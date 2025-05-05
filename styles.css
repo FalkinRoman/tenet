@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;700&family=Montserrat:wght@300&display=swap');
+
 * {
     margin: 0;
     padding: 0;
@@ -6,16 +8,23 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-    padding: 20px;
+    
+    background: #fff;
+    color: #1d252d;
+    margin: 0;
+    padding: 0;
+    line-height: 1.4;
     overflow-x: hidden;
 }
 
+h1, h2, h3, h4, h5, h6, p, span, li, .logo-desc, .main-title, .main-desc, .main-menu li, .choose, .phone, .main-nav {
+    color: #1d252d !important;
+}
+
 .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
+    max-width: 100vw;
+    margin: 0;
+    padding: 0;
     opacity: 0;
     transform: translateY(20px);
     transition: opacity 0.8s ease, transform 0.8s ease;
@@ -96,7 +105,7 @@ p {
 }
 
 .secondary-text span {
-    color: #FFFFFF;
+    color: #fff !important;
     font-size: 0.7rem;
     font-weight: 400;
     letter-spacing: 0.05em;
@@ -137,4 +146,182 @@ p {
 
 .loader-screen.hide {
     transform: translateY(-100%);
+}
+
+.main-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px 3.125rem;
+    border-bottom: 1px solid #eaeaea;
+    font-size: 16px;
+    
+}
+
+.burger {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    cursor: pointer;
+    margin-right: 32px;
+}
+.burger span {
+    display: block;
+    width: 28px;
+    height: 3px;
+    background: #222;
+    margin-bottom: 6px;
+    border-radius: 2px;
+}
+.burger span:last-child {
+    margin-bottom: 0;
+}
+
+.logo-block {
+    display: flex;
+    align-items: center;
+    height: 38px;
+}
+.logo-img {
+    height: 24px;
+    width: auto;
+    display: block;
+}
+.vertical-line-header {
+    width: 1px;
+    height: 36px;
+    background: #929aa1;
+    margin: 0 12px 0 12px;
+}
+.logo-desc {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: #222;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    line-height: 1;
+    white-space: nowrap;
+    gap: 0.15rem;
+    
+}
+.logo-desc span {
+    display: block;
+}
+
+.main-nav {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 300;
+}
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    font-size: 1rem;
+}
+.choose {
+    font-weight: 300;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+}
+.phone {
+    font-weight: 300;
+    font-size: 14px;
+}
+
+.main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 64px 0 0 0;
+}
+.main-title {
+    font-size: 3.8rem;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    margin-bottom: 36px;
+    color: #222;
+    text-align: left;
+    margin-left: 0;
+    line-height: 1.05;
+}
+.main-desc {
+    max-width: 700px;
+    font-size: 1.13rem;
+    color: #444;
+    text-align: left;
+    margin-bottom: 56px;
+    line-height: 1.4;
+}
+.main-menu {
+    display: flex;
+    justify-content: flex-start;
+    gap: 36px;
+    list-style: none;
+    padding: 0;
+    margin: 0 0 36px 0;
+}
+.main-menu li {
+    font-size: 1.01rem;
+    color: #222;
+    font-weight: 400;
+    padding-bottom: 4px;
+    border-bottom: 2px solid #222;
+    min-width: 110px;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s;
+}
+.main-menu li:hover {
+    color: #0071e3;
+    border-bottom: 2px solid #0071e3;
+}
+.main-image {
+    width: 100vw;
+    max-width: 100vw;
+    margin: 0;
+    border-radius: 0;
+    overflow: hidden;
+    box-shadow: none;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+}
+.main-image img {
+    width: 100vw;
+    min-width: 100vw;
+    max-width: 100vw;
+    display: block;
+    object-fit: cover;
+    min-height: 340px;
+    max-height: 420px;
+}
+
+.main-nav span {
+    font-family: 'Inter', 'Montserrat', 'Manrope', sans-serif;
+    font-weight: 300;
+    font-size: 14px;
+    letter-spacing: 0.01em;
+}
+
+.burger-img {
+    width: 44px;
+    height: 44px;
+    display: block;
+    margin-right: 64px;
+    object-fit: contain;
+    cursor: pointer !important;
 } 
