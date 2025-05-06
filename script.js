@@ -54,10 +54,16 @@ document.addEventListener('DOMContentLoaded', () => {
     // Подсветка активного пункта по якорю
     const sections = ['about','principles','services','results','advantages','team'];
     function setActiveMenu() {
+        const header = document.querySelector('.main-header');
+        const submenu = document.querySelector('.sticky-submenu');
+        const headerHeight = header ? header.offsetHeight : 0;
+        const submenuHeight = submenu ? submenu.offsetHeight : 0;
+        const offset = headerHeight + submenuHeight;
+
         let found = false;
         for (let id of sections) {
             const el = document.getElementById(id);
-            if (el && window.scrollY + 100 >= el.offsetTop) {
+            if (el && window.scrollY + offset + 1 >= el.offsetTop) {
                 stickyMenu.querySelectorAll('li').forEach(li => li.classList.remove('active'));
                 const link = stickyMenu.querySelector(`a[href="#${id}"]`);
                 if (link) link.parentElement.classList.add('active');
