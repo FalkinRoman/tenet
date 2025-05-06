@@ -1,14 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;700&family=Montserrat:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;700&family=Montserrat:wght@300;400;500;700;900&display=swap');
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: 'Montserrat', 'Manrope', Arial, sans-serif;
 }
 
 body {
-    
+    font-family: 'Montserrat', 'Manrope', Arial, sans-serif;
     background: #fff;
     color: #1d252d;
     margin: 0;
@@ -29,6 +29,7 @@ h1, h2, h3, h4, h5, h6, p, span, li, .logo-desc, .main-title, .main-desc, .main-
     transform: translateY(20px);
     transition: opacity 0.8s ease, transform 0.8s ease;
     transition-delay: 0.2s;
+    
 }
 
 .container.visible {
@@ -152,10 +153,19 @@ p {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 6px 3.125rem;
+    padding: 8px 3.125rem;
     border-bottom: 1px solid #eaeaea;
     font-size: 16px;
-    
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    z-index: 100;
+    background: hsla(0, 0%, 100%, 0.8);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    transition: opacity 0.6s ease;
+    border-bottom: 1px solid #eaeaea;
 }
 
 .burger {
@@ -233,18 +243,18 @@ p {
     display: flex;
     align-items: center;
     gap: 6px;
-    font-size: 14px;
+    font-size: 15px;
 }
 .phone {
     font-weight: 300;
-    font-size: 14px;
+    font-size: 15px;
 }
 
 .main-content {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    padding: 64px 0 0 0;
+    padding: 53px 0 0 0;
 }
 .main-title {
     font-size: 3.8rem;
@@ -267,26 +277,22 @@ p {
 .main-menu {
     display: flex;
     justify-content: flex-start;
-    gap: 36px;
     list-style: none;
     padding: 0;
     margin: 0 0 36px 0;
 }
 .main-menu li {
-    font-size: 1.01rem;
-    color: #222;
-    font-weight: 400;
+    font-size: 15px;
+    font-weight: 300;
     padding-bottom: 4px;
-    border-bottom: 2px solid #222;
+    border-bottom: 2px solid #1d252d;
     min-width: 110px;
     text-align: center;
     cursor: pointer;
-    transition: border-color 0.2s, color 0.2s;
+    transition: none;
 }
-.main-menu li:hover {
-    color: #0071e3;
-    border-bottom: 2px solid #0071e3;
-}
+
+
 .main-image {
     width: 100vw;
     max-width: 100vw;
@@ -311,17 +317,284 @@ p {
 }
 
 .main-nav span {
-    font-family: 'Inter', 'Montserrat', 'Manrope', sans-serif;
+    font-family: 'Montserrat', 'Manrope', Arial, sans-serif;
     font-weight: 300;
     font-size: 14px;
     letter-spacing: 0.01em;
+    display: none;
 }
 
 .burger-img {
-    width: 44px;
-    height: 44px;
+    width: 40px;
+    height: 40px;
     display: block;
     margin-right: 64px;
     object-fit: contain;
     cursor: pointer !important;
+}
+
+.services-row {
+    width: 100%;
+    text-align: center;
+    font-family: 'Montserrat', 'Manrope', Arial, sans-serif;
+    font-weight: 700;
+    font-size: 1.35rem;
+    margin-top: 32px;
+    margin-bottom: 18px;
+    letter-spacing: 0.01em;
+    line-height: 1.1;
+}
+
+.main-headline {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 28px;
+    font-family: 'Montserrat', 'Manrope', Arial, sans-serif;
+    line-height: 1.08;
+}
+.headline-light {
+    font-weight: 300;
+    font-size: 2.1rem;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 1.1;
+}
+.headline-bold {
+    font-weight: 700;
+    font-size: 2.5rem;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 1.1;
+}
+
+.main-menu.new-menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex-wrap: nowrap;
+    width: 100%;
+}
+.main-menu.new-menu a {
+    color: #1d252d;
+    text-decoration: none;
+    font: inherit;
+    cursor: pointer;
+    border: none;
+    background: none;
+    padding: 0;
+    transition: color 0.2s;
+    display: inline-block;
+}
+.main-menu.new-menu li {
+    border-bottom: 2px solid #1d252d;
+    padding-bottom: 6px;
+    text-align: center;
+    cursor: pointer;
+    transition: none;
+    white-space: nowrap;
+    letter-spacing: 0.01em;
+    display: inline-block;
+    min-width: unset;
+    margin: 0 auto;
+}
+.main-menu.new-menu li:hover, .main-menu.new-menu a:hover {
+    text-decoration: none;
+}
+
+.main-center-container {
+ 
+    
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+}
+.services-row-block {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 24px;
+    margin-top: 60px;
+}
+.services-row-bold {
+    font-family: 'Montserrat', 'Manrope', Arial, sans-serif;
+    font-weight: 700;
+    font-size: 2.1rem;
+    letter-spacing: 0.01em;
+    color: #1d252d;
+    line-height: 1.2;
+}
+.main-headline-block {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 64px;
+    font-family: 'Montserrat', 'Manrope', Arial, sans-serif;
+    line-height: 1.15;
+}
+
+.main-menu-block {
+    width: 80vw;
+    margin: 0 auto 40px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 18px 0;
+}
+
+
+
+.services-row-muted {
+    font-family: 'Montserrat', 'Manrope', Arial, sans-serif;
+    font-weight: 500;
+    font-size: 28px;
+    color: #C0C0C0 !important;
+    line-height: 1.2;
+    letter-spacing: 0.05em;
+}
+.headline-light {
+    font-family: 'Montserrat', 'Manrope', Arial, sans-serif;
+    font-weight: 300;
+    font-size: 58px;
+    color: #1d252d;
+    display: inline-block;
+   
+    line-height: 1.1;
+}
+.headline-bold {
+    font-family: 'Montserrat', 'Manrope', Arial, sans-serif;
+    font-weight: 700;
+    font-size: 58px;
+    color: #1d252d;
+    display: inline-block;
+    line-height: 1.1;
+    
+}
+
+.services-row-bold, .services-row-muted, .headline-light, .headline-bold, .main-menu.new-menu li, .main-menu li, .main-title, .main-desc, .logo-desc, .main-nav span, .choose, .phone {
+    font-family: 'Montserrat', 'Manrope', Arial, sans-serif !important;
+}
+
+.telegram-icon {
+    width: 26px;
+    height: 26px;
+
+    vertical-align: middle;
+    display: inline-block;
+    cursor: pointer;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+.main-section {
+    width: 100vw;
+    max-width: 1100px;
+    margin: 0 auto 64px auto;
+    padding: 64px 24px 32px 24px;
+    background: #f8f9fa;
+    border-radius: 18px;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.03);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.main-section h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 18px;
+    color: #1d252d;
+}
+.main-section p {
+    font-size: 1.1rem;
+    color: #444;
+    margin-bottom: 0;
+}
+
+.main-footer {
+    width: 100vw;
+    background: #1d252d;
+    color: #fff;
+    text-align: center;
+    padding: 32px 0 24px 0;
+    font-size: 1rem;
+    font-weight: 400;
+    letter-spacing: 0.02em;
 } 
+
+
+
+
+/* подменю */
+.sticky-submenu {
+    position: fixed;
+    top: 57px; /* подбери под высоту своего хедера */
+    left: 0;
+    width: 100vw;
+    background: hsla(0, 0%, 100%, 0.8);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    transition: opacity 0.6s ease;
+    z-index: 99;
+    display: flex;
+    justify-content: center;
+    padding: 18px 0 0 0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, .1);
+}
+
+
+
+.sticky-menu {
+    width: 70vw;
+    margin: 0 auto 0 auto;
+    display: flex;
+    justify-content: center;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+   
+}
+
+.sticky-submenu li {
+    font-family: 'Montserrat', 'Manrope', Arial, sans-serif;
+    font-size: 15px;
+    font-weight: 300;
+    letter-spacing: -0.05em;
+    color: #222;
+    padding-bottom: 18px;
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.2s;
+}
+
+.sticky-submenu li.active,
+.sticky-submenu li:hover {
+    border-bottom: 2px solid #222;
+}
+
+.sticky-submenu a {
+    color: inherit;
+    text-decoration: none;
+    padding: 0 4px;
+}
+
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+  link.addEventListener('click', function(e) {
+    const targetId = this.getAttribute('href').slice(1);
+    const target = document.getElementById(targetId);
+    if (target) {
+      e.preventDefault();
+      const header = document.querySelector('.main-header');
+      const submenu = document.querySelector('.sticky-submenu');
+      // Всегда учитываем обе высоты, даже если подменю скрыто (оно появится при скролле)
+      const headerHeight = header ? header.offsetHeight : 0;
+      const submenuHeight = submenu ? submenu.offsetHeight : 0;
+      const offset = headerHeight + submenuHeight;
+      const top = target.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
+  });
+});
