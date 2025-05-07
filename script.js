@@ -124,3 +124,67 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+
+
+// Плавный скролл к якорю
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', function(e) {
+      const targetId = this.getAttribute('href').slice(1);
+      const target = document.getElementById(targetId);
+      if (target) {
+        e.preventDefault();
+        const header = document.querySelector('.main-header');
+        const submenu = document.querySelector('.sticky-submenu');
+        // Всегда учитываем обе высоты, даже если подменю скрыто (оно появится при скролле)
+        const headerHeight = header ? header.offsetHeight : 0;
+        const submenuHeight = submenu ? submenu.offsetHeight : 0;
+        const offset = headerHeight + submenuHeight;
+        const top = target.getBoundingClientRect().top + window.scrollY - offset;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+    });
+  });
+
+
+// Бургер меню
+document.addEventListener('DOMContentLoaded', () => {
+    const burger = document.querySelector('.burger-img');
+    const overlay = document.getElementById('burgerOverlay');
+    const closeBtn = document.getElementById('burgerClose');
+    const drop = document.getElementById('burgerDrop');
+    if (burger && overlay && closeBtn && drop) {
+        burger.addEventListener('click', () => {
+            // 1. Показать падающий div
+            drop.classList.add('active');
+            setTimeout(() => {
+                // 2. Убрать падающий div
+                drop.classList.remove('active');
+                drop.classList.add('hide');
+                // 3. Показать бургер-экран
+                overlay.classList.add('open');
+                document.body.style.overflow = 'hidden';
+                // 4. Сбросить drop через 300мс (чтобы можно было повторно открыть)
+                setTimeout(() => {
+                    drop.classList.remove('hide');
+                }, 300);
+            }, 220); // время падения + пауза
+        });
+        closeBtn.addEventListener('click', () => {
+            overlay.classList.remove('open');
+            document.body.style.overflow = 'auto';
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                overlay.classList.remove('open');
+                document.body.style.overflow = 'auto';
+            }
+        });
+        overlay.querySelectorAll('.burger-menu a').forEach(a => {
+            a.addEventListener('click', () => {
+                overlay.classList.remove('open');
+                document.body.style.overflow = 'auto';
+            });
+        });
+    }
+});
