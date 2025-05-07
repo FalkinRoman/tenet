@@ -393,7 +393,7 @@ p {
     padding-bottom: 6px;
     text-align: center;
     cursor: pointer;
-    transition: none;
+    transition: opacity 0.7s cubic-bezier(.4,0,.2,1);
     white-space: nowrap;
     letter-spacing: 0.01em;
     display: inline-block;
@@ -479,8 +479,8 @@ p {
 }
 
 .telegram-icon {
-    width: 23px;
-    height: 23px;
+    width: 18px;
+    height: 18px;
 
     vertical-align: middle;
     display: inline-block;

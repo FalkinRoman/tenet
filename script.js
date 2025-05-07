@@ -103,3 +103,24 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
       }
     });
   });
+
+// Затемнение других li при наведении на один (только для .main-menu.new-menu)
+document.addEventListener('DOMContentLoaded', () => {
+    const menu = document.querySelector('.main-menu.new-menu');
+    if (menu) {
+        const items = menu.querySelectorAll('li');
+        items.forEach(li => {
+            li.addEventListener('mouseenter', () => {
+                items.forEach(other => {
+                    if (other !== li) other.style.opacity = '0.3';
+                    else other.style.opacity = '1';
+                });
+            });
+            li.addEventListener('mouseleave', () => {
+                items.forEach(other => {
+                    other.style.opacity = '1';
+                });
+            });
+        });
+    }
+});
