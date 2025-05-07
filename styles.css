@@ -259,6 +259,7 @@ p {
 .phone {
     font-weight: 300;
     font-size: 15px;
+    cursor: pointer;
 }
 
 .main-content {
@@ -680,6 +681,13 @@ html {
     display: flex;
     justify-content: center;
     margin-top: 32px;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.5s, transform 0.5s;
+}
+.burger-menu.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 .burger-menu ul {
     list-style: none;
@@ -714,7 +722,13 @@ html {
     display: flex;
     flex-direction: column;
     gap: 24px;
- 
+    opacity: 0;
+    transform: translateX(60px);
+    transition: opacity 0.5s, transform 0.5s;
+}
+.burger-socials.visible {
+    opacity: 1;
+    transform: translateX(0);
 }
 .burger-socials a {
     color: #bfc3c6;

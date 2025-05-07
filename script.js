@@ -152,38 +152,65 @@ document.addEventListener('DOMContentLoaded', () => {
     const burger = document.querySelector('.burger-img');
     const overlay = document.getElementById('burgerOverlay');
     const closeBtn = document.getElementById('burgerClose');
+    const menu = overlay.querySelector('.burger-menu');
+    const socials = overlay.querySelector('.burger-socials');
     const drop = document.getElementById('burgerDrop');
-    if (burger && overlay && closeBtn && drop) {
+
+    if (burger && overlay && closeBtn && menu && socials && drop) {
         burger.addEventListener('click', () => {
-            // 1. Показать падающий div
+            // 1. Показать падающую плашку
             drop.classList.add('active');
+
+            // 2. Убрать плашку и показать бургер-меню
             setTimeout(() => {
-                // 2. Убрать падающий div
                 drop.classList.remove('active');
                 drop.classList.add('hide');
-                // 3. Показать бургер-экран
                 overlay.classList.add('open');
                 document.body.style.overflow = 'hidden';
-                // 4. Сбросить drop через 300мс (чтобы можно было повторно открыть)
+
+                // Сбросить анимации меню и соцсетей
+                menu.classList.remove('visible');
+                socials.classList.remove('visible');
+
+                // Появление меню снизу
+                setTimeout(() => {
+                    menu.classList.add('visible');
+                }, 200);
+
+                // Появление соцсетей справа
+                setTimeout(() => {
+                    socials.classList.add('visible');
+                }, 600);
+
+                // 3. Сбросить drop через 300мс (чтобы можно было повторно открыть)
                 setTimeout(() => {
                     drop.classList.remove('hide');
                 }, 300);
             }, 220); // время падения + пауза
         });
+
         closeBtn.addEventListener('click', () => {
             overlay.classList.remove('open');
             document.body.style.overflow = 'auto';
+            menu.classList.remove('visible');
+            socials.classList.remove('visible');
         });
+
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
                 overlay.classList.remove('open');
                 document.body.style.overflow = 'auto';
+                menu.classList.remove('visible');
+                socials.classList.remove('visible');
             }
         });
+
         overlay.querySelectorAll('.burger-menu a').forEach(a => {
             a.addEventListener('click', () => {
                 overlay.classList.remove('open');
                 document.body.style.overflow = 'auto';
+                menu.classList.remove('visible');
+                socials.classList.remove('visible');
             });
         });
     }
