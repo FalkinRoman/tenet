@@ -571,6 +571,8 @@ html {
    
 }
 
+
+
 .sticky-submenu li {
     font-family: 'Montserrat', 'Manrope', Arial, sans-serif;
     font-size: 15px;
@@ -703,12 +705,12 @@ html {
     font-weight: 400;
     margin-bottom: 24px;
     letter-spacing: 0.01em;
-    transition: color 0.2s;
+    transition: color 0.3s cubic-bezier(.4,0,.2,1);
     cursor: pointer;
     text-align: center;
 }
 .burger-menu li:hover {
-    color: #fff;
+    color: #fff !important;
 }
 .burger-menu a {
     color: inherit;
