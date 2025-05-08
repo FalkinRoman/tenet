@@ -215,3 +215,19 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+
+
+// Типизируем текст машинка
+document.addEventListener('DOMContentLoaded', function() {
+    new Typed('#typewriter', {
+      strings: ['рынка недвижимости'],
+      typeSpeed: 150,
+      backSpeed: 80,
+      backDelay: 1200,
+      startDelay: 200,
+      loop: true,
+      showCursor: true,
+      cursorChar: '|'
+    });
+  });
