@@ -1200,7 +1200,21 @@ html {
     .headline-bold {
         font-size: 30px;
     }
-    
+    .main-header {
+        padding: 8px 30px;
+    }
+
+    .burger-img {
+        margin-right: 44px;
+    }
+
+    .main-header2{
+        padding: 8px 30px;
+    }
+
+    .burger-close {
+        margin-right: 44px !important;
+    }
     
 }
 
