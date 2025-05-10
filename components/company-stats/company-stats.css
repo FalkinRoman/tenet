@@ -1,0 +1,92 @@
+.company-stats__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.company-stats__item {
+    position: relative;
+    padding: 30px 20px;
+    text-align: center;
+}
+
+/* Горизонтальные линии */
+.company-stats__item:nth-child(n+5)::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: #E5E5E5;
+}
+
+/* Вертикальные линии */
+.company-stats__item:not(:nth-child(4n))::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 1px;
+    background: #E5E5E5;
+}
+
+@media (max-width: 1024px) {
+    .company-stats__grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Горизонтальные линии для планшета */
+    .company-stats__item:nth-child(n+3)::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: #E5E5E5;
+    }
+
+    /* Вертикальные линии для планшета */
+    .company-stats__item:not(:nth-child(2n))::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: 1px;
+        background: #E5E5E5;
+    }
+}
+
+@media (max-width: 768px) {
+    .company-stats__grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Горизонтальные линии для мобилки */
+    .company-stats__item:nth-child(n+3)::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: #E5E5E5;
+    }
+
+    /* Вертикальные линии для мобилки */
+    .company-stats__item:not(:nth-child(2n))::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: 1px;
+        background: #E5E5E5;
+    }
+} 

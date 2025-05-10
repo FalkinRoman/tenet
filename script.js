@@ -231,3 +231,54 @@ document.addEventListener('DOMContentLoaded', function() {
       cursorChar: '|'
     });
   });
+
+// Анимация появления и счётчик для блока "Мы в цифрах"
+(function() {
+  function animateStatsBlock() {
+    const stats = document.querySelectorAll('.stats-grid .stat-cell');
+    if (!stats.length) return;
+    const options = { threshold: 0.3 };
+    const observer = new window.IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          // Анимация цифр
+          const num = entry.target.querySelector('.stat-number');
+          if (num && !num.classList.contains('counted')) {
+            const target = parseInt(num.getAttribute('data-target'), 10);
+            animateNumber(num, target);
+            num.classList.add('counted');
+          }
+          obs.unobserve(entry.target);
+        }
+      });
+    }, options);
+    stats.forEach(stat => observer.observe(stat));
+  }
+  function animateNumber(el, target) {
+    let start = 0;
+    let duration = 900 + Math.random() * 600;
+    let startTime = null;
+    function step(ts) {
+      if (!startTime) startTime = ts;
+      let progress = Math.min((ts - startTime) / duration, 1);
+      let val = Math.floor(progress * (target - start) + start);
+      el.textContent = val;
+      // Если есть % рядом, не затираем его
+      if (el.nextElementSibling && el.nextElementSibling.classList.contains('stat-percent')) {
+        el.textContent = val;
+        el.nextElementSibling.style.display = 'inline-block';
+      }
+      if (progress < 1) {
+        requestAnimationFrame(step);
+      } else {
+        el.textContent = target;
+        if (el.nextElementSibling && el.nextElementSibling.classList.contains('stat-percent')) {
+          el.nextElementSibling.style.display = 'inline-block';
+        }
+      }
+    }
+    requestAnimationFrame(step);
+  }
+  document.addEventListener('DOMContentLoaded', animateStatsBlock);
+})();
