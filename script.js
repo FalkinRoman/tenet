@@ -20,9 +20,11 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Обработчик клика на заголовок
     const h1 = document.querySelector('.container h1');
-    h1.addEventListener('click', () => {
-        alert('Привет! Вы кликнули на заголовок!');
-    });
+    if (h1) {
+        h1.addEventListener('click', () => {
+            alert('Привет! Вы кликнули на заголовок!');
+        });
+    }
 });
 
 window.onbeforeunload = function () {
@@ -375,6 +377,49 @@ document.addEventListener('DOMContentLoaded', () => {
   showTexts();
 });
 
+// Анимация появления венн-диаграммы по этапам
+document.addEventListener('DOMContentLoaded', function() {
+  const block = document.querySelector('.venn-animated-block');
+  if (!block) return;
+  const svg = block.querySelector('.venn-svg');
+  const circles = svg.querySelectorAll('.venn-circle');
+  const texts = svg.querySelectorAll('.venn-text');
 
+  function animateVenn() {
+    const rect = block.getBoundingClientRect();
+    if (rect.top < window.innerHeight * 0.8) {
+      setTimeout(() => {
+        // 1. Главный круг + результат
+        circles[3].classList.add('visible'); // main (он 4-й по счёту)
+        setTimeout(() => texts[0].classList.add('visible'), 200); // РЕЗУЛЬТАТ
+
+        // 2. Малые круги одновременно
+        setTimeout(() => {
+          circles[2].classList.add('visible'); // top
+          circles[0].classList.add('visible'); // left
+          circles[1].classList.add('visible'); // right
+        }, 700);
+
+        // 3. Крупные подписи одновременно
+        setTimeout(() => {
+          texts[1].classList.add('visible');
+          texts[2].classList.add('visible');
+          texts[3].classList.add('visible');
+        }, 1300);
+
+        // 4. Мелкие подписи одновременно
+        setTimeout(() => {
+          texts[4].classList.add('visible');
+          texts[5].classList.add('visible');
+          texts[6].classList.add('visible');
+        }, 1700);
+
+        window.removeEventListener('scroll', animateVenn);
+      }, 900);
+    }
+  }
+  window.addEventListener('scroll', animateVenn);
+  animateVenn();
+});
 
 

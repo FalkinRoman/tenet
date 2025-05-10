@@ -1643,4 +1643,70 @@ html {
     max-width: 100vw;
   }
 }
-  
+
+.venn-animated-block {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 520px;
+  margin: 0 auto 120px auto;
+}
+.venn-svg {
+  max-width: 600px;
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.venn-circle {
+  opacity: 0;
+  transition: opacity 0.7s, transform 1s cubic-bezier(.4,0,.2,1);
+}
+.venn-circle.main {
+  opacity: 0;
+  transition: opacity 0.7s;
+}
+.venn-circle.main.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+/* Анимация влёта малых кругов */
+.venn-circle.top { transform: translateY(-120px);}
+.venn-circle.left { transform: translate(-120px, 120px) ;}
+.venn-circle.right { transform: translate(120px, 120px);}
+.venn-circle.top.visible,
+.venn-circle.left.visible,
+.venn-circle.right.visible {
+  opacity: 1;
+  transform: translate(0,0) scale(1);
+}
+.venn-text {
+  font-family: 'Montserrat', Arial, sans-serif;
+  font-weight: 700;
+  font-size: 2.2rem;
+  text-anchor: middle;
+  dominant-baseline: middle;
+  fill: #111;
+  opacity: 0;
+  transition: opacity 0.7s;
+}
+
+.venn-text2 {
+  font-weight: 600 !important;
+  font-size: 18px !important;
+}
+
+.venn-text.result { font-size: 42px; font-weight: 700; }
+.venn-text.control, .venn-text.growth, .venn-text.education { font-size: 1.3rem; }
+.venn-text.monitoring, .venn-text.management, .venn-text.progress { font-size: 8px; font-weight: 400; fill: #000000; }
+.venn-text.visible { opacity: 1; }
+@media (max-width: 700px) {
+  .venn-svg { max-width: 98vw; }
+  .venn-text { font-size: 1.1rem; }
+  .venn-text.result { font-size: 1.5rem; }
+  .venn-text.control, .venn-text.growth, .venn-text.education { font-size: 0.8rem; }
+  .venn-text.monitoring, .venn-text.management, .venn-text.progress { font-size: 8px; }
+  .venn-animated-block { min-height: 220px; margin-bottom: 40px; }
+}
+
+
