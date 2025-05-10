@@ -282,3 +282,67 @@ document.addEventListener('DOMContentLoaded', function() {
   }
   document.addEventListener('DOMContentLoaded', animateStatsBlock);
 })();
+
+
+
+
+// Блок "Мы в цифрах"
+const statCells = document.querySelectorAll('.stat-cell');
+const infoData = [
+  {title: 'Опыт', desc: '22 года на рынке недвижимости — это не просто цифра, а гарантия стабильности.'},
+  {title: 'Команда', desc: '50 сотрудников с опытом продаж — каждый эксперт в своём деле.'},
+  {title: 'Компетенции', desc: '39 авторских компетенций — уникальные решения для рынка.'},
+  {title: 'Навыки', desc: '51 навык — результат постоянного развития и обучения.'},
+  {title: 'Корреляция', desc: '78% — показатель эффективности нашей методологии.'},
+  {title: 'Тренинг', desc: '41 авторский тренинг — эксклюзив для рынка недвижимости.'},
+  {title: 'Проекты', desc: '67 индивидуальных проектов с партнёрами — гибкость и персонализация.'},
+  {title: 'Обучение', desc: '1160 специалистов обучено в год — мы делимся опытом.'}
+];
+
+function handleHover(e) {
+  if (window.innerWidth < 1200) return;
+  const hovered = e.currentTarget;
+  const idx = parseInt(hovered.dataset.info, 10);
+  statCells.forEach((cell, i) => {
+    cell.classList.remove('bottom-row');
+    if (cell === hovered) {
+      cell.classList.add('active');
+      cell.classList.remove('faded');
+      // popup
+      let popup = cell.querySelector('.stat-info-popup');
+      if (!popup) {
+        popup = document.createElement('div');
+        popup.className = 'stat-info-popup';
+        popup.innerHTML = `<div style="font-weight:700;font-size:1.1em;margin-bottom:8px;">${infoData[idx].title}</div>
+        <div style="font-weight:400;font-size:0.98em;line-height:1.4;">${infoData[idx].desc}</div>`;
+        cell.appendChild(popup);
+      }
+      // Определяем нижний ряд (4 колонки)
+      if (window.innerWidth >= 1200 && idx >= 4) {
+        cell.classList.add('bottom-row');
+      }
+      // Для адаптива (2 колонки)
+      if (window.innerWidth < 1200 && idx >= 6) {
+        cell.classList.add('bottom-row');
+      }
+    } else {
+      cell.classList.remove('active', 'bottom-row');
+      cell.classList.add('faded');
+      let popup = cell.querySelector('.stat-info-popup');
+      if (popup) popup.remove();
+    }
+  });
+}
+function handleLeave() {
+  statCells.forEach(cell => {
+    cell.classList.remove('faded', 'active');
+    let popup = cell.querySelector('.stat-info-popup');
+    if (popup) popup.remove();
+  });
+}
+
+statCells.forEach(cell => {
+  cell.addEventListener('mouseenter', handleHover);
+  cell.addEventListener('mouseleave', handleLeave);
+});
+window.addEventListener('resize', handleLeave);
