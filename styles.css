@@ -1201,7 +1201,7 @@ html {
         font-size: 28px;
     }
     .main-header {
-        padding: 8px 30px;
+        padding: 8px 20px;
     }
 
     .burger-img {
@@ -1209,11 +1209,15 @@ html {
     }
 
     .main-header2{
-        padding: 8px 30px;
+        padding: 8px 20px;
     }
 
     .burger-close {
         margin-right: 44px !important;
+    }
+
+    .burger-menu li {
+        font-size: 18px;
     }
     
 }
