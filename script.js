@@ -346,3 +346,35 @@ statCells.forEach(cell => {
   cell.addEventListener('mouseleave', handleLeave);
 });
 window.addEventListener('resize', handleLeave);
+
+
+
+
+// Анимация появления текстов в "Принципы"
+document.addEventListener('DOMContentLoaded', () => {
+  const first = document.querySelector('.principles-text-block.first-text');
+  const second = document.querySelector('.principles-text-block.second-text');
+  if (!first || !second) return;
+  first.style.opacity = 0;
+  first.style.transform = 'translateY(60px)';
+  second.style.opacity = 0;
+  second.style.transform = 'translateX(80px)';
+  function showTexts() {
+    const rect = first.getBoundingClientRect();
+    if (rect.top < window.innerHeight * 0.7) {
+      first.style.opacity = 1;
+      first.style.transform = 'translateY(0)';
+      setTimeout(() => {
+        second.style.opacity = 1;
+        second.style.transform = 'translateX(0)';
+      }, 900);
+      window.removeEventListener('scroll', showTexts);
+    }
+  }
+  window.addEventListener('scroll', showTexts);
+  showTexts();
+});
+
+
+
+
