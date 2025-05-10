@@ -1611,7 +1611,7 @@ html {
     max-width: 98vw;
     padding-top: 60px;
     padding-bottom: 60px;
-    max-width: 80%;
+    max-width: 70%;
     min-height: 40vh;
   }
   .second-text {
@@ -1631,6 +1631,7 @@ html {
 @media (max-width: 600px) {
   .first-text, .second-text {
     padding: 18px 20px 36px 20px;
+    max-width: 80%;
   }
 
   .principles-title, .principles-title-bold {
