@@ -1366,6 +1366,13 @@ html {
     background: #111;
     z-index: 2;
   }
+  /* Убираем правую линию у каждой второй ячейки в строке (то есть у правых) */
+  .stats-grid .stat-cell:nth-child(2n)::after {
+    display: none !important;
+    content: none !important;
+    background: none !important;
+    width: 0 !important;
+  }
 }
 @media (max-width: 900px) {
   .stats-title {
@@ -1630,7 +1637,7 @@ html {
 }
 @media (max-width: 600px) {
   .first-text, .second-text {
-    padding: 18px 20px 36px 20px;
+    padding: 18px 0px 36px 20px;
     max-width: 80%;
   }
 
