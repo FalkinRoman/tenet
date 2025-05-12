@@ -422,4 +422,20 @@ document.addEventListener('DOMContentLoaded', function() {
   animateVenn();
 });
 
+document.addEventListener('DOMContentLoaded', function() {
+  const textBlock = document.querySelector('.venn-text-block');
+  if (!textBlock) return;
+
+  function showTextBlockOnScroll() {
+    const rect = textBlock.getBoundingClientRect();
+    if (rect.top < window.innerHeight * 0.85) {
+      textBlock.classList.add('visible');
+      window.removeEventListener('scroll', showTextBlockOnScroll);
+    }
+  }
+
+  window.addEventListener('scroll', showTextBlockOnScroll);
+  showTextBlockOnScroll();
+});
+
 
