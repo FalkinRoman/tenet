@@ -1290,6 +1290,18 @@ html {
   .stats-fullwidth-block {
     padding: 10px 0;
   }
+  .first-text .principles-desc {
+    font-size: 1rem;
+    max-width: 98vw;
+    text-align: left;
+  }
+  .first-text .principles-title {
+    font-size: 1.5rem;
+    padding-right: 3.125rem;
+    margin-bottom: 20px;
+    padding-left: 0;
+    text-align: left;
+  }
 }
 
 @media (max-width: 500px) {
@@ -1489,11 +1501,11 @@ html {
     min-height: 0vh;
   }
   .principles-title, .principles-title-bold {
-    font-size: 1.5rem;
+    font-size: 2.6rem;
     padding-right: 3.125rem;
   }
   .principles-desc {
-    font-size: 1rem;
+    font-size: 1.25rem;
     max-width: 98vw;
   }
 }
@@ -1604,7 +1616,7 @@ html {
   gap: 64px;
   width: 100vw;
   max-width: 1400px;
-  margin: 0 auto 60px auto;
+  margin: 0 auto 120px auto;
   padding: 0 5vw;
   box-sizing: border-box;
 }
@@ -1658,15 +1670,13 @@ html {
   color: #111;
 }
 
-
-
 /* Планшеты и ниже: всё по центру, аккуратные отступы */
 @media (max-width: 1100px) {
   .venn-main-block {
     flex-direction: column;
     align-items: center;
     gap: 32px;
-    padding: 40px 4vw 120px 4vw;
+    padding: 40px 4vw 50px 4vw;
     max-width: 98vw;
   }
   .venn-main-block .venn-animated-block {
@@ -1675,18 +1685,35 @@ html {
     max-width: 98vw;
     width: 100vw;
   }
-  .venn-text-block {
-    opacity: 0;
-    transform: translateY(40px);
-    will-change: opacity, transform;
+  .venn-text-block,
+  .mission-text-block {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    will-change: auto;
   }
-  .venn-text-block.visible {
-    opacity: 1;
-    transform: translateY(0);
+  .venn-text-block.visible,
+  .mission-text-block.visible {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
   }
 }
 
 @media (max-width: 700px) {
+    .first-text {
+        padding: 60px 40px;
+        max-width: 100%;
+    }
+    
+    .second-text {
+        padding: 0 40px 60px 40px;
+    }
+
+    .principles-title-bold {
+        font-size: 2rem;
+        padding-right: 0;
+    }
   .venn-main-block {
     padding: 0 20px;
     gap: 18px;
@@ -1795,15 +1822,14 @@ html {
 }
 
 .mission-img:nth-child(1) {
-    
-    transform: scale(1.1); /* увеличит на 8% */
-  }
+    transform: scale(0.88);
+}
 .mission-img:nth-child(2) {
-    transform: scale(0.8);
+    transform: scale(0.64);
     top: -90px;
 }
 .mission-img:nth-child(3) {
-    transform: scale(0.8);
+    transform: scale(0.64);
     top: 60px;
     left: 50px;
 }
@@ -1826,7 +1852,7 @@ html {
     min-width: 0;
     max-width: 98vw;
     width: 100vw;
-    height: 320px;
+    height: 430px;
   }
   .mission-text-block {
     opacity: 0;
@@ -1837,17 +1863,26 @@ html {
     opacity: 1;
     transform: translateY(0);
   }
+  
+.mission-img:nth-child(2) {
+    transform: scale(0.64) !important;
+    
+}
+.mission-img:nth-child(3) {
+    transform: scale(0.7) !important;
+    
+}
 }
 @media (max-width: 700px) {
   .mission-content {
-    padding: 0 20px;
+    padding: 120px 20px;
     gap: 18px;
     margin-bottom: 24px;
   }
   .mission-images-block {
     max-width: 98vw;
     width: 100vw;
-    height: 180px;
+    
   }
   .mission-title {
     font-size: 1.5rem;
@@ -1862,11 +1897,12 @@ html {
 }
 @media (max-width: 600px) {
   .mission-content {
-    padding: 18px 0 36px 20px;
-    max-width: 80%;
+    padding: 90px 20px 36px 20px;
+    
+    gap: 70px;
   }
   .mission-title {
-    font-size: 1.1rem;
+    font-size: 1.5rem;
     padding-right: 20px;
   }
   .mission-desc {
@@ -1874,6 +1910,29 @@ html {
     max-width: 100vw;
   }
   .mission-images-block {
-    height: 120px;
+    
   }
+  .first-text {
+    padding: 60px 20px;
+}
+  .second-text {
+    padding: 0 20px 60px 20px;
+    max-width: 100%;
+}
+}
+
+@media (max-width: 500px) {
+    .mission-content {
+        padding: 70px 20px 70px 20px;
+        gap: 70px;
+    }
+}
+
+@media (max-width: 423px) {
+    .mission-img:nth-child(3) {
+        transform: scale(0.6) !important;
+    }
+    .mission-img:nth-child(2) {
+        transform: scale(0.6) !important;
+    }
 }
