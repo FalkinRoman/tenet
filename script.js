@@ -429,7 +429,13 @@ document.addEventListener('DOMContentLoaded', function() {
   function showTextBlockOnScroll() {
     const rect = textBlock.getBoundingClientRect();
     if (rect.top < window.innerHeight * 0.85) {
-      textBlock.classList.add('visible');
+      if (window.innerWidth <= 1100) {
+        setTimeout(() => {
+          textBlock.classList.add('visible');
+        }, 900); // задержка 900мс, как у других блоков
+      } else {
+        textBlock.classList.add('visible');
+      }
       window.removeEventListener('scroll', showTextBlockOnScroll);
     }
   }

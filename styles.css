@@ -1125,7 +1125,7 @@ html {
   opacity: 0;
   transform: translateY(40px);
   cursor: pointer;
-  transition: opacity 0.6s, color 0.6s, filter 0.6s;
+  transition: opacity 0.7s cubic-bezier(.4,0,.2,1), color 0.7s cubic-bezier(.4,0,.2,1), filter 0.7s cubic-bezier(.4,0,.2,1);
 }
 
 .stat-cell.visible {
@@ -1357,7 +1357,7 @@ html {
 
 /* Плавное затухание */
 .stat-cell {
-    transition: opacity 0.6s, color 0.6s, filter 0.6s;
+    transition: opacity 0.7s cubic-bezier(.4,0,.2,1), color 0.7s cubic-bezier(.4,0,.2,1), filter 0.7s cubic-bezier(.4,0,.2,1);
 }
 
 .stat-cell.faded,
@@ -1367,6 +1367,7 @@ html {
     opacity: 0.58 !important;
     filter: grayscale(0.5);
     color: #bfc3c6 !important;
+    transition: opacity 0.7s cubic-bezier(.4,0,.2,1), color 0.7s cubic-bezier(.4,0,.2,1), filter 0.7s cubic-bezier(.4,0,.2,1);
 }
 
 .stat-cell.active {
@@ -1657,9 +1658,7 @@ html {
   color: #111;
 }
 
-.venn-text-block.visible {
-  /* больше не нужно, можно удалить, но оставим пустым на всякий */
-}
+
 
 /* Планшеты и ниже: всё по центру, аккуратные отступы */
 @media (max-width: 1100px) {
