@@ -444,4 +444,68 @@ document.addEventListener('DOMContentLoaded', function() {
   showTextBlockOnScroll();
 });
 
+document.addEventListener('DOMContentLoaded', function() {
+  const missionTextBlock = document.querySelector('.mission-text-block');
+  if (!missionTextBlock) return;
+
+  function showMissionTextOnScroll() {
+    const rect = missionTextBlock.getBoundingClientRect();
+    if (rect.top < window.innerHeight * 0.85) {
+      if (window.innerWidth <= 1100) {
+        setTimeout(() => {
+          missionTextBlock.classList.add('visible');
+        }, 900);
+      } else {
+        missionTextBlock.classList.add('visible');
+      }
+      window.removeEventListener('scroll', showMissionTextOnScroll);
+    }
+  }
+
+  window.addEventListener('scroll', showMissionTextOnScroll);
+  showMissionTextOnScroll();
+});
+
+// Параллакс для миссии (только на десктопе)
+(function() {
+  const imagesBlock = document.querySelector('.mission-images-block');
+  const img2 = imagesBlock ? imagesBlock.querySelector('.mission-img:nth-child(2)') : null;
+  const img3 = imagesBlock ? imagesBlock.querySelector('.mission-img:nth-child(3)') : null;
+  if (!imagesBlock || !img2 || !img3) return;
+
+  // Сохраняем твои базовые transform для каждого изображения
+  const baseTransform2 = 'scale(0.8)';
+  const baseTop2 = img2.style.top || '-90px';
+  const baseTransform3 = 'scale(0.8)';
+  const baseTop3 = img3.style.top || '60px';
+  const baseLeft3 = img3.style.left || '50px';
+
+  function parallaxMission() {
+    if (window.innerWidth <= 1100) {
+      img2.style.transform = baseTransform2;
+      img2.style.top = baseTop2;
+      img3.style.transform = baseTransform3;
+      img3.style.top = baseTop3;
+      img3.style.left = baseLeft3;
+      return;
+    }
+    const rect = imagesBlock.getBoundingClientRect();
+    const winH = window.innerHeight;
+    if (rect.top > winH || rect.bottom < 0) return;
+    // Прогресс появления блока на экране (0 — верх, 1 — низ)
+    const progress = Math.min(Math.max((winH - rect.top) / (winH + rect.height), 0), 1);
+    // Движение: максимум 48px и 81px (ещё больше, третье двигается быстрее)
+    const y2 = Math.round(progress * 96 - 48); // -48..+48
+    const y3 = Math.round(progress * 162 - 81); // -81..+81
+    img2.style.transform = `${baseTransform2} translateY(${y2}px)`;
+    img2.style.top = baseTop2;
+    img3.style.transform = `${baseTransform3} translateY(${y3}px)`;
+    img3.style.top = baseTop3;
+    img3.style.left = baseLeft3;
+  }
+  window.addEventListener('scroll', parallaxMission);
+  window.addEventListener('resize', parallaxMission);
+  parallaxMission();
+})();
+
 
