@@ -9,13 +9,14 @@
 
 body {
     background: #fff;
-    color: #1d252d;
+    color: #000000;
     line-height: 1.4;
     overflow-x: hidden;
 }
 
 h1, h2, h3, h4, h5, h6, p, span, li, .logo-desc, .main-title, .main-desc, .main-menu li, .choose, .phone, .main-nav {
     color: #1d252d !important;
+    letter-spacing: -0.05em;
 }
 
 .container {
@@ -37,6 +38,11 @@ h1 {
 
 p {
     color: #666;
+    letter-spacing: -0.05em;
+}
+
+a {
+  letter-spacing: -0.05em;
 }
 
 /* Стили для загрузочного экрана */
@@ -147,7 +153,7 @@ p {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 8px 3.125rem;
+    padding: 10px 3.125rem;
     position: fixed;
     top: 0;
     left: 0;
@@ -203,7 +209,7 @@ p {
 .vertical-line-header {
     width: 1px;
     height: 36px;
-    background: #929aa1;
+    background: #000000;
     margin: 0 12px;
 }
 
@@ -236,12 +242,12 @@ p {
 .header-actions {
     display: flex;
     align-items: center;
-    gap: 28px;
+    gap: 20px;
     font-size: 1rem;
 }
 
 .choose, .phone {
-    font-weight: 300;
+  font-weight: 500;
     font-size: 15px;
     cursor: pointer;
 }
@@ -360,11 +366,13 @@ p {
 .headline-light {
     font-weight: 300;
     font-size: 2.1rem;
+    letter-spacing: -0.05em;
 }
 
 .headline-bold {
     font-weight: 700;
     font-size: 2.5rem;
+    letter-spacing: -0.05em;
 }
 
 .main-menu.new-menu {
@@ -379,7 +387,7 @@ p {
 }
 
 .main-menu.new-menu a {
-    color: #1d252d;
+    color: #000000;
     text-decoration: none;
     font: inherit;
     cursor: pointer;
@@ -388,6 +396,7 @@ p {
     padding: 0;
     transition: color 0.2s;
     display: inline-block;
+    font-weight: 500;
 }
 
 .main-menu.new-menu li {
@@ -452,11 +461,11 @@ p {
 
 .services-row-muted {
     font-family: 'Montserrat', 'Manrope', Arial, sans-serif;
-    font-weight: 500;
+    font-weight:400;
     font-size: 28px;
     color: #C0C0C0 !important;
     line-height: 1.2;
-    letter-spacing: 0.05em;
+    letter-spacing: -0.05em;
 }
 
 .headline-light, .headline-bold {
@@ -1451,9 +1460,9 @@ html {
   margin: 0 auto;
   text-align: left;
   padding-top: 100px;
-  padding-bottom: 120px;
+  padding-bottom: 180px;
   max-width: 680px;
-  min-height: 60vh;
+ 
 }
 
 .second-text {
@@ -1494,7 +1503,7 @@ html {
     max-width: 70%;
     padding-top: 60px;
     padding-bottom: 60px;
-    min-height: 40vh;
+
   }
   .second-text {
     margin-right: 0;
@@ -1616,7 +1625,7 @@ html {
   gap: 64px;
   width: 100vw;
   max-width: 1400px;
-  margin: 0 auto 120px auto;
+  margin: 0 auto 0px auto;
   padding: 0 5vw;
   box-sizing: border-box;
 }
@@ -1702,21 +1711,21 @@ html {
 
 @media (max-width: 700px) {
     .first-text {
-        padding: 60px 40px;
+        padding: 100px 40px 60px 40px;
         max-width: 100%;
     }
     
     .second-text {
-        padding: 0 40px 60px 40px;
+        padding: 60px 40px 40px 40px;
     }
 
     .principles-title-bold {
-        font-size: 2rem;
+        font-size: 1.6rem;
         padding-right: 0;
     }
   .venn-main-block {
     padding: 0 20px;
-    gap: 18px;
+    gap: 30px;
     margin-bottom: 24px;
   }
   .venn-main-block .venn-animated-block,
@@ -1822,10 +1831,10 @@ html {
 }
 
 .mission-img:nth-child(1) {
-    transform: scale(0.88);
+    transform: scale(1);
 }
 .mission-img:nth-child(2) {
-    transform: scale(0.64);
+    transform: scale(0.8);
     top: -90px;
 }
 .mission-img:nth-child(3) {
@@ -1833,8 +1842,7 @@ html {
     top: 60px;
     left: 50px;
 }
-/* .mission-img:nth-child(2) { opacity: 0.7; filter: blur(2px); }
-.mission-img:nth-child(3) { opacity: 0.4; filter: blur(6px); } */
+
 
 @media (max-width: 1100px) {
   .mission-content {
@@ -1875,8 +1883,8 @@ html {
 }
 @media (max-width: 700px) {
   .mission-content {
-    padding: 120px 20px;
-    gap: 18px;
+    padding: 100px 20px;
+    gap: 90px;
     margin-bottom: 24px;
   }
   .mission-images-block {
@@ -1923,8 +1931,8 @@ html {
 
 @media (max-width: 500px) {
     .mission-content {
-        padding: 70px 20px 70px 20px;
-        gap: 70px;
+        padding: 30px 20px 70px 20px;
+        gap: 30px;
     }
 }
 
