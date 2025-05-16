@@ -297,27 +297,19 @@ a {
 }
 
 .main-image {
+    height: 50vh;
     width: 100vw;
-    max-width: 100vw;
-    margin: 0;
-    border-radius: 0;
     overflow: hidden;
-    box-shadow: none;
-    position: relative;
-    left: 50%;
-    right: 50%;
-    margin-left: -50vw;
-    margin-right: -50vw;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
 }
 
 .main-image img {
     width: 100vw;
-    min-width: 100vw;
-    max-width: 100vw;
-    display: block;
+    height: 100%;
     object-fit: cover;
-    min-height: 340px;
-    max-height: 420px;
+    display: block;
 }
 
 .main-nav span {
@@ -424,6 +416,7 @@ a {
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
+    height: 40vh;
 }
 
 .services-row-block {
@@ -995,6 +988,15 @@ html {
 }
 
 @media (max-width: 980px)  { 
+
+  .main-center-container {
+    height: 30vh;
+}
+
+.main-image {
+  height: 60vh;
+}
+
     .headline-light, .headline-bold {
         font-size: 34px;
     }
@@ -1021,8 +1023,15 @@ html {
     .phone-icon {
         display: block;
     }
+    .main-center-container {
+      height: 35vh;
+  }
     .phone, .choose, .sticky-submenu {
         display: none !important;
+    }
+
+    .main-image {
+      height: 60vh;
     }
     .burger-socials {
         position: fixed;
@@ -1110,12 +1119,20 @@ html {
     .burger-menu li {
         font-size: 18px;
     }
+
+    .main-center-container {
+      height: 30vh;
+  }
+
 }
 
 
 @media (max-width: 390px) { 
   .services-row-muted .sep {
     margin: 0 4px !important;
+}
+.main-center-container {
+  height: 35vh;
 }
 }
 
