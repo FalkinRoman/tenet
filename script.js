@@ -327,6 +327,35 @@ function handleHover(e) {
       if (window.innerWidth < 1200 && idx >= 6) {
         cell.classList.add('bottom-row');
       }
+      // --- Новая логика позиционирования popup ---
+      popup.style.left = '';
+      popup.style.right = '';
+      popup.style.transform = '';
+      popup.style.top = '';
+      popup.style.bottom = '';
+      if (idx === 0 || idx === 1 || idx === 4 || idx === 5) {
+        popup.style.left = '100%';
+        popup.style.right = 'auto';
+        popup.style.top = '50%';
+        popup.style.bottom = 'auto';
+        popup.style.transform = 'translateY(-50%)';
+      }
+      if (idx === 2 || idx === 3 || idx === 6 || idx === 7) {
+        popup.style.right = '100%';
+        popup.style.left = 'auto';
+        popup.style.top = '50%';
+        popup.style.bottom = 'auto';
+        popup.style.transform = 'translateY(-50%)';
+      }
+      // Коррекция для нижних, если вылезает за низ grid
+      setTimeout(() => {
+        const popupRect = popup.getBoundingClientRect();
+        const gridRect = cell.parentElement.getBoundingClientRect();
+        if (popupRect.bottom > gridRect.bottom) {
+          const diff = popupRect.bottom - gridRect.bottom;
+          popup.style.transform = `translateY(calc(-50% - ${diff}px))`;
+        }
+      }, 0);
     } else {
       cell.classList.remove('active', 'bottom-row');
       cell.classList.add('faded');
@@ -507,5 +536,13 @@ document.addEventListener('DOMContentLoaded', function() {
   window.addEventListener('resize', parallaxMission);
   parallaxMission();
 })();
+
+// Фикс для мобильных 100vh/50vh
+function setRealVh() {
+  let vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty('--real-vh', `${vh}px`);
+}
+setRealVh();
+window.addEventListener('resize', setRealVh);
 
 

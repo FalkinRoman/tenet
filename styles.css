@@ -297,7 +297,7 @@ a {
 }
 
 .main-image {
-    height: 50vh;
+    height: calc(var(--real-vh, 1vh) * 50);
     width: 100vw;
     overflow: hidden;
     display: flex;
