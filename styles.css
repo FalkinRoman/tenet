@@ -934,7 +934,9 @@ html {
 
 /* Планшеты */
 @media (max-width: 980px)  { 
-
+  .main-image {
+    height: calc(var(--real-vh, 1vh) * 50);
+  }
   .services-row-muted .sep {
     margin: 0 14px !important;
 }
@@ -988,13 +990,8 @@ html {
 }
 
 @media (max-width: 980px)  { 
-
   .main-center-container {
     height: 30vh;
-}
-
-.main-image {
-  height: 60vh;
 }
 
     .headline-light, .headline-bold {
@@ -1031,7 +1028,7 @@ html {
     }
 
     .main-image {
-      height: 60vh;
+      height: calc(var(--real-vh, 1vh) * 50);
     }
     .burger-socials {
         position: fixed;
@@ -1063,7 +1060,6 @@ html {
 
 
 @media (max-width: 650px)  { 
-
   .services-row-muted .sep {
     margin: 0 12px !important;
 }
@@ -1086,7 +1082,6 @@ html {
 }
 
 @media (max-width: 650px)  { 
-
   .services-row-muted .sep {
     margin: 0 10px !important;
 }

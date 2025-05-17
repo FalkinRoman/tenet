@@ -539,10 +539,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Фикс для мобильных 100vh/50vh
 function setRealVh() {
+  // Берём реальную высоту окна, а не viewport
   let vh = window.innerHeight * 0.01;
   document.documentElement.style.setProperty('--real-vh', `${vh}px`);
 }
 setRealVh();
 window.addEventListener('resize', setRealVh);
+window.addEventListener('orientationchange', setRealVh);
 
 
