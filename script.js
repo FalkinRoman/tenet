@@ -547,4 +547,22 @@ setRealVh();
 window.addEventListener('resize', setRealVh);
 window.addEventListener('orientationchange', setRealVh);
 
+// Фикс высоты для картинки
+function fixImageHeight() {
+    const mainImage = document.querySelector('.main-image');
+    if (!mainImage) return;
+    
+    // Получаем реальную высоту viewport
+    const vh = window.innerHeight * 0.01;
+    // Устанавливаем фиксированную высоту в пикселях
+    const height = vh * 50; // 50vh
+    mainImage.style.height = `${height}px`;
+}
+
+// Вызываем при загрузке и ресайзе
+window.addEventListener('load', fixImageHeight);
+window.addEventListener('resize', fixImageHeight);
+// Вызываем при скролле, чтобы компенсировать изменение viewport на мобильных
+window.addEventListener('scroll', fixImageHeight);
+
 

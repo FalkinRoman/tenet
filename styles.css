@@ -297,19 +297,22 @@ a {
 }
 
 .main-image {
-    height: calc(var(--real-vh, 1vh) * 50);
     width: 100vw;
     overflow: hidden;
     display: flex;
     align-items: flex-end;
     justify-content: center;
+    position: relative;
 }
 
 .main-image img {
-    width: 100vw;
+    width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
 .main-nav span {
