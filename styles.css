@@ -2018,6 +2018,11 @@ html {
   transform: translateY(0);
 }
 
+.main-slogan-block2.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 .main-slogan-line {
   font-size: 28px;
   font-weight: 400;
@@ -2097,9 +2102,16 @@ html {
   }
   .main-slogan-block2 {
     display: block;
-    padding: 80px 20px 60px 20px;
+    padding: 110px 20px 80px 20px;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.7s cubic-bezier(.4,0,.2,1), transform 0.7s cubic-bezier(.4,0,.2,1);
   }
 
+  .main-slogan-block2.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 

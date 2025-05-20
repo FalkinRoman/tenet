@@ -508,13 +508,25 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Анимация появления слогана при скролле
 const sloganBlock = document.querySelector('.main-slogan-block');
+const sloganBlock2 = document.querySelector('.main-slogan-block2');
 const sloganObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
-      setTimeout(() => {
-        entry.target.classList.add('visible');
-      }, 700);
-      sloganObserver.unobserve(entry.target);
+      // Для второго блока проверяем, что первый блок скрыт
+      if (entry.target === sloganBlock2) {
+        if (window.getComputedStyle(sloganBlock).display === 'none') {
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, 700);
+          sloganObserver.unobserve(entry.target);
+        }
+      } else {
+        // Для первого блока обычная анимация
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, 700);
+        sloganObserver.unobserve(entry.target);
+      }
     }
   });
 }, {
@@ -523,6 +535,10 @@ const sloganObserver = new IntersectionObserver((entries) => {
 
 if (sloganBlock) {
   sloganObserver.observe(sloganBlock);
+}
+
+if (sloganBlock2) {
+  sloganObserver.observe(sloganBlock2);
 }
 
 
