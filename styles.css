@@ -1773,7 +1773,8 @@ html {
     .principles-title-bold {
         font-size: 1.6rem;
         padding-right: 0;
-        padding-top: 40px;
+        padding-top: 30px;
+        padding-left: 50px;
     }
   .venn-main-block {
     padding: 0 20px;
@@ -2117,4 +2118,61 @@ html {
   }
 }
 
+
+
+.main-slogan3 {
+  font-weight: 800;
+  font-size: 2rem;
+  letter-spacing: -0.01em;
+
+}
+
+
+.main-slogan-block3 {
+  margin-left: 7vw;
+  opacity: 0;
+  transform: translateX(-60px);
+  transition: opacity 0.7s cubic-bezier(.4,0,.2,1), transform 0.7s cubic-bezier(.4,0,.2,1);
+  padding-bottom: 120px;
+  padding-top: 80px;
+}
+.main-slogan-block3.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+@media (max-width: 1100px) {
+  .mission-content {
+
+    padding: 40px 4vw 45px 4vw;
+}
+}
+
+@media (max-width: 900px) {
+  .main-slogan-block3 {
+    margin-left: 0;
+    padding-left:  3.125rem;
+    padding-top: 20px;
+    padding-bottom: 130px;
+  }
+}
+@media (max-width: 700px) {
+  .main-slogan3 {
+    font-size: 1.6rem;
+  }
+  .main-slogan-block3 {
+    padding-left: 40px;
+    padding-top: 60px;
+  }
+}
+
+@media (max-width: 600px) {
+
+  .main-slogan-block3 {
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 40px;
+    padding-bottom: 100px;
+  }
+}
 

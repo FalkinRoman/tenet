@@ -533,4 +533,20 @@ if (sloganBlock) {
   sloganObserver.observe(sloganBlock);
 }
 
+document.addEventListener('DOMContentLoaded', () => {
+  const sloganBlock3 = document.querySelector('.main-slogan-block3');
+  if (!sloganBlock3) return;
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, 500);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.2 });
+  observer.observe(sloganBlock3);
+});
+
 
