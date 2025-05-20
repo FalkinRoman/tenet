@@ -2158,21 +2158,21 @@ html {
 }
 @media (max-width: 700px) {
   .main-slogan3 {
-    font-size: 1.6rem;
+    font-size: 1.6rem !important;
   }
   .main-slogan-block3 {
-    padding-left: 40px;
-    padding-top: 60px;
+    padding-left: 40px !important;
+    padding-top: 60px !important;
   }
 }
 
 @media (max-width: 600px) {
 
   .main-slogan-block3 {
-    padding-left: 30px;
-    padding-right: 30px;
-    padding-top: 40px;
-    padding-bottom: 100px;
+    padding-left: 30px !important;
+    padding-right: 30px !important;
+    padding-top: 40px !important;
+    padding-bottom: 100px !important;
   }
 }
 
