@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const loaderScreen = document.querySelector('.loader-screen');
     const container = document.querySelector('.container');
+    const sloganBlock2 = document.querySelector('.main-slogan-block2');
     
     // Ждем завершения всех анимаций лоадера (2.4 секунды)
     setTimeout(() => {
@@ -15,6 +16,13 @@ document.addEventListener('DOMContentLoaded', () => {
             if (window.location.hash) {
                 window.location.hash = '';
             }
+
+            // Запускаем анимацию второго блока через 2 секунды после скрытия лоадера
+            setTimeout(() => {
+                if (sloganBlock2) {
+                    sloganBlock2.classList.add('visible');
+                }
+            }, 2000);
         }, 200);
     }, 2400);
     
@@ -506,27 +514,15 @@ document.addEventListener('DOMContentLoaded', function() {
   parallaxMission();
 })();
 
-// Анимация появления слогана при скролле
+// Анимация появления слогана при скролле (только для первого блока)
 const sloganBlock = document.querySelector('.main-slogan-block');
-const sloganBlock2 = document.querySelector('.main-slogan-block2');
 const sloganObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
-      // Для второго блока проверяем, что первый блок скрыт
-      if (entry.target === sloganBlock2) {
-        if (window.getComputedStyle(sloganBlock).display === 'none') {
-          setTimeout(() => {
-            entry.target.classList.add('visible');
-          }, 700);
-          sloganObserver.unobserve(entry.target);
-        }
-      } else {
-        // Для первого блока обычная анимация
-        setTimeout(() => {
-          entry.target.classList.add('visible');
-        }, 700);
-        sloganObserver.unobserve(entry.target);
-      }
+      setTimeout(() => {
+        entry.target.classList.add('visible');
+      }, 700);
+      sloganObserver.unobserve(entry.target);
     }
   });
 }, {
@@ -535,10 +531,6 @@ const sloganObserver = new IntersectionObserver((entries) => {
 
 if (sloganBlock) {
   sloganObserver.observe(sloganBlock);
-}
-
-if (sloganBlock2) {
-  sloganObserver.observe(sloganBlock2);
 }
 
 
