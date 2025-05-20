@@ -521,7 +521,7 @@ const sloganObserver = new IntersectionObserver((entries) => {
     if (entry.isIntersecting) {
       setTimeout(() => {
         entry.target.classList.add('visible');
-      }, 700);
+      }, 500);
       sloganObserver.unobserve(entry.target);
     }
   });

@@ -1349,7 +1349,7 @@ html {
   }
   .first-text .principles-title {
     font-size: 1.5rem;
-    padding-right: 3.125rem;
+    
     margin-bottom: 20px;
     padding-left: 0;
     text-align: left;
@@ -1510,7 +1510,7 @@ html {
   text-align: left;
   padding-top: 100px;
   padding-bottom: 180px;
-  max-width: 680px;
+  max-width: 630px;
  
 }
 
@@ -1519,12 +1519,12 @@ html {
   margin-right: 7vw;
   text-align: right;
   padding-bottom: 120px;
-  max-width: 900px;
+  max-width: 620px;
   transform: translateX(80px);
 }
 
 .principles-title, .principles-title-bold {
-  font-size: 2.6rem;
+  font-size: 2rem;
   margin-bottom: 20px;
   letter-spacing: -0.01em;
 }
@@ -1543,8 +1543,7 @@ html {
   font-weight: 400;
   margin-bottom: 0;
   max-width: 680px;
-  margin-left: auto;
-  margin-right: auto;
+
 }
 
 @media (max-width: 900px) {
@@ -1559,7 +1558,10 @@ html {
     min-height: 0vh;
   }
   .principles-title, .principles-title-bold {
-    font-size: 2.6rem;
+    font-size: 2rem;
+    
+  }
+  .principles-title-bold {
     padding-right: 3.125rem;
   }
   .principles-desc {
@@ -1705,7 +1707,7 @@ html {
 
 .venn-text-block h3 {
   font-family: 'Montserrat', Arial, sans-serif;
-  font-size: 2.6rem;
+  font-size: 2rem;
   font-weight: 400;
   margin-bottom: 20px;
   letter-spacing: -0.01em;
@@ -1771,6 +1773,7 @@ html {
     .principles-title-bold {
         font-size: 1.6rem;
         padding-right: 0;
+        padding-top: 40px;
     }
   .venn-main-block {
     padding: 0 20px;
@@ -1838,7 +1841,7 @@ html {
 }
 .mission-title {
   font-family: 'Montserrat', Arial, sans-serif;
-  font-size: 2.6rem;
+  font-size: 2rem;
   font-weight: 400;
   margin-bottom: 20px;
   letter-spacing: -0.01em;
