@@ -7,11 +7,16 @@
     font-family: 'Montserrat', 'Manrope', Arial, sans-serif;
 }
 
+html, body {
+    overflow-x: hidden;
+    width: 100%;
+    position: relative;
+}
+
 body {
     background: #fff;
     color: #000000;
     line-height: 1.4;
-    overflow-x: hidden;
 }
 
 h1, h2, h3, h4, h5, h6, p, span, li, .logo-desc, .main-title, .main-desc, .main-menu li, .choose, .phone, .main-nav {
@@ -500,7 +505,7 @@ html {
 }
 
 .main-section {
-    width: 100vw;
+    width: 100%;
     max-width: 1100px;
     margin: 0 auto 64px auto;
     padding: 64px 24px 32px 24px;
@@ -1122,13 +1127,13 @@ html {
 /* --- Блок "Мы в цифрах" --- */
 #about,
 .stats-fullwidth-block {
-  width: 100vw !important;
-  max-width: 100vw !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  border-radius: 0 !important;
-  box-shadow: none !important;
-  background: none !important;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  border-radius: 0;
+  box-shadow: none;
+  background: none;
 }
 
 .stats-title {
@@ -1474,8 +1479,8 @@ html {
 }
 
 .principles-section {
-  width: 100vw;
-  max-width: 100vw;
+  width: 100%;
+  max-width: 100%;
   margin: 0;
   padding: 0;
   background: #fff;
@@ -1661,7 +1666,7 @@ html {
   align-items: center;
   justify-content: center;
   gap: 64px;
-  width: 100vw;
+  width: 100%;
   max-width: 1400px;
   margin: 0 auto 0px auto;
   padding: 0 5vw;
@@ -1791,8 +1796,8 @@ html {
 
 /* --- Миссия --- */
 .mission-section {
-  width: 100vw;
-  max-width: 100vw;
+  width: 100%;
+  max-width: 100%;
   margin: 0;
   padding: 0;
   background: #fff;
@@ -1805,7 +1810,7 @@ html {
   align-items: center;
   justify-content: center;
   gap: 64px;
-  width: 100vw;
+  width: 100%;
   max-width: 1400px;
   margin: 60px auto 60px auto;
   padding: 0 5vw;
