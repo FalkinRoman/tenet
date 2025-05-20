@@ -315,17 +315,15 @@ function handleHover(e) {
       if (!popup) {
         popup = document.createElement('div');
         popup.className = 'stat-info-popup';
+        // Добавляем класс в зависимости от позиции
+        if ([2,3,6,7].includes(idx)) { // индексы 3,4,7,8 (правые элементы)
+          popup.classList.add('right-side');
+        } else { // индексы 1,2,5,6 (левые элементы)
+          popup.classList.add('left-side');
+        }
         popup.innerHTML = `<div style="font-weight:700;font-size:1.1em;margin-bottom:8px;">${infoData[idx].title}</div>
         <div style="font-weight:400;font-size:0.98em;line-height:1.4;">${infoData[idx].desc}</div>`;
         cell.appendChild(popup);
-      }
-      // Определяем нижний ряд (4 колонки)
-      if (window.innerWidth >= 1200 && idx >= 4) {
-        cell.classList.add('bottom-row');
-      }
-      // Для адаптива (2 колонки)
-      if (window.innerWidth < 1200 && idx >= 6) {
-        cell.classList.add('bottom-row');
       }
     } else {
       cell.classList.remove('active', 'bottom-row');

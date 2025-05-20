@@ -1444,9 +1444,8 @@ html {
 /* Всплывающий блок */
 .stat-info-popup {
     position: absolute;
-    top: 100%;
-    left: 50%;
-    transform: translate(-50%, 24px);
+    top: 50%;
+    transform: translateY(-50%);
     min-width: 260px;
     max-width: 340px;
     background: #fff;
@@ -1461,21 +1460,28 @@ html {
     z-index: 10;
 }
 
+/* Для правых элементов (3,4,7,8) */
+.stat-info-popup.right-side {
+    left: auto;
+    right: 100%;
+    margin-right: 24px;
+}
+
+/* Для левых элементов (1,2,5,6) */
+.stat-info-popup.left-side {
+    left: 100%;
+    margin-left: 24px;
+}
+
 .stat-cell.active .stat-info-popup {
     opacity: 1;
     pointer-events: auto;
-    transform: translate(-50%, 0);
 }
 
 @media (max-width: 1200px) {
-    .stat-info-popup { display: none !important; }
-}
-
-/* Popup для нижнего ряда — появляется сверху */
-.stat-cell.bottom-row .stat-info-popup {
-    top: auto;
-    bottom: 100%;
-    transform: translate(-50%, -24px);
+    .stat-info-popup { 
+        display: none !important; 
+    }
 }
 
 .principles-section {
