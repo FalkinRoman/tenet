@@ -506,4 +506,23 @@ document.addEventListener('DOMContentLoaded', function() {
   parallaxMission();
 })();
 
+// Анимация появления слогана при скролле
+const sloganBlock = document.querySelector('.main-slogan-block');
+const sloganObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      setTimeout(() => {
+        entry.target.classList.add('visible');
+      }, 700);
+      sloganObserver.unobserve(entry.target);
+    }
+  });
+}, {
+  threshold: 0.2
+});
+
+if (sloganBlock) {
+  sloganObserver.observe(sloganBlock);
+}
+
 
