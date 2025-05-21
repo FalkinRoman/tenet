@@ -549,4 +549,65 @@ document.addEventListener('DOMContentLoaded', () => {
   observer.observe(sloganBlock3);
 });
 
+document.addEventListener('DOMContentLoaded', function() {
+  const valuesTextBlock = document.querySelector('.values-text-block');
+  if (!valuesTextBlock) return;
+
+  function showValuesTextOnScroll() {
+    const rect = valuesTextBlock.getBoundingClientRect();
+    if (rect.top < window.innerHeight * 0.85) {
+      if (window.innerWidth <= 1100) {
+        setTimeout(() => {
+          valuesTextBlock.classList.add('visible');
+        }, 900);
+      } else {
+        valuesTextBlock.classList.add('visible');
+      }
+      window.removeEventListener('scroll', showValuesTextOnScroll);
+    }
+  }
+
+  window.addEventListener('scroll', showValuesTextOnScroll);
+  showValuesTextOnScroll();
+});
+
+// Параллакс для values (только на десктопе)
+(function() {
+  const imagesBlock = document.querySelector('.values-images-block');
+  const img1 = imagesBlock ? imagesBlock.querySelector('.values-img:nth-child(1)') : null;
+  const img2 = imagesBlock ? imagesBlock.querySelector('.values-img:nth-child(2)') : null;
+  if (!imagesBlock || !img1 || !img2) return;
+
+  // Базовые transform для каждого изображения
+  const baseTransform1 = 'scale(1)';
+  const baseTop1 = img1.style.top || '0px';
+  const baseTransform2 = 'scale(1.8)';
+  const baseTop2 = img2.style.top || '140px';
+
+  function parallaxValues() {
+    if (window.innerWidth <= 1100) {
+      img1.style.transform = baseTransform1;
+      img1.style.top = baseTop1;
+      img2.style.transform = baseTransform2;
+      img2.style.top = baseTop2;
+      return;
+    }
+    const rect = imagesBlock.getBoundingClientRect();
+    const winH = window.innerHeight;
+    if (rect.top > winH || rect.bottom < 0) return;
+    // Прогресс появления блока на экране (0 — верх, 1 — низ)
+    const progress = Math.min(Math.max((winH - rect.top) / (winH + rect.height), 0), 1);
+    // Движение: максимум 48px и 81px (вторая двигается быстрее)
+    const y1 = Math.round(progress * 48 - 24); // -24..+24
+    const y2 = Math.round(progress * 81 - 40); // -40..+41
+    img1.style.transform = `${baseTransform1} translateY(${y1}px)`;
+    img1.style.top = baseTop1;
+    img2.style.transform = `${baseTransform2} translateY(${y2}px)`;
+    img2.style.top = baseTop2;
+  }
+  window.addEventListener('scroll', parallaxValues);
+  window.addEventListener('resize', parallaxValues);
+  parallaxValues();
+})();
+
 
