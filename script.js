@@ -512,6 +512,9 @@ document.addEventListener('DOMContentLoaded', function() {
   window.addEventListener('scroll', parallaxMission);
   window.addEventListener('resize', parallaxMission);
   parallaxMission();
+
+  if (img2) img2.addEventListener('load', parallaxMission);
+  if (img3) img3.addEventListener('load', parallaxMission);
 })();
 
 // Анимация появления слогана при скролле (только для первого блока)
@@ -608,6 +611,9 @@ document.addEventListener('DOMContentLoaded', function() {
   window.addEventListener('scroll', parallaxValues);
   window.addEventListener('resize', parallaxValues);
   parallaxValues();
+
+  if (img1) img1.addEventListener('load', parallaxValues);
+  if (img2) img2.addEventListener('load', parallaxValues);
 })();
 
 document.addEventListener('DOMContentLoaded', () => {
