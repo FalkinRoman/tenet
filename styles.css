@@ -1648,6 +1648,22 @@ html {
 .venn-text.visible { opacity: 1; }
 
 @media (max-width: 700px) {
+  .main-image {
+    aspect-ratio: 16/9;
+    width: 100vw;
+    height: auto;
+    min-height: unset;
+    max-height: unset;
+    overflow: hidden;
+  }
+  .main-image img {
+    width: 100vw;
+    height: 100%;
+    object-fit: cover;
+    min-height: unset;
+    max-height: unset;
+    display: block;
+  }
   .venn-svg { max-width: 98vw; }
   .venn-text { font-size: 1.1rem; }
   .venn-text.result { font-size: 32px; }
