@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (sloganBlock2) {
                     sloganBlock2.classList.add('visible');
                 }
-            }, 2000);
+            }, 3000);
         }, 200);
     }, 2400);
     
