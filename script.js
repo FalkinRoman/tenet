@@ -610,4 +610,24 @@ document.addEventListener('DOMContentLoaded', function() {
   parallaxValues();
 })();
 
+document.addEventListener('DOMContentLoaded', () => {
+    const stickyMenu = document.querySelector('.sticky-submenu .sticky-menu');
+    if (stickyMenu) {
+        const items = stickyMenu.querySelectorAll('li');
+        items.forEach(li => {
+            li.addEventListener('mouseenter', () => {
+                items.forEach(other => {
+                    if (other !== li) other.style.opacity = '0.3';
+                    else other.style.opacity = '1';
+                });
+            });
+            li.addEventListener('mouseleave', () => {
+                items.forEach(other => {
+                    other.style.opacity = '1';
+                });
+            });
+        });
+    }
+});
+
 
