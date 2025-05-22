@@ -563,9 +563,9 @@ html {
 .sticky-submenu li {
     font-family: 'Montserrat', 'Manrope', Arial, sans-serif;
     font-size: 15px;
-    font-weight: 300;
+    font-weight: 500;
     letter-spacing: -0.05em;
-    color: #222;
+    color: #000000 !important;
     padding-bottom: 18px;
     border-bottom: 2px solid transparent;
     transition: border-color 0.3s cubic-bezier(.4,0,.2,1);
