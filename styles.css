@@ -1014,7 +1014,7 @@ html {
         margin-bottom: 26px;
     }
     .main-menu-block {
-        margin: 0 auto 20px auto;
+        margin: 0 auto 40px auto;
     }
     .sticky-submenu {
         top: 55px;
@@ -1591,6 +1591,8 @@ html {
   justify-content: center;
   align-items: center;
   min-height: 520px;
+  transform: scale(1.18);
+  transform-origin: center center;
 }
 
 .venn-svg {
@@ -1773,6 +1775,9 @@ html {
     opacity: 1 !important;
     transform: none !important;
     transition: none !important;
+  }
+  .venn-animated-block {
+    transform: none;
   }
 }
 
