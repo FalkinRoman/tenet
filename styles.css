@@ -2417,17 +2417,17 @@ html {
 }
 @media (max-width: 700px) {
   .main-image-caption {
-    font-size: 1.3rem;
-    right: 12px;
-    bottom: 12px;
+    font-size: 1.7rem;
+    right: 18px;
+    bottom: 18px;
     line-height: 1.08;
   }
 }
 @media (max-width: 500px) {
   .main-image-caption {
-    font-size: 1.05rem;
-    right: 8px;
-    bottom: 8px;
+    font-size: 1.25rem;
+    right: 10px;
+    bottom: 10px;
     line-height: 1.09;
   }
 }
@@ -2439,7 +2439,7 @@ html {
 
 @media (max-width: 700px) {
   .main-image--captioned {
-    height: 180px !important;
+    height: 240px !important;
     min-height: unset !important;
     max-height: unset !important;
     width: 100vw !important;
@@ -2458,7 +2458,7 @@ html {
 
 @media (max-width: 500px) {
   .main-image--captioned {
-    height: 120px !important;
+    height: 170px !important;
   }
 }
 
