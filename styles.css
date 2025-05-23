@@ -429,6 +429,7 @@ a {
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
+    min-height: 320px;
 }
 
 .services-row-block {
@@ -457,7 +458,7 @@ a {
 
 .main-menu-block {
     width: 80vw;
-    margin: 0 auto 70px auto;
+    margin: 0 auto 50px auto;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1646,7 +1647,7 @@ html {
 
 .venn-text.result { font-size: 42px; font-weight: 700; }
 .venn-text.control, .venn-text.growth, .venn-text.education { font-size: 1.3rem; }
-.venn-text.monitoring, .venn-text.management, .venn-text.progress { font-size: 8px; font-weight: 400; fill: #000; }
+.venn-text.monitoring, .venn-text.management, .venn-text.progress { font-size: 8px; font-weight: 600; fill: #000; }
 .venn-text.visible { opacity: 1; }
 
 @media (max-width: 700px) {
@@ -2464,6 +2465,28 @@ html {
 @media (max-width: 500px) {
   .main-image--captioned {
     height: 170px !important;
+  }
+}
+
+@media (min-width: 1100px) {
+  .main-image {
+    height: 50vh;
+    min-height: 50vh;
+    max-height: 50vh;
+  }
+  
+  .main-image img {
+    height: 50vh;
+    min-height: 50vh;
+    max-height: 50vh;
+    object-fit: cover;
+  }
+
+  .main-center-container {
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 }
 
