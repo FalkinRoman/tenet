@@ -472,51 +472,6 @@ document.addEventListener('DOMContentLoaded', function() {
   showMissionTextOnScroll();
 });
 
-// Параллакс для миссии (только на десктопе)
-(function() {
-  const imagesBlock = document.querySelector('.mission-images-block');
-  const img2 = imagesBlock ? imagesBlock.querySelector('.mission-img:nth-child(2)') : null;
-  const img3 = imagesBlock ? imagesBlock.querySelector('.mission-img:nth-child(3)') : null;
-  if (!imagesBlock || !img2 || !img3) return;
-
-  // Сохраняем твои базовые transform для каждого изображения
-  const baseTransform2 = 'scale(0.8)';
-  const baseTop2 = img2.style.top || '-90px';
-  const baseTransform3 = 'scale(0.8)';
-  const baseTop3 = img3.style.top || '60px';
-  const baseLeft3 = img3.style.left || '50px';
-
-  function parallaxMission() {
-    if (window.innerWidth <= 1100) {
-      img2.style.transform = baseTransform2;
-      img2.style.top = baseTop2;
-      img3.style.transform = baseTransform3;
-      img3.style.top = baseTop3;
-      img3.style.left = baseLeft3;
-      return;
-    }
-    const rect = imagesBlock.getBoundingClientRect();
-    const winH = window.innerHeight;
-    if (rect.top > winH || rect.bottom < 0) return;
-    // Прогресс появления блока на экране (0 — верх, 1 — низ)
-    const progress = Math.min(Math.max((winH - rect.top) / (winH + rect.height), 0), 1);
-    // Движение: максимум 48px и 81px (ещё больше, третье двигается быстрее)
-    const y2 = Math.round(progress * 96 - 48); // -48..+48
-    const y3 = Math.round(progress * 162 - 81); // -81..+81
-    img2.style.transform = `${baseTransform2} translateY(${y2}px)`;
-    img2.style.top = baseTop2;
-    img3.style.transform = `${baseTransform3} translateY(${y3}px)`;
-    img3.style.top = baseTop3;
-    img3.style.left = baseLeft3;
-  }
-  window.addEventListener('scroll', parallaxMission);
-  window.addEventListener('resize', parallaxMission);
-  parallaxMission();
-
-  if (img2) img2.addEventListener('load', parallaxMission);
-  if (img3) img3.addEventListener('load', parallaxMission);
-})();
-
 // Анимация появления слогана при скролле (только для первого блока)
 const sloganBlock = document.querySelector('.main-slogan-block');
 const sloganObserver = new IntersectionObserver((entries) => {
@@ -574,48 +529,6 @@ document.addEventListener('DOMContentLoaded', function() {
   showValuesTextOnScroll();
 });
 
-// Параллакс для values (только на десктопе)
-(function() {
-  const imagesBlock = document.querySelector('.values-images-block');
-  const img1 = imagesBlock ? imagesBlock.querySelector('.values-img:nth-child(1)') : null;
-  const img2 = imagesBlock ? imagesBlock.querySelector('.values-img:nth-child(2)') : null;
-  if (!imagesBlock || !img1 || !img2) return;
-
-  // Базовые transform для каждого изображения
-  const baseTransform1 = 'scale(1)';
-  const baseTop1 = img1.style.top || '0px';
-  const baseTransform2 = 'scale(1.8)';
-  const baseTop2 = img2.style.top || '140px';
-
-  function parallaxValues() {
-    if (window.innerWidth <= 1100) {
-      img1.style.transform = baseTransform1;
-      img1.style.top = baseTop1;
-      img2.style.transform = baseTransform2;
-      img2.style.top = baseTop2;
-      return;
-    }
-    const rect = imagesBlock.getBoundingClientRect();
-    const winH = window.innerHeight;
-    if (rect.top > winH || rect.bottom < 0) return;
-    // Прогресс появления блока на экране (0 — верх, 1 — низ)
-    const progress = Math.min(Math.max((winH - rect.top) / (winH + rect.height), 0), 1);
-    // Движение: максимум 48px и 81px (вторая двигается быстрее)
-    const y1 = Math.round(progress * 48 - 24); // -24..+24
-    const y2 = Math.round(progress * 81 - 40); // -40..+41
-    img1.style.transform = `${baseTransform1} translateY(${y1}px)`;
-    img1.style.top = baseTop1;
-    img2.style.transform = `${baseTransform2} translateY(${y2}px)`;
-    img2.style.top = baseTop2;
-  }
-  window.addEventListener('scroll', parallaxValues);
-  window.addEventListener('resize', parallaxValues);
-  parallaxValues();
-
-  if (img1) img1.addEventListener('load', parallaxValues);
-  if (img2) img2.addEventListener('load', parallaxValues);
-})();
-
 document.addEventListener('DOMContentLoaded', () => {
     const stickyMenu = document.querySelector('.sticky-submenu .sticky-menu');
     if (stickyMenu) {
@@ -634,6 +547,18 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+  if (window.innerWidth > 1100) {
+    new Rellax('.mission-img[data-rellax-speed], .values-img[data-rellax-speed]', {
+      center: true,
+      wrapper: null,
+      round: true,
+      vertical: true,
+      horizontal: false
+    });
+  }
 });
 
 
