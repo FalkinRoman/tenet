@@ -1,38 +1,38 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const loaderScreen = document.querySelector('.loader-screen');
-    const container = document.querySelector('.container');
-    const sloganBlock2 = document.querySelector('.main-slogan-block2');
-    
-    // Ждем завершения всех анимаций лоадера (2.4 секунды)
-    setTimeout(() => {
-        // Сначала начинаем исчезать элементы лоадера
-        loaderScreen.classList.add('hide');
-        
-        // После того как лоадер начал скрываться, показываем контент
-        setTimeout(() => {
-            container.classList.add('visible');
-            // Сброс скролла после появления контента
-            window.scrollTo(0, 0);
-            if (window.location.hash) {
-                window.location.hash = '';
-            }
+  const loaderScreen = document.querySelector('.loader-screen');
+  const container = document.querySelector('.container');
+  const sloganBlock2 = document.querySelector('.main-slogan-block2');
 
-            // Запускаем анимацию второго блока через 2 секунды после скрытия лоадера
-            setTimeout(() => {
-                if (sloganBlock2) {
-                    sloganBlock2.classList.add('visible');
-                }
-            }, 5000);
-        }, 200);
-    }, 2400);
-    
-    // Обработчик клика на заголовок
-    const h1 = document.querySelector('.container h1');
-    if (h1) {
-        h1.addEventListener('click', () => {
-            alert('Привет! Вы кликнули на заголовок!');
-        });
-    }
+  // Ждем завершения всех анимаций лоадера (2.4 секунды)
+  setTimeout(() => {
+    // Сначала начинаем исчезать элементы лоадера
+    loaderScreen.classList.add('hide');
+
+    // После того как лоадер начал скрываться, показываем контент
+    setTimeout(() => {
+      container.classList.add('visible');
+      // Сброс скролла после появления контента
+      window.scrollTo(0, 0);
+      if (window.location.hash) {
+        window.location.hash = '';
+      }
+
+      // Запускаем анимацию второго блока через 2 секунды после скрытия лоадера
+      setTimeout(() => {
+        if (sloganBlock2) {
+          sloganBlock2.classList.add('visible');
+        }
+      }, 5000);
+    }, 200);
+  }, 2400);
+
+  // Обработчик клика на заголовок
+  const h1 = document.querySelector('.container h1');
+  if (h1) {
+    h1.addEventListener('click', () => {
+      alert('Привет! Вы кликнули на заголовок!');
+    });
+  }
 });
 
 window.onbeforeunload = function () {
@@ -41,209 +41,195 @@ window.onbeforeunload = function () {
 
 if ('scrollRestoration' in history) {
   history.scrollRestoration = 'manual';
-} 
+}
 
 
 
 
 // Этот код отвечает за отображение и управление поведением липкого подменю, которое появляется при прокрутке страницы и подсвечивает активный пункт меню в зависимости от текущей секции.
 document.addEventListener('DOMContentLoaded', () => {
-    const origMenu = document.querySelector('.main-menu-block');
-    const stickyMenu = document.querySelector('.sticky-submenu');
-    const origMenuRect = () => origMenu.getBoundingClientRect().bottom;
+  const origMenu = document.querySelector('.main-menu-block');
+  const stickyMenu = document.querySelector('.sticky-submenu');
+  const origMenuRect = () => origMenu.getBoundingClientRect().bottom;
 
-    function onScroll() {
-        if (origMenuRect() <= 80) { // 80 — высота хедера
-            stickyMenu.style.display = 'flex';
-        } else {
-            stickyMenu.style.display = 'none';
-        }
+  function onScroll() {
+    if (origMenuRect() <= 80) { // 80 — высота хедера
+      stickyMenu.style.display = 'flex';
+    } else {
+      stickyMenu.style.display = 'none';
     }
-    window.addEventListener('scroll', onScroll);
+  }
+  window.addEventListener('scroll', onScroll);
 
-    // Подсветка активного пункта по якорю
-    const sections = ['about','principles','services','results','advantages','team'];
-    function setActiveMenu() {
-        const header = document.querySelector('.main-header');
-        const submenu = document.querySelector('.sticky-submenu');
-        const headerHeight = header ? header.offsetHeight : 0;
-        const submenuHeight = submenu ? submenu.offsetHeight : 0;
-        const offset = headerHeight + submenuHeight;
+  // Подсветка активного пункта по якорю
+  const sections = ['about', 'principles', 'services', 'results', 'advantages', 'team'];
+  function setActiveMenu() {
+    const header = document.querySelector('.main-header');
+    const submenu = document.querySelector('.sticky-submenu');
+    const headerHeight = header ? header.offsetHeight : 0;
+    const submenuHeight = submenu ? submenu.offsetHeight : 0;
+    const offset = headerHeight + submenuHeight;
 
-        let found = false;
-        for (let id of sections) {
-            const el = document.getElementById(id);
-            if (el && window.scrollY + offset + 1 >= el.offsetTop) {
-                stickyMenu.querySelectorAll('li').forEach(li => li.classList.remove('active'));
-                const link = stickyMenu.querySelector(`a[href="#${id}"]`);
-                if (link) link.parentElement.classList.add('active');
-                found = true;
-            }
-        }
-        if (!found) stickyMenu.querySelectorAll('li').forEach(li => li.classList.remove('active'));
+    let found = false;
+    for (let id of sections) {
+      const el = document.getElementById(id);
+      if (el && window.scrollY + offset + 1 >= el.offsetTop) {
+        stickyMenu.querySelectorAll('li').forEach(li => li.classList.remove('active'));
+        const link = stickyMenu.querySelector(`a[href="#${id}"]`);
+        if (link) link.parentElement.classList.add('active');
+        found = true;
+      }
     }
-    window.addEventListener('scroll', setActiveMenu);
-    stickyMenu.querySelectorAll('a').forEach(a => {
-        a.addEventListener('click', e => {
-            setTimeout(setActiveMenu, 300);
-        });
+    if (!found) stickyMenu.querySelectorAll('li').forEach(li => li.classList.remove('active'));
+  }
+  window.addEventListener('scroll', setActiveMenu);
+  stickyMenu.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', e => {
+      setTimeout(setActiveMenu, 300);
     });
+  });
 });
 
 
 // Обрабатываем все ссылки, начинающиеся с "#", добавляя обработчик клика
 document.querySelectorAll('a[href^="#"]').forEach(link => {
-    link.addEventListener('click', function(e) {
-      // Получаем ID целевого элемента из атрибута href
-      const targetId = this.getAttribute('href').slice(1);
-      const target = document.getElementById(targetId);
-      if (target) {
-        // Предотвращаем стандартное поведение ссылки
-        e.preventDefault();
-        // Получаем высоту хедера и подменю
-        const header = document.querySelector('.main-header');
-        const submenu = document.querySelector('.sticky-submenu');
-        const headerHeight = header ? header.offsetHeight : 0;
-        const submenuHeight = submenu ? submenu.offsetHeight : 0;
-        // Рассчитываем смещение для плавного скролла
-        const offset = headerHeight + submenuHeight;
-        const top = target.getBoundingClientRect().top + window.scrollY - offset;
-        // Плавно скроллим к целевому элементу
-        window.scrollTo({ top, behavior: 'smooth' });
-      }
-    });
+  link.addEventListener('click', function (e) {
+    // Получаем ID целевого элемента из атрибута href
+    const targetId = this.getAttribute('href').slice(1);
+    const target = document.getElementById(targetId);
+    if (target) {
+      // Предотвращаем стандартное поведение ссылки
+      e.preventDefault();
+      // Получаем высоту хедера и подменю
+      const header = document.querySelector('.main-header');
+      const submenu = document.querySelector('.sticky-submenu');
+      const headerHeight = header ? header.offsetHeight : 0;
+      const submenuHeight = submenu ? submenu.offsetHeight : 0;
+      // Рассчитываем смещение для плавного скролла
+      const offset = headerHeight + submenuHeight;
+      const top = target.getBoundingClientRect().top + window.scrollY - offset;
+      // Плавно скроллим к целевому элементу
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
   });
+});
 
 // Затемнение других li при наведении на один (только для .main-menu.new-menu)
 document.addEventListener('DOMContentLoaded', () => {
-    const menu = document.querySelector('.main-menu.new-menu');
-    if (menu) {
-        const items = menu.querySelectorAll('li');
-        items.forEach(li => {
-            li.addEventListener('mouseenter', () => {
-                items.forEach(other => {
-                    if (other !== li) other.style.opacity = '0.3';
-                    else other.style.opacity = '1';
-                });
-            });
-            li.addEventListener('mouseleave', () => {
-                items.forEach(other => {
-                    other.style.opacity = '1';
-                });
-            });
+  const menu = document.querySelector('.main-menu.new-menu');
+  if (menu) {
+    const items = menu.querySelectorAll('li');
+    items.forEach(li => {
+      li.addEventListener('mouseenter', () => {
+        items.forEach(other => {
+          if (other !== li) other.style.opacity = '0.3';
+          else other.style.opacity = '1';
         });
-    }
+      });
+      li.addEventListener('mouseleave', () => {
+        items.forEach(other => {
+          other.style.opacity = '1';
+        });
+      });
+    });
+  }
 });
 
 
 
 // Плавный скролл к якорю
 document.querySelectorAll('a[href^="#"]').forEach(link => {
-    link.addEventListener('click', function(e) {
-      const targetId = this.getAttribute('href').slice(1);
-      const target = document.getElementById(targetId);
-      if (target) {
-        e.preventDefault();
-        const header = document.querySelector('.main-header');
-        const submenu = document.querySelector('.sticky-submenu');
-        // Всегда учитываем обе высоты, даже если подменю скрыто (оно появится при скролле)
-        const headerHeight = header ? header.offsetHeight : 0;
-        const submenuHeight = submenu ? submenu.offsetHeight : 0;
-        const offset = headerHeight + submenuHeight;
-        const top = target.getBoundingClientRect().top + window.scrollY - offset;
-        window.scrollTo({ top, behavior: 'smooth' });
-      }
-    });
+  link.addEventListener('click', function (e) {
+    const targetId = this.getAttribute('href').slice(1);
+    const target = document.getElementById(targetId);
+    if (target) {
+      e.preventDefault();
+      const header = document.querySelector('.main-header');
+      const submenu = document.querySelector('.sticky-submenu');
+      // Всегда учитываем обе высоты, даже если подменю скрыто (оно появится при скролле)
+      const headerHeight = header ? header.offsetHeight : 0;
+      const submenuHeight = submenu ? submenu.offsetHeight : 0;
+      const offset = headerHeight + submenuHeight;
+      const top = target.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
   });
+});
 
 
 // Бургер меню
 document.addEventListener('DOMContentLoaded', () => {
-    const burger = document.querySelector('.burger-img');
-    const overlay = document.getElementById('burgerOverlay');
-    const closeBtn = document.getElementById('burgerClose');
-    const menu = overlay.querySelector('.burger-menu');
-    const socials = overlay.querySelector('.burger-socials');
-    const drop = document.getElementById('burgerDrop');
+  const burger = document.querySelector('.burger-img');
+  const overlay = document.getElementById('burgerOverlay');
+  const closeBtn = document.getElementById('burgerClose');
+  const menu = overlay.querySelector('.burger-menu');
+  const socials = overlay.querySelector('.burger-socials');
+  const drop = document.getElementById('burgerDrop');
 
-    if (burger && overlay && closeBtn && menu && socials && drop) {
-        burger.addEventListener('click', () => {
-            // 1. Показать падающую плашку
-            drop.classList.add('active');
+  if (burger && overlay && closeBtn && menu && socials && drop) {
+    burger.addEventListener('click', () => {
+      // 1. Показать падающую плашку
+      drop.classList.add('active');
 
-            // 2. Убрать плашку и показать бургер-меню
-            setTimeout(() => {
-                drop.classList.remove('active');
-                drop.classList.add('hide');
-                overlay.classList.add('open');
-                document.body.style.overflow = 'hidden';
+      // 2. Убрать плашку и показать бургер-меню
+      setTimeout(() => {
+        drop.classList.remove('active');
+        drop.classList.add('hide');
+        overlay.classList.add('open');
+        document.body.style.overflow = 'hidden';
 
-                // Сбросить анимации меню и соцсетей
-                menu.classList.remove('visible');
-                socials.classList.remove('visible');
+        // Сбросить анимации меню и соцсетей
+        menu.classList.remove('visible');
+        socials.classList.remove('visible');
 
-                // Появление меню снизу
-                setTimeout(() => {
-                    menu.classList.add('visible');
-                }, 200);
+        // Появление меню снизу
+        setTimeout(() => {
+          menu.classList.add('visible');
+        }, 200);
 
-                // Появление соцсетей справа
-                setTimeout(() => {
-                    socials.classList.add('visible');
-                }, 600);
+        // Появление соцсетей справа
+        setTimeout(() => {
+          socials.classList.add('visible');
+        }, 600);
 
-                // 3. Сбросить drop через 300мс (чтобы можно было повторно открыть)
-                setTimeout(() => {
-                    drop.classList.remove('hide');
-                }, 300);
-            }, 220); // время падения + пауза
-        });
+        // 3. Сбросить drop через 300мс (чтобы можно было повторно открыть)
+        setTimeout(() => {
+          drop.classList.remove('hide');
+        }, 300);
+      }, 220); // время падения + пауза
+    });
 
-        closeBtn.addEventListener('click', () => {
-            overlay.classList.remove('open');
-            document.body.style.overflow = 'auto';
-            menu.classList.remove('visible');
-            socials.classList.remove('visible');
-        });
+    closeBtn.addEventListener('click', () => {
+      overlay.classList.remove('open');
+      document.body.style.overflow = 'auto';
+      menu.classList.remove('visible');
+      socials.classList.remove('visible');
+    });
 
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                overlay.classList.remove('open');
-                document.body.style.overflow = 'auto';
-                menu.classList.remove('visible');
-                socials.classList.remove('visible');
-            }
-        });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        overlay.classList.remove('open');
+        document.body.style.overflow = 'auto';
+        menu.classList.remove('visible');
+        socials.classList.remove('visible');
+      }
+    });
 
-        overlay.querySelectorAll('.burger-menu a').forEach(a => {
-            a.addEventListener('click', () => {
-                overlay.classList.remove('open');
-                document.body.style.overflow = 'auto';
-                menu.classList.remove('visible');
-                socials.classList.remove('visible');
-            });
-        });
-    }
+    overlay.querySelectorAll('.burger-menu a').forEach(a => {
+      a.addEventListener('click', () => {
+        overlay.classList.remove('open');
+        document.body.style.overflow = 'auto';
+        menu.classList.remove('visible');
+        socials.classList.remove('visible');
+      });
+    });
+  }
 });
 
 
 
-// Типизируем текст машинка
-document.addEventListener('DOMContentLoaded', function() {
-    new Typed('#typewriter', {
-      strings: ['рынка недвижимости'],
-      typeSpeed: 150,
-      backSpeed: 80,
-      backDelay: 1200,
-      startDelay: 200,
-      loop: true,
-      showCursor: true,
-      cursorChar: '|'
-    });
-  });
-
 // Анимация появления и счётчик для блока "Мы в цифрах"
-(function() {
+(function () {
   function animateStatsBlock() {
     const stats = document.querySelectorAll('.stats-grid .stat-cell');
     if (!stats.length) return;
@@ -299,14 +285,14 @@ document.addEventListener('DOMContentLoaded', function() {
 // Блок "Мы в цифрах"
 const statCells = document.querySelectorAll('.stat-cell');
 const infoData = [
-  {title: 'Опыт', desc: '22 года на рынке недвижимости — это не просто цифра, а гарантия стабильности.'},
-  {title: 'Команда', desc: '50 сотрудников с опытом продаж — каждый эксперт в своём деле.'},
-  {title: 'Компетенции', desc: '39 авторских компетенций — уникальные решения для рынка.'},
-  {title: 'Навыки', desc: '51 навык — результат постоянного развития и обучения.'},
-  {title: 'Корреляция', desc: '78% — показатель эффективности нашей методологии.'},
-  {title: 'Тренинг', desc: '41 авторский тренинг — эксклюзив для рынка недвижимости.'},
-  {title: 'Проекты', desc: '67 индивидуальных проектов с партнёрами — гибкость и персонализация.'},
-  {title: 'Обучение', desc: '1160 специалистов обучено в год — мы делимся опытом.'}
+  { title: 'Опыт', desc: '22 года на рынке недвижимости — это не просто цифра, а гарантия стабильности.' },
+  { title: 'Команда', desc: '50 сотрудников с опытом продаж — каждый эксперт в своём деле.' },
+  { title: 'Компетенции', desc: '39 авторских компетенций — уникальные решения для рынка.' },
+  { title: 'Навыки', desc: '51 навык — результат постоянного развития и обучения.' },
+  { title: 'Корреляция', desc: '78% — показатель эффективности нашей методологии.' },
+  { title: 'Тренинг', desc: '41 авторский тренинг — эксклюзив для рынка недвижимости.' },
+  { title: 'Проекты', desc: '67 индивидуальных проектов с партнёрами — гибкость и персонализация.' },
+  { title: 'Обучение', desc: '1160 специалистов обучено в год — мы делимся опытом.' }
 ];
 
 function handleHover(e) {
@@ -324,7 +310,7 @@ function handleHover(e) {
         popup = document.createElement('div');
         popup.className = 'stat-info-popup';
         // Добавляем класс в зависимости от позиции
-        if ([2,3,6,7].includes(idx)) { // индексы 3,4,7,8 (правые элементы)
+        if ([2, 3, 6, 7].includes(idx)) { // индексы 3,4,7,8 (правые элементы)
           popup.classList.add('right-side');
         } else { // индексы 1,2,5,6 (левые элементы)
           popup.classList.add('left-side');
@@ -384,7 +370,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // Анимация появления венн-диаграммы по этапам
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   const block = document.querySelector('.venn-animated-block');
   if (!block) return;
   const svg = block.querySelector('.venn-svg');
@@ -428,7 +414,7 @@ document.addEventListener('DOMContentLoaded', function() {
   animateVenn();
 });
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   const textBlock = document.querySelector('.venn-text-block');
   if (!textBlock) return;
 
@@ -450,7 +436,7 @@ document.addEventListener('DOMContentLoaded', function() {
   showTextBlockOnScroll();
 });
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   const missionTextBlock = document.querySelector('.mission-text-block');
   if (!missionTextBlock) return;
 
@@ -507,7 +493,7 @@ document.addEventListener('DOMContentLoaded', () => {
   observer.observe(sloganBlock3);
 });
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   const valuesTextBlock = document.querySelector('.values-text-block');
   if (!valuesTextBlock) return;
 
@@ -530,26 +516,26 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-    const stickyMenu = document.querySelector('.sticky-submenu .sticky-menu');
-    if (stickyMenu) {
-        const items = stickyMenu.querySelectorAll('li');
-        items.forEach(li => {
-            li.addEventListener('mouseenter', () => {
-                items.forEach(other => {
-                    if (other !== li) other.style.opacity = '0.3';
-                    else other.style.opacity = '1';
-                });
-            });
-            li.addEventListener('mouseleave', () => {
-                items.forEach(other => {
-                    other.style.opacity = '1';
-                });
-            });
+  const stickyMenu = document.querySelector('.sticky-submenu .sticky-menu');
+  if (stickyMenu) {
+    const items = stickyMenu.querySelectorAll('li');
+    items.forEach(li => {
+      li.addEventListener('mouseenter', () => {
+        items.forEach(other => {
+          if (other !== li) other.style.opacity = '0.3';
+          else other.style.opacity = '1';
         });
-    }
+      });
+      li.addEventListener('mouseleave', () => {
+        items.forEach(other => {
+          other.style.opacity = '1';
+        });
+      });
+    });
+  }
 });
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   if (window.innerWidth > 1100) {
     new Rellax('.mission-img[data-rellax-speed], .values-img[data-rellax-speed]', {
       center: true,
@@ -560,5 +546,4 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 });
-
 
