@@ -547,3 +547,113 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 });
 
+// === Problems Section Logic ===
+(function () {
+  // Соответствие: задача -> индексы причин
+  const reasonsMap = [
+    // НИЗКАЯ КОНВЕРСИЯ
+    [0,1,2,3,8,9,13],
+    // ПОТЕРЯ ПРИБЫЛИ
+    [1,4,5,6,9,14,16],
+    // УХОДЯЩИЕ КЛИЕНТЫ
+    [2,7,10,11,12,15],
+    // НЕВЫПОЛНЕНИЕ ПЛАНА
+    [4,5,8,9,13,14,16],
+    // УПУЩЕННЫЕ СДЕЛКИ
+    [0,3,6,7,10,13,15],
+    // ЕЩЁ ЧТО-ТО
+    [1,2,5,8,12,14,16]
+  ];
+  let interval = null;
+  let userSelected = false;
+  let progressTimer = null;
+  let progressDuration = 3000;
+
+  function animateCircle(idx) {
+    // Сбросить все круги
+    document.querySelectorAll('.circle-progress').forEach(c => {
+      c.style.transition = 'none';
+      c.style.strokeDashoffset = 62.8;
+      // force reflow
+      void c.offsetWidth;
+      c.style.transition = 'stroke-dashoffset 3s linear';
+    });
+    // Анимировать только активный
+    const active = document.querySelector(`.problems-choice[data-index="${idx}"] .circle-progress`);
+    if (active) {
+      active.style.strokeDashoffset = 0;
+    }
+  }
+
+  function resetCircles() {
+    document.querySelectorAll('.circle-progress').forEach(c => {
+      c.style.transition = 'none';
+      c.style.strokeDashoffset = 62.8;
+    });
+    document.querySelectorAll('.problems-choice').forEach(el => {
+      el.classList.remove('show-progress');
+    });
+  }
+
+  function setActiveTask(idx, withAnim = true) {
+    const nodes = document.querySelectorAll('.problems-choice');
+    nodes.forEach((el, i) => {
+      el.classList.remove('active', 'show-progress');
+      if (i === idx) {
+        el.classList.add('active');
+        if (withAnim && !userSelected) {
+          el.classList.add('show-progress');
+        }
+      }
+    });
+    setActiveReasons(idx);
+    if (withAnim && !userSelected) {
+      animateCircle(idx);
+    } else {
+      resetCircles();
+    }
+  }
+
+  function setActiveReasons(taskIdx) {
+    const allReasons = document.querySelectorAll('.problems-reasons-list span');
+    allReasons.forEach((el, i) => {
+      if (reasonsMap[taskIdx].includes(i)) el.classList.add('problems-reason-active');
+      else el.classList.remove('problems-reason-active');
+    });
+  }
+
+  function getRandomTaskIdx() {
+    return Math.floor(Math.random() * reasonsMap.length);
+  }
+
+  function autoSwitch() {
+    if (userSelected) return;
+    const idx = getRandomTaskIdx();
+    setActiveTask(idx, true);
+  }
+
+  function startAuto() {
+    interval = setInterval(autoSwitch, progressDuration);
+    autoSwitch();
+  }
+
+  function stopAuto() {
+    if (interval) clearInterval(interval);
+    interval = null;
+    resetCircles();
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    const nodes = document.querySelectorAll('.problems-choice');
+    if (!nodes.length) return;
+    startAuto();
+    nodes.forEach((el, i) => {
+      el.addEventListener('click', () => {
+        userSelected = true;
+        stopAuto();
+        setActiveTask(i, false);
+      });
+    });
+  });
+})();
+
