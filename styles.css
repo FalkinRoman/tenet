@@ -2496,14 +2496,19 @@ html {
   width: 100vw;
   max-width: 100vw;
   background: #fff;
-  padding: 60px 0 0 0;
+  padding: 240px 0 240px 0;
   margin: 0;
   position: relative;
   z-index: 2;
 }
 .problems-header {
+  width: 100vw;
+  max-width: 100vw;
+  margin: 0 auto 90px auto;
   text-align: center;
-  margin-bottom: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .problems-main {
   font-family: 'Montserrat', Arial, sans-serif;
@@ -2526,14 +2531,17 @@ html {
   justify-content: center;
   align-items: flex-start;
   gap: 60px;
-  max-width: 1200px;
+  max-width: 100vw;
+  width: 100vw;
   margin: 0 auto 0 auto;
+  box-sizing: border-box;
 }
 .problems-img-col {
   flex: 0 0 340px;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding-left: 4vw;
 }
 .problems-helmet {
   width: 320px;
@@ -2546,13 +2554,21 @@ html {
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 100vw;
+  max-width: 100vw;
+  box-sizing: border-box;
+  padding-left: 4vw;
+  padding-right: 4vw;
 }
 .problems-choices-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 32px 48px;
   width: 100%;
-  max-width: 540px;
+  max-width: 100vw;
+  box-sizing: border-box;
+  padding-left: 0;
+  padding-right: 0;
 }
 .problems-choice {
   display: flex;
@@ -2571,8 +2587,8 @@ html {
 }
 .problems-choice__text {
   flex: 1 1 0;
-  font-size: 1.7rem;
-  font-weight: 900;
+  font-size: 1.3rem;
+  font-weight: 700;
   color: #e0e0e0 !important;
   padding-right: 18px;
   white-space: nowrap;
@@ -2581,7 +2597,7 @@ html {
 }
 .problems-choice.active .problems-choice__text {
   color: #111 !important;
-  font-weight: 900;
+  font-weight: 700;
 }
 .problems-choice-radio {
   display: flex;
@@ -2614,7 +2630,7 @@ html {
   border-bottom: 2px solid #ededed;
 }
 .problems-choice:nth-child(5), .problems-choice:nth-child(6) {
-  border-bottom: none;
+  border-bottom: 2px solid rgba(237,237,237,0.5);
 }
 .problems-choice .radio-outer {
   border: 2px solid #e0e0e0;
@@ -2628,7 +2644,7 @@ html {
   width: 100vw;
   background: #111;
   color: #fff;
-  margin-top: 48px;
+  margin-top: 90px;
   padding: 0 0 0 0;
   position: relative;
   min-height: 90px;
@@ -2649,13 +2665,15 @@ html {
   margin-right: 18px;
   min-width: 32px;
   text-align: center;
+  transform: rotate(180deg);
+  margin-left: 10px;
 }
 .problems-reasons-list {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  padding: 18px 0;
+  padding: 18px 4vw;
   gap: 24px 32px;
   font-size: 0.92rem;
   font-family: 'Montserrat', Arial, sans-serif;
