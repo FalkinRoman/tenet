@@ -3004,3 +3004,16 @@ html {
   opacity: 1;
   transform: translateX(0);
 }
+
+.problems-reasons-list {
+  font-size: 0.78rem;
+  padding: 8px 2vw 8px 2vw;
+  gap: 12px 16px;
+}
+@media (max-width: 900px) {
+  .problems-reasons-list {
+    font-size: 0.7rem;
+    padding: 6px 1vw 6px 1vw;
+    gap: 8px 8px;
+  }
+}

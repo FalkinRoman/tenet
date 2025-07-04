@@ -549,87 +549,43 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // === Problems Section Logic ===
 (function () {
-  // Соответствие: задача -> индексы причин
-  const reasonsMap = [
-    // НИЗКАЯ КОНВЕРСИЯ
-    [0,1,2,3,8,9,13],
-    // ПОТЕРЯ ПРИБЫЛИ
-    [1,4,5,6,9,14,16],
-    // УХОДЯЩИЕ КЛИЕНТЫ
-    [2,7,10,11,12,15],
-    // НЕВЫПОЛНЕНИЕ ПЛАНА
-    [4,5,8,9,13,14,16],
-    // УПУЩЕННЫЕ СДЕЛКИ
-    [0,3,6,7,10,13,15],
-    // ЕЩЁ ЧТО-ТО
-    [1,2,5,8,12,14,16]
-  ];
+  const reasonsCount = document.querySelectorAll('.problems-reasons-list span').length;
+  const problems = document.querySelectorAll('.problems-choice');
   let interval = null;
   let userSelected = false;
-  let progressTimer = null;
   let progressDuration = 3000;
 
-  function animateCircle(idx) {
-    // Сбросить все круги
-    document.querySelectorAll('.circle-progress').forEach(c => {
-      c.style.transition = 'none';
-      c.style.strokeDashoffset = 62.8;
-      // force reflow
-      void c.offsetWidth;
-      c.style.transition = 'stroke-dashoffset 3s linear';
-    });
-    // Анимировать только активный
-    const active = document.querySelector(`.problems-choice[data-index="${idx}"] .circle-progress`);
-    if (active) {
-      active.style.strokeDashoffset = 0;
+  function getRandomIndexes(count, total) {
+    const arr = [];
+    while (arr.length < count) {
+      const idx = Math.floor(Math.random() * total);
+      if (!arr.includes(idx)) arr.push(idx);
     }
+    return arr;
   }
 
-  function resetCircles() {
-    document.querySelectorAll('.circle-progress').forEach(c => {
-      c.style.transition = 'none';
-      c.style.strokeDashoffset = 62.8;
+  function setActiveTask(idx) {
+    problems.forEach((el, i) => {
+      el.classList.toggle('active', i === idx);
     });
-    document.querySelectorAll('.problems-choice').forEach(el => {
-      el.classList.remove('show-progress');
-    });
+    setActiveReasonsRandom();
   }
 
-  function setActiveTask(idx, withAnim = true) {
-    const nodes = document.querySelectorAll('.problems-choice');
-    nodes.forEach((el, i) => {
-      el.classList.remove('active', 'show-progress');
-      if (i === idx) {
-        el.classList.add('active');
-        if (withAnim && !userSelected) {
-          el.classList.add('show-progress');
-        }
-      }
-    });
-    setActiveReasons(idx);
-    if (withAnim && !userSelected) {
-      animateCircle(idx);
-    } else {
-      resetCircles();
-    }
-  }
-
-  function setActiveReasons(taskIdx) {
+  function setActiveReasonsRandom() {
     const allReasons = document.querySelectorAll('.problems-reasons-list span');
+    const count = 6;
+    const total = allReasons.length;
+    const activeIdxs = getRandomIndexes(count, total);
     allReasons.forEach((el, i) => {
-      if (reasonsMap[taskIdx].includes(i)) el.classList.add('problems-reason-active');
+      if (activeIdxs.includes(i)) el.classList.add('problems-reason-active');
       else el.classList.remove('problems-reason-active');
     });
   }
 
-  function getRandomTaskIdx() {
-    return Math.floor(Math.random() * reasonsMap.length);
-  }
-
   function autoSwitch() {
     if (userSelected) return;
-    const idx = getRandomTaskIdx();
-    setActiveTask(idx, true);
+    const idx = Math.floor(Math.random() * problems.length);
+    setActiveTask(idx);
   }
 
   function startAuto() {
@@ -640,19 +596,20 @@ document.addEventListener('DOMContentLoaded', function () {
   function stopAuto() {
     if (interval) clearInterval(interval);
     interval = null;
-    resetCircles();
   }
 
   document.addEventListener('DOMContentLoaded', function () {
-    const nodes = document.querySelectorAll('.problems-choice');
-    if (!nodes.length) return;
+    if (!problems.length) return;
     startAuto();
-    nodes.forEach((el, i) => {
+    problems.forEach((el, i) => {
       el.addEventListener('click', () => {
         userSelected = true;
         stopAuto();
-        setActiveTask(i, false);
+        setActiveTask(i);
       });
+    });
+    window.addEventListener('resize', () => {
+      setActiveReasonsRandom();
     });
   });
 })();
@@ -694,3 +651,44 @@ document.addEventListener('DOMContentLoaded', function () {
   }, { threshold: 0.3 });
   observer.observe(section);
 });
+
+const allReasons = [
+  "ЕРЕЗУЛЬТАТИВНЫЕ ЧЕК - ЛИСТЫ", "CSI", "ОТСУТСТВИЕ СТАНДАРТОВ", "ТЕКУЧКА КАДРОВ",
+  "ВОЗВРАТ КЛИЕНТОВ В ВОРОНКУ", "ОТСУТСВИЕ РАБОТЫ С ВОЗРАЖЕНИЯМИ", "НЕЭФФЕКТИВНЫЕ МЕТОДЫ", "NPS",
+  "НИЗКОЕ КАЧЕСТВО ПЕРСОНАЛА", "НИЗКОЕ КАЧЕСТВО УПРАВЛЕНИЯ", "ОТСУТСТВИЕ АНАЛИЗА ВЛИЯНИЯ НА РЕЗУЛЬТАТ",
+  "НЕТ ЗАПИСИ ВСТРЕЧ", "ОТСУТСТВИЕ МЕТОДОЛОГИИ", "НЕХВАТКА МОТИВАЦИИ", "НЕ ОПРЕДЕЛЕНА «ТЕМПЕРАТУРА» КЛИЕНТА",
+  "МНОГО СОМНЕВАЮЩИХСЯ КЛИЕНТОВ", "CSAT", "ПРОБЛЕМЫ С АДАПТАЦИЕЙ НОВЫХ СОТРУДНИКОВ", "НЕХВАТКА НАВЫКОВ ПЕРСОНАЛА",
+  "ОТСУТСТВИЕ АНАЛИЗА ВЛИЯНИЯ НА РЕЗУЛЬТАТ", "НЕХВАТКА ИНСТРУМЕНТОВ И ПЕРСОНАЛА", "ОТСУТСТВИЕ ОБРАТНОЙ СВЯЗИ",
+  "НЕЯСНЫЕ ПОТРЕБНОСТИ КЛИЕНТОВ", "НЕТ ЗАПИСИ ЗВОНКОВ", "ТАЙНЫЙ ПОКУПАТЕЛЬ", "РАЗНЫЙ УРОВЕНЬ ПЕРСОНАЛА",
+  "НЕХВАТКА НАВЫКОВ ПРОДАВЦОВ", "ОТСУТСТВИЕ РАБОТЫ С ЖАЛОБАМИ И РЕКОМЕНДАЦИЯМИ", "СЛАБАЯ ВОВЛЕЧЕННОСТЬ",
+  "ВЫГОРАНИЕ", "КОММУНИКАЦИЯ", "НЕХВАТКА РЕСУРСОВ ДЛЯ ОБУЧЕНИЯ И РАЗВИТИЯ", "НАРУШЕНЫ БИЗНЕС ПРОЦЕССЫ"
+];
+
+// 16 наиболее релевантных для мобилы/планшета (выбери любые, вот пример)
+const mobileReasons = [
+  "ЕРЕЗУЛЬТАТИВНЫЕ ЧЕК - ЛИСТЫ", "CSI", "ОТСУТСТВИЕ СТАНДАРТОВ", "ТЕКУЧКА КАДРОВ",
+  "ВОЗВРАТ КЛИЕНТОВ В ВОРОНКУ", "ОТСУТСВИЕ РАБОТЫ С ВОЗРАЖЕНИЯМИ", "НЕЭФФЕКТИВНЫЕ МЕТОДЫ", "NPS",
+  "НИЗКОЕ КАЧЕСТВО ПЕРСОНАЛА", "ОТСУТСТВИЕ АНАЛИЗА ВЛИЯНИЯ НА РЕЗУЛЬТАТ", "НЕХВАТКА МОТИВАЦИИ",
+  "МНОГО СОМНЕВАЮЩИХСЯ КЛИЕНТОВ", "CSAT", "ПРОБЛЕМЫ С АДАПТАЦИЕЙ НОВЫХ СОТРУДНИКОВ",
+  "НЕХВАТКА НАВЫКОВ ПЕРСОНАЛА", "ВЫГОРАНИЕ"
+];
+
+function getCurrentReasons() {
+  if (window.innerWidth < 900) return mobileReasons;
+  return allReasons;
+}
+
+function renderReasons() {
+  const reasonsList = document.querySelector('.problems-reasons-list');
+  if (!reasonsList) return;
+  reasonsList.innerHTML = '';
+  getCurrentReasons().forEach(reason => {
+    const span = document.createElement('span');
+    span.textContent = reason;
+    reasonsList.appendChild(span);
+  });
+}
+
+// Вызови при загрузке и ресайзе:
+window.addEventListener('DOMContentLoaded', renderReasons);
+window.addEventListener('resize', renderReasons);
