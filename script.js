@@ -657,3 +657,40 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 })();
 
+
+
+
+
+
+
+
+
+
+document.addEventListener('DOMContentLoaded', function () {
+  const section = document.querySelector('.problems-section');
+  const strike = document.querySelector('.problems-strike');
+  const line = document.querySelector('.problems-strike .strike-line');
+  const slide = document.querySelector('.problems-slide');
+  if (!section || !strike || !line || !slide) return;
+
+  let animated = false;
+  const observer = new window.IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !animated) {
+        animated = true;
+        // 1. Анимация линии перечёркивания
+        strike.classList.add('strike-animate');
+        // 2. После анимации линии — делаем слово бледным
+        setTimeout(() => {
+          strike.classList.add('strike-fade');
+          // 3. После этого появляется "задачи" и сдвигает "наших партнеров"
+          setTimeout(() => {
+            slide.classList.add('slide-animate');
+          }, 600);
+        }, 900); // линия 0.7s + пауза
+        obs.unobserve(section);
+      }
+    });
+  }, { threshold: 0.3 });
+  observer.observe(section);
+});

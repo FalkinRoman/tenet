@@ -2535,6 +2535,8 @@ html {
   }
 }
 .problems-main {
+  display: inline-flex;
+  align-items: center;
   font-family: 'Montserrat', Arial, sans-serif;
   font-size: 3.2rem;
   font-weight: 400;
@@ -2542,13 +2544,62 @@ html {
   letter-spacing: -0.03em;
 }
 .problems-strike {
-  text-decoration: line-through;
-  color: #888;
-  font-weight: 300;
-}
-.problems-main b {
-  font-weight: 900;
   color: #111;
+  font-weight: 400;
+  position: relative;
+  display: inline-block;
+  min-width: 0;
+  transition: color 0.7s, font-weight 0.7s;
+}
+.problems-strike .strike-line {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 55%;
+  width: 0;
+  height: 5px;
+  background: #111;
+  transform: translateY(-50%);
+  transition: width 0.7s cubic-bezier(.4,0,.2,1);
+  z-index: 2;
+}
+.problems-strike.strike-animate .strike-line {
+  width: 100%;
+}
+.problems-strike.strike-fade {
+  color: #bfc3c6 !important;
+  font-weight: 400 !important;
+}
+.problems-slide-wrap {
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+}
+.problems-slide {
+  color: #111;
+  font-weight: 900;
+  opacity: 0;
+  transform: translateX(-40px);
+  display: inline-block;
+  transition: opacity 0.7s, transform 0.7s;
+  position: relative;
+  z-index: 2;
+}
+.problems-slide.slide-animate {
+  opacity: 1;
+  transform: translateX(0);
+}
+.problems-partners {
+  display: inline-block;
+  transition: margin-left 0.7s cubic-bezier(.4,0,.2,1);
+  margin-left: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
+.problems-slide.slide-animate ~ .problems-partners {
+  margin-left: 5px;
 }
 .problems-content {
   display: flex;
@@ -2743,7 +2794,14 @@ html {
 }
 @media (max-width: 600px) {
   .problems-main {
-    font-size: 1.5rem;
+    font-size: 0.95rem;
+  }
+  .problems-slide {
+    font-size: 0.95rem;
+  }
+  .problems-partners {
+    font-size: 0.85rem;
+    margin-left: 2px !important;
   }
   .problems-helmet {
     width: 180px;
@@ -2914,3 +2972,35 @@ html {
 
 
 
+
+
+
+
+
+.problems-strike {
+  color: #111;
+  font-weight: 400;
+  position: relative;
+  display: inline-block;
+  min-width: 0;
+  transition: color 0.7s, font-weight 0.7s;
+}
+.problems-strike.strike-animate {
+  color: #bfc3c6;
+  font-weight: 400;
+  text-decoration-color: #bfc3c6;
+}
+.problems-slide {
+  color: #111;
+  font-weight: 900;
+  opacity: 0;
+  transform: translateX(-40px);
+  display: inline-block;
+  transition: opacity 0.7s, transform 0.7s;
+  position: relative;
+  z-index: 2;
+}
+.problems-slide.slide-animate {
+  opacity: 1;
+  transform: translateX(0);
+}
