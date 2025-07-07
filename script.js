@@ -653,7 +653,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 const allReasons = [
-  "ЕРЕЗУЛЬТАТИВНЫЕ ЧЕК - ЛИСТЫ", "CSI", "ОТСУТСТВИЕ СТАНДАРТОВ", "ТЕКУЧКА КАДРОВ",
+  "РЕРЕЗУЛЬТАТИВНЫЕ ЧЕК - ЛИСТЫ", "CSI", "ОТСУТСТВИЕ СТАНДАРТОВ", "ТЕКУЧКА КАДРОВ",
   "ВОЗВРАТ КЛИЕНТОВ В ВОРОНКУ", "ОТСУТСВИЕ РАБОТЫ С ВОЗРАЖЕНИЯМИ", "НЕЭФФЕКТИВНЫЕ МЕТОДЫ", "NPS",
   "НИЗКОЕ КАЧЕСТВО ПЕРСОНАЛА", "НИЗКОЕ КАЧЕСТВО УПРАВЛЕНИЯ", "ОТСУТСТВИЕ АНАЛИЗА ВЛИЯНИЯ НА РЕЗУЛЬТАТ",
   "НЕТ ЗАПИСИ ВСТРЕЧ", "ОТСУТСТВИЕ МЕТОДОЛОГИИ", "НЕХВАТКА МОТИВАЦИИ", "НЕ ОПРЕДЕЛЕНА «ТЕМПЕРАТУРА» КЛИЕНТА",
@@ -692,3 +692,33 @@ function renderReasons() {
 // Вызови при загрузке и ресайзе:
 window.addEventListener('DOMContentLoaded', renderReasons);
 window.addEventListener('resize', renderReasons);
+
+document.addEventListener('DOMContentLoaded', function () {
+  const block = document.querySelector('.bottom-problems-block');
+  const strike = block.querySelector('.bottom-strike');
+  const line = block.querySelector('.bottom-strike-line');
+  const slide = block.querySelector('.bottom-slide');
+  const partners = block.querySelector('.bottom-partners-text');
+  if (!block || !strike || !line || !slide || !partners) return;
+
+  let animated = false;
+  const observer = new window.IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !animated) {
+        animated = true;
+        // 1. Анимация линии перечёркивания
+        strike.classList.add('strike-animate');
+        // 2. После анимации линии — делаем слово бледным
+        setTimeout(() => {
+          strike.classList.add('strike-fade');
+          // 3. После этого появляется "задачи"
+          setTimeout(() => {
+            slide.classList.add('slide-animate');
+          }, 600);
+        }, 900);
+        obs.unobserve(block);
+      }
+    });
+  }, { threshold: 0.3 });
+  observer.observe(block);
+});
