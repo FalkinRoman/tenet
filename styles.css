@@ -3138,12 +3138,45 @@ html {
 
 @media (max-width: 900px) {
   .bottom-partners-text {
-    font-size: 1rem;
+    font-size: 2.4rem;
+  }
+  .bottom-problems-header{
+    font-size: 2.4rem;
+  }
+}
+
+@media (max-width: 700px) {
+  .bottom-partners-text {
+    font-size: 2.2rem;
+  }
+  .bottom-problems-header{
+    font-size: 2.2rem;
+  }
+  .bottom-problems-header{
+    gap: 0.1em;
   }
 }
 @media (max-width: 600px) {
   .bottom-partners-text {
-    font-size: 0.85rem;
+    font-size: 1.9rem;
+  }
+  .bottom-problems-header{
+    font-size: 1.9rem;
+  }
+  .bottom-problems-block {
+    margin: 0 0 10px 0;
+  }
+}
+
+@media (max-width: 500px) {
+  .bottom-partners-text {
+    font-size: 1.6rem;
+  }
+  .bottom-problems-header{
+    font-size: 1.6rem;
+  }
+  .bottom-problems-block {
+    margin: 0 0 0 0;
   }
 }
 
