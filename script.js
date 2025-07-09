@@ -658,7 +658,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 const allReasons = [
-  "РЕРЕЗУЛЬТАТИВНЫЕ ЧЕК - ЛИСТЫ", "CSI", "ОТСУТСТВИЕ СТАНДАРТОВ", "ТЕКУЧКА КАДРОВ",
+  "НЕРЕЗУЛЬТАТИВНЫЕ ЧЕК - ЛИСТЫ", "CSI", "ОТСУТСТВИЕ СТАНДАРТОВ", "ТЕКУЧКА КАДРОВ",
   "ВОЗВРАТ КЛИЕНТОВ В ВОРОНКУ", "ОТСУТСВИЕ РАБОТЫ С ВОЗРАЖЕНИЯМИ", "НЕЭФФЕКТИВНЫЕ МЕТОДЫ", "NPS",
   "НИЗКОЕ КАЧЕСТВО ПЕРСОНАЛА", "НИЗКОЕ КАЧЕСТВО УПРАВЛЕНИЯ", "ОТСУТСТВИЕ АНАЛИЗА ВЛИЯНИЯ НА РЕЗУЛЬТАТ",
   "НЕТ ЗАПИСИ ВСТРЕЧ", "ОТСУТСТВИЕ МЕТОДОЛОГИИ", "НЕХВАТКА МОТИВАЦИИ", "НЕ ОПРЕДЕЛЕНА «ТЕМПЕРАТУРА» КЛИЕНТА",
@@ -671,7 +671,7 @@ const allReasons = [
 
 // 16 наиболее релевантных для мобилы/планшета (выбери любые, вот пример)
 const mobileReasons = [
-  "ЕРЕЗУЛЬТАТИВНЫЕ ЧЕК - ЛИСТЫ", "CSI", "ОТСУТСТВИЕ СТАНДАРТОВ", "ТЕКУЧКА КАДРОВ",
+  "НЕРЕЗУЛЬТАТИВНЫЕ ЧЕК - ЛИСТЫ", "CSI", "ОТСУТСТВИЕ СТАНДАРТОВ", "ТЕКУЧКА КАДРОВ",
   "ВОЗВРАТ КЛИЕНТОВ В ВОРОНКУ", "ОТСУТСВИЕ РАБОТЫ С ВОЗРАЖЕНИЯМИ", "НЕЭФФЕКТИВНЫЕ МЕТОДЫ", "NPS",
   "НИЗКОЕ КАЧЕСТВО ПЕРСОНАЛА", "ОТСУТСТВИЕ АНАЛИЗА ВЛИЯНИЯ НА РЕЗУЛЬТАТ", "НЕХВАТКА МОТИВАЦИИ",
   "МНОГО СОМНЕВАЮЩИХСЯ КЛИЕНТОВ", "CSAT", "ПРОБЛЕМЫ С АДАПТАЦИЕЙ НОВЫХ СОТРУДНИКОВ",
@@ -726,4 +726,54 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }, { threshold: 0.3 });
   observer.observe(block);
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+  const main = document.querySelector('.how-solve-main');
+  const bg = document.querySelector('.how-solve-circle-bg');
+  const accent = document.querySelector('.how-solve-circle-accent');
+  const texts = [
+    document.querySelector('.how-solve-text-0'),
+    document.querySelector('.how-solve-text-1'),
+    document.querySelector('.how-solve-text-2'),
+    document.querySelector('.how-solve-text-3'),
+    document.querySelector('.how-solve-text-4')
+  ];
+  const steps = texts.length;
+  const circleLen = 2 * Math.PI * 230; // 230 — радиус круга
+  accent.setAttribute('stroke-dasharray', circleLen);
+  accent.setAttribute('stroke-dashoffset', circleLen);
+
+  function showAllTexts() {
+    texts.forEach(t => t.classList.add('visible'));
+  }
+
+  function animateStep(step) {
+    if (step < steps) {
+      // Подсветить текущий текст (предыдущие остаются активными)
+      texts[step].classList.add('active');
+      // Нарисовать сегмент круга
+      accent.style.strokeDashoffset = circleLen - circleLen / steps * (step + 1);
+      setTimeout(() => animateStep(step + 1), 900);
+    }
+    // Всё, больше ничего не делаем — все активные остаются чёрными
+  }
+
+  // Появление по IntersectionObserver
+  const observer = new IntersectionObserver(([entry]) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => {
+        main.style.opacity = 1;
+        setTimeout(() => {
+          bg.style.opacity = 1;
+          setTimeout(() => {
+            showAllTexts();
+            setTimeout(() => animateStep(0), 700);
+          }, 500);
+        }, 400);
+      }, 200);
+      observer.disconnect();
+    }
+  }, { threshold: 0.3 });
+  observer.observe(main);
 });

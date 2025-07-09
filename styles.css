@@ -3257,7 +3257,7 @@ html {
   font-size: 2.8rem;
   font-weight: 700;
   color: #111;
-  margin-top: 0.7em;
+  
   letter-spacing: -0.02em;
 }
 
@@ -3272,3 +3272,109 @@ html {
 
 /* Удаляем все стили для .how-solve-main-circle */
 .how-solve-main-circle { all: unset; }
+
+.how-solve-anim-block,
+.how-solve-circle-wrap {
+  width: 480px;
+  height: 480px;
+  margin: 0 auto;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.how-solve-main {
+  position: absolute;
+  left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: #111;
+  text-align: center;
+  z-index: 2;
+  opacity: 0;
+  transition: opacity 0.7s;
+}
+
+.how-solve-circle-svg {
+  position: absolute;
+  left: 0; top: 0;
+  z-index: 1;
+  width: 480px;
+  height: 480px;
+}
+
+.how-solve-circle-bg {
+  fill: none;
+  stroke: #e5e5e5;
+  stroke-width: 2;
+  opacity: 0;
+  transition: opacity 0.7s;
+}
+
+.how-solve-circle-accent {
+  fill: none;
+  stroke: #111;
+  stroke-width: 2;
+  stroke-dasharray: 1445; /* длина окружности для r=230 */
+  stroke-dashoffset: 1445;
+  opacity: 1;
+  transition: stroke-dashoffset 0.7s cubic-bezier(.4,0,.2,1);
+  transform-origin: 50% 50%;
+  transform: rotate(-90deg);
+}
+
+.how-solve-text {
+  position: absolute;
+  left: 50%; top: 50%;
+  width: 180px;
+  text-align: center;
+  color: #bfc3c6;
+  font-size: 1.1rem;
+  font-weight: 400;
+  opacity: 0;
+  transition: color 0.5s, opacity 0.5s;
+  z-index: 3;
+  pointer-events: none;
+  transform-origin: 0 0;
+}
+.how-solve-text.active {
+  color: #111;
+  font-weight: 700;
+  opacity: 1;
+}
+.how-solve-text.visible {
+  opacity: 0.5;
+}
+
+/* Расположение 5 пунктов по кругу (углы подобраны для равномерного распределения) */
+.how-solve-text-0 { transform: rotate(-126deg) translate(220px) rotate(126deg); }
+.how-solve-text-1 { transform: rotate(-54deg)  translate(220px) rotate(54deg); }
+.how-solve-text-2 { transform: rotate(18deg)   translate(220px) rotate(-18deg); }
+.how-solve-text-3 { transform: rotate(90deg)   translate(220px) rotate(-90deg); }
+.how-solve-text-4 { transform: rotate(162deg)  translate(220px) rotate(-162deg); }
+
+/* Адаптив */
+@media (max-width: 700px) {
+  .how-solve-anim-block,
+  .how-solve-circle-wrap,
+  .how-solve-circle-svg {
+    width: 98vw;
+    height: 98vw;
+    min-width: 0;
+    min-height: 0;
+  }
+  .how-solve-main {
+    font-size: 1.5rem;
+  }
+  .how-solve-text {
+    width: 34vw;
+    font-size: 0.9rem;
+  }
+  .how-solve-text-0 { transform: rotate(-126deg) translate(42vw) rotate(126deg); }
+  .how-solve-text-1 { transform: rotate(-54deg)  translate(42vw) rotate(54deg); }
+  .how-solve-text-2 { transform: rotate(18deg)   translate(42vw) rotate(-18deg); }
+  .how-solve-text-3 { transform: rotate(90deg)   translate(42vw) rotate(-90deg); }
+  .how-solve-text-4 { transform: rotate(162deg)  translate(42vw) rotate(-162deg);}
+}
