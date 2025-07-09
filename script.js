@@ -573,7 +573,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function setActiveReasonsRandom() {
     const allReasons = document.querySelectorAll('.problems-reasons-list span');
-    const count = 6;
+    let count;
+    if (window.innerWidth < 900) {
+      count = 4;
+    } else {
+      count = 6;
+    }
     const total = allReasons.length;
     const activeIdxs = getRandomIndexes(count, total);
     allReasons.forEach((el, i) => {
