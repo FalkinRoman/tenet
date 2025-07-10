@@ -3322,7 +3322,7 @@ html {
   opacity: 1;
   transition: stroke-dashoffset 0.7s cubic-bezier(.4,0,.2,1);
   transform-origin: 50% 50%;
-  transform: rotate(-90deg);
+  transform: rotate(-170deg);
 }
 
 .how-solve-text {
@@ -3377,4 +3377,61 @@ html {
   .how-solve-text-2 { transform: rotate(18deg)   translate(42vw) rotate(-18deg); }
   .how-solve-text-3 { transform: rotate(90deg)   translate(42vw) rotate(-90deg); }
   .how-solve-text-4 { transform: rotate(162deg)  translate(42vw) rotate(-162deg);}
+}
+
+.how-solve-text {
+  /* ... */
+  color: #bfc3c6;
+  opacity: 0;
+  /* ... */
+}
+.how-solve-text.visible {
+  opacity: 0.5;
+}
+.how-solve-text.active,
+.how-solve-text.visible.active {
+  color: #111 !important;
+  font-weight: 700;
+  opacity: 1 !important;
+}
+
+.how-solve-text .how-solve-title {
+  display: block;
+  font-weight: 700;
+  font-size: 1.1em;
+  color: #111;
+  transition: color 0.4s;
+}
+.how-solve-text .how-solve-desc {
+  display: block;
+  font-weight: 400;
+  font-size: 0.85em;
+  color: #bfc3c6;
+  transition: color 0.4s;
+}
+
+.how-solve-text {
+  opacity: 0;
+  color: #bfc3c6;
+  font-weight: 400;
+  transition: color 0.4s, opacity 0.4s;
+}
+.how-solve-text.visible {
+  opacity: 0.5;
+  color: #bfc3c6;
+}
+.how-solve-text.active {
+  opacity: 1;
+  color: #111;
+  font-weight: 700;
+}
+.how-solve-text .how-solve-title {
+  font-weight: 700;
+  color: inherit;
+  font-size: 1.1em;
+}
+.how-solve-text .how-solve-desc {
+  font-weight: 400;
+  color: inherit;
+  font-size: 0.85em;
 }
