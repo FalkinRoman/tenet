@@ -3277,7 +3277,7 @@ html {
 .how-solve-circle-wrap {
   width: 480px;
   height: 480px;
-  margin: 0 auto;
+  margin: 100px auto;
   position: relative;
   display: flex;
   align-items: center;
@@ -3308,7 +3308,7 @@ html {
 .how-solve-circle-bg {
   fill: none;
   stroke: #e5e5e5;
-  stroke-width: 2;
+  stroke-width: 1;
   opacity: 0;
   transition: opacity 0.7s;
 }
@@ -3316,7 +3316,7 @@ html {
 .how-solve-circle-accent {
   fill: none;
   stroke: #111;
-  stroke-width: 2;
+  stroke-width: 1;
   stroke-dasharray: 1445; /* длина окружности для r=230 */
   stroke-dashoffset: 1445;
   opacity: 1;
@@ -3328,8 +3328,7 @@ html {
 .how-solve-text {
   position: absolute;
   left: 50%; top: 50%;
-  width: 180px;
-  text-align: center;
+  text-align: left;
   color: #bfc3c6;
   font-size: 1.1rem;
   font-weight: 400;
@@ -3345,15 +3344,16 @@ html {
   opacity: 1;
 }
 .how-solve-text.visible {
-  opacity: 0.5;
+  opacity: 0.25;
+  color: #bfc3c6;
 }
 
 /* Расположение 5 пунктов по кругу (углы подобраны для равномерного распределения) */
-.how-solve-text-0 { transform: rotate(-126deg) translate(220px) rotate(126deg); }
-.how-solve-text-1 { transform: rotate(-54deg)  translate(220px) rotate(54deg); }
-.how-solve-text-2 { transform: rotate(18deg)   translate(220px) rotate(-18deg); }
-.how-solve-text-3 { transform: rotate(90deg)   translate(220px) rotate(-90deg); }
-.how-solve-text-4 { transform: rotate(162deg)  translate(220px) rotate(-162deg); }
+.how-solve-text-0 { transform: rotate(-126deg) translate(270px) rotate(126deg); margin-left: -310px;  margin-top: 10px;}
+.how-solve-text-1 { transform: rotate(-54deg)  translate(220px) rotate(54deg); margin-left: 20px; margin-top: -90px;}
+.how-solve-text-2 { transform: rotate(18deg)   translate(220px) rotate(-18deg); margin-left: 60px; margin-top: -100px;}
+.how-solve-text-3 { transform: rotate(90deg)   translate(220px) rotate(-90deg); margin-left: 50px; margin-top: 50px;}
+.how-solve-text-4 { transform: rotate(162deg)  translate(220px) rotate(-162deg); margin-left: -360px; margin-top: 10px;}
 
 /* Адаптив */
 @media (max-width: 700px) {
@@ -3386,7 +3386,8 @@ html {
   /* ... */
 }
 .how-solve-text.visible {
-  opacity: 0.5;
+  opacity: 0.25;
+  color: #bfc3c6;
 }
 .how-solve-text.active,
 .how-solve-text.visible.active {
@@ -3417,7 +3418,7 @@ html {
   transition: color 0.4s, opacity 0.4s;
 }
 .how-solve-text.visible {
-  opacity: 0.5;
+  opacity: 0.25;
   color: #bfc3c6;
 }
 .how-solve-text.active {
@@ -3434,4 +3435,84 @@ html {
   font-weight: 400;
   color: inherit;
   font-size: 0.85em;
+}
+
+.how-solve-text {
+  font-size: 1.7rem;
+}
+@media (max-width: 700px) {
+  .how-solve-text {
+    font-size: 1.05rem;
+  }
+}
+
+.how-solve-text-0 {
+  line-height: 1.12;
+}
+.how-solve-text-0 .how-solve-desc {
+  margin: 0;
+  padding: 0;
+  display: inline;
+}
+.how-solve-text-0 br {
+  line-height: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.how-solve-text-1 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 0.6;
+}
+.how-solve-text-1 .how-solve-title {
+  white-space: nowrap;
+  margin-bottom: 0; /* минимальный отступ */
+}
+.how-solve-text-1 .how-solve-desc {
+  white-space: nowrap;
+  margin: 0;
+  padding: 0;
+}
+
+.how-solve-text-2 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 0.6;
+}
+.how-solve-text-2 .how-solve-title,
+.how-solve-text-2 .how-solve-desc {
+  margin: 0;
+  padding: 0;
+  white-space: nowrap;
+}
+
+
+.how-solve-text-3 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 0.6;
+}
+.how-solve-text-3 .how-solve-title,
+.how-solve-text-3 .how-solve-desc {
+  margin: 0;
+  padding: 0;
+  white-space: nowrap;
+}
+
+
+.how-solve-text-4 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 0.6;
+}
+.how-solve-text-4 .how-solve-title,
+.how-solve-text-4 .how-solve-desc {
+  margin: 0;
+  padding: 0;
+  white-space: nowrap;
 }
