@@ -3356,27 +3356,71 @@ html {
 .how-solve-text-4 { transform: rotate(162deg)  translate(220px) rotate(-162deg); margin-left: -360px; margin-top: 10px;}
 
 /* Адаптив */
+@media (max-width: 900px) {
+  .how-solve-anim-block,
+  .how-solve-circle-wrap,
+  .how-solve-circle-svg {
+    width: 340px;
+    height: 340px;
+    min-width: 0;
+    min-height: 0;
+  }
+  .how-solve-main {
+    font-size: 1.3rem;
+  }
+  .how-solve-text {
+    width: 120px;
+    font-size: 0.85rem;
+  }
+  .how-solve-text-0 { transform: rotate(-126deg) translate(170px) rotate(126deg); margin-left: -140px; margin-top: 0; }
+  .how-solve-text-1 { transform: rotate(-54deg)  translate(130px) rotate(54deg); margin-left: 10px; margin-top: -60px; }
+  .how-solve-text-2 { transform: rotate(18deg)   translate(130px) rotate(-18deg); margin-left: 30px; margin-top: -60px; }
+  .how-solve-text-3 { transform: rotate(90deg)   translate(130px) rotate(-90deg); margin-left: 30px; margin-top: 30px; }
+  .how-solve-text-4 { transform: rotate(162deg)  translate(130px) rotate(-162deg); margin-left: -150px; margin-top: 0; }
+}
+
 @media (max-width: 700px) {
+  .how-solve-anim-block,
+  .how-solve-circle-wrap,
+  .how-solve-circle-svg {
+    width: 90vw;
+    height: 90vw;
+    min-width: 0;
+    min-height: 0;
+  }
+  .how-solve-main {
+    font-size: 1.1rem;
+  }
+  .how-solve-text {
+    width: 28vw;
+    font-size: 0.7rem;
+  }
+  .how-solve-text-0 { transform: rotate(-126deg) translate(34vw) rotate(126deg); margin-left: -32vw; margin-top: 0; }
+  .how-solve-text-1 { transform: rotate(-54deg)  translate(28vw) rotate(54deg); margin-left: 2vw; margin-top: -18vw; }
+  .how-solve-text-2 { transform: rotate(18deg)   translate(28vw) rotate(-18deg); margin-left: 6vw; margin-top: -18vw; }
+  .how-solve-text-3 { transform: rotate(90deg)   translate(28vw) rotate(-90deg); margin-left: 6vw; margin-top: 6vw; }
+  .how-solve-text-4 { transform: rotate(162deg)  translate(28vw) rotate(-162deg); margin-left: -34vw; margin-top: 0; }
+}
+
+@media (max-width: 500px) {
   .how-solve-anim-block,
   .how-solve-circle-wrap,
   .how-solve-circle-svg {
     width: 98vw;
     height: 98vw;
-    min-width: 0;
-    min-height: 0;
   }
   .how-solve-main {
-    font-size: 1.5rem;
-  }
-  .how-solve-text {
-    width: 34vw;
     font-size: 0.9rem;
   }
-  .how-solve-text-0 { transform: rotate(-126deg) translate(42vw) rotate(126deg); }
-  .how-solve-text-1 { transform: rotate(-54deg)  translate(42vw) rotate(54deg); }
-  .how-solve-text-2 { transform: rotate(18deg)   translate(42vw) rotate(-18deg); }
-  .how-solve-text-3 { transform: rotate(90deg)   translate(42vw) rotate(-90deg); }
-  .how-solve-text-4 { transform: rotate(162deg)  translate(42vw) rotate(-162deg);}
+  .how-solve-text {
+    width: 32vw;
+    font-size: 0.62rem;
+  }
+  .how-solve-text-0 { transform: rotate(-126deg) translate(30vw) rotate(126deg); margin-left: -36vw; margin-top: 0; }
+  .how-solve-text-1 { transform: rotate(-54deg)  translate(24vw) rotate(54deg); margin-left: 2vw; margin-top: -14vw; }
+  .how-solve-text-2 { transform: rotate(18deg)   translate(24vw) rotate(-18deg); margin-left: 6vw; margin-top: -14vw; }
+  .how-solve-text-3 { transform: rotate(90deg)   translate(24vw) rotate(-90deg); margin-left: 6vw; margin-top: 6vw; }
+  .how-solve-text-4 { transform: rotate(162deg)  translate(24vw) rotate(-162deg); margin-left: -38vw; margin-top: 0; }
 }
 
 .how-solve-text {
