@@ -3220,7 +3220,7 @@ html {
   width: 100vw;
   max-width: 100vw;
   background: #fff;
-  padding: 0 0 60px 0;
+  padding: 0 0 234px 0;
   min-height: 180px;
   display: flex;
   flex-direction: column;
@@ -3233,7 +3233,6 @@ html {
   text-align: left;
   font-size: 3rem;
   font-weight: 400;
-  margin-top: 0.5em;
   margin-bottom: 0;
   letter-spacing: -0.02em;
   white-space: nowrap;
@@ -3264,6 +3263,9 @@ html {
 @media (max-width: 900px) {
   .how-solve-title { font-size: 1.8rem; }
   .how-solve-main { font-size: 2rem; }
+  .how-solve-section {
+    padding: 0 0 150px 0;
+  }
 }
 @media (max-width: 700px) {
   .how-solve-title { font-size: 1.32rem; }
@@ -3368,6 +3370,9 @@ html {
   .how-solve-main {
     font-size: 1.3rem;
   }
+  .how-solve-anim-block{
+    margin: 80px auto;
+  }
   .how-solve-text {
     width: 120px;
     font-size: 0.85rem;
@@ -3380,6 +3385,12 @@ html {
 }
 
 @media (max-width: 700px) {
+  .how-solve-circle-wrap {
+    margin: 50px auto;
+  }
+  .how-solve-anim-block{
+    margin: 60px auto;
+  }
   .how-solve-anim-block,
   .how-solve-circle-wrap,
   .how-solve-circle-svg {
@@ -3402,6 +3413,13 @@ html {
   .how-solve-text-4 { transform: rotate(162deg)  translate(16vw) rotate(-162deg); margin-left: -18vw; margin-top: 0; }
 }
 
+@media (max-width: 600px) {
+  .how-solve-section {
+      padding: 0 0 130px 0;
+  }
+  
+}
+
 @media (max-width: 500px) {
   .how-solve-anim-block,
   .how-solve-circle-wrap,
@@ -3409,6 +3427,9 @@ html {
     width: 45vw;
     height: 45vw;
   }
+  .how-solve-section {
+    padding: 0 0 88px 0;
+}
   .how-solve-main {
     font-size: 0.85rem;
   }
@@ -3720,4 +3741,12 @@ html {
   .how-solve-text-4 { transform: rotate(162deg)  translate(110px) rotate(-162deg); margin-left: -56px; margin-top: 28px; }
   
   
+}
+
+
+
+@media (max-width: 427px) {
+  .how-solve-section {
+    padding: 0 0 110px 0;
+}
 }
