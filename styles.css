@@ -3600,10 +3600,10 @@ html {
     font-size: 1.4rem;
   }
   .how-solve-text {
-    width: 120px;
+    width: 160px;
     font-size: 1rem;
   }
-  .how-solve-text-0 { transform: rotate(-126deg) translate(170px) rotate(126deg); margin-left: -180px; margin-top: 0; }
+  .how-solve-text-0 { transform: rotate(-126deg) translate(170px) rotate(126deg); margin-left: -208px; margin-top: 0; }
   .how-solve-text-1 { transform: rotate(-54deg)  translate(130px) rotate(54deg); margin-left: 50px; margin-top: -60px; }
   .how-solve-text-2 { transform: rotate(18deg)   translate(130px) rotate(-18deg); margin-left: 60px; margin-top: -60px; }
   .how-solve-text-3 { transform: rotate(90deg)   translate(130px) rotate(-90deg); margin-left: 30px; margin-top: 55px; }
