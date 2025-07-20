@@ -3693,8 +3693,8 @@ html {
   .how-solve-anim-block,
   .how-solve-circle-wrap,
   .how-solve-circle-svg {
-    width: 200px;
-    height: 200px;
+    width: 190px;
+    height: 190px;
     min-width: 0;
     min-height: 0;
   }
@@ -3703,27 +3703,27 @@ html {
   }
   .how-solve-text {
     width: 100px;
-    font-size: 0.6rem;
+    font-size: 0.7rem;
   }
   .how-solve-text-0 { transform: rotate(-126deg) translate(140px) rotate(126deg); margin-left: -80px; margin-top: 10px; }
   .how-solve-text-1 { transform: rotate(-54deg)  translate(110px) rotate(54deg); margin-left: -10px; margin-top: -26px; }
   .how-solve-text-2 { transform: rotate(18deg)   translate(110px) rotate(-18deg); margin-left: 4px; margin-top: -45px; }
   .how-solve-text-3 { transform: rotate(90deg)   translate(110px) rotate(-90deg); margin-left: 25px; margin-top: 0px; }
-  .how-solve-text-4 { transform: rotate(162deg)  translate(110px) rotate(-162deg); margin-left: -103px; margin-top: 10px; }
+  .how-solve-text-4 { transform: rotate(162deg)  translate(110px) rotate(-162deg); margin-left: -103px; margin-top: 25px; }
   
   
 }
 
 
-@media (max-width: 435px) {
+@media (max-width: 460px) {
   .how-solve-title {
     font-size: 1.6rem;
   }
   .how-solve-anim-block,
   .how-solve-circle-wrap,
   .how-solve-circle-svg {
-    width: 175px;
-    height: 175px;
+    width: 165px;
+    height: 165px;
     min-width: 0;
     min-height: 0;
   }
@@ -3732,11 +3732,42 @@ html {
   }
   .how-solve-text {
     width: 100px;
-    font-size: 0.5rem;
+    font-size: 0.6rem;
   }
   .how-solve-text-0 { transform: rotate(-126deg) translate(140px) rotate(126deg); margin-left: -50px; margin-top: 20px; }
   .how-solve-text-1 { transform: rotate(-54deg)  translate(110px) rotate(54deg); margin-left: -30px; margin-top: -19px; }
   .how-solve-text-2 { transform: rotate(18deg)   translate(110px) rotate(-18deg); margin-left: -9px; margin-top: -45px; }
+  .how-solve-text-3 { transform: rotate(90deg)   translate(110px) rotate(-90deg); margin-left: 15px; margin-top: -12px; }
+  .how-solve-text-4 { transform: rotate(162deg)  translate(110px) rotate(-162deg); margin-left: -56px; margin-top: 28px; }
+  
+  
+}
+
+
+
+
+@media (max-width: 400px) {
+  .how-solve-title {
+    font-size: 1.6rem;
+  }
+  .how-solve-anim-block,
+  .how-solve-circle-wrap,
+  .how-solve-circle-svg {
+    width: 160px;
+    height: 160px;
+    min-width: 0;
+    min-height: 0;
+  }
+  .how-solve-main {
+    font-size: 0.8rem;
+  }
+  .how-solve-text {
+    width: 100px;
+    font-size: 0.55rem;
+  }
+  .how-solve-text-0 { transform: rotate(-126deg) translate(140px) rotate(126deg); margin-left: -50px; margin-top: 20px; }
+  .how-solve-text-1 { transform: rotate(-54deg)  translate(110px) rotate(54deg); margin-left: -30px; margin-top: -19px; }
+  .how-solve-text-2 { transform: rotate(18deg)   translate(110px) rotate(-18deg); margin-left: -18px; margin-top: -45px; }
   .how-solve-text-3 { transform: rotate(90deg)   translate(110px) rotate(-90deg); margin-left: 15px; margin-top: -12px; }
   .how-solve-text-4 { transform: rotate(162deg)  translate(110px) rotate(-162deg); margin-left: -56px; margin-top: 28px; }
   
