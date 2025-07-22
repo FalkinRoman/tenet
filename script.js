@@ -777,3 +777,179 @@ document.addEventListener('DOMContentLoaded', function () {
   }, { threshold: 0.3 });
   observer.observe(main);
 });
+
+// Современная анимация пирамиды 'Какой итог?' с запуском по скроллу и стартовым состоянием (2 элемента)
+(function () {
+  let hasAnimated = false;
+  function setInitialState(steps, activeStep) {
+    // Показываем первый и второй элементы
+    activeStep.textContent = '';
+    activeStep.innerHTML = steps[0].innerHTML;
+    activeStep.classList.add('visible');
+    steps.forEach((el, i) => {
+      el.classList.remove('active', 'bright', 'done');
+      if (i === 0) el.classList.add('active');
+      if (i === 1) el.classList.add('bright');
+    });
+  }
+  function startPyramidAnimation() {
+    if (hasAnimated) return;
+    hasAnimated = true;
+    const steps = Array.from(document.querySelectorAll('.result-pyramid .result-step'));
+    const activeStep = document.querySelector('.result-active-step');
+    if (!steps.length || !activeStep) return;
+    setInitialState(steps, activeStep);
+    setTimeout(() => {
+      let current = 0;
+      function showStep(idx) {
+        activeStep.textContent = '';
+        activeStep.innerHTML = steps[idx].innerHTML;
+        activeStep.classList.add('visible');
+        steps.forEach((el, i) => {
+          el.classList.remove('active', 'bright', 'done');
+          if (i < idx) el.classList.add('done');
+          if (i === idx) el.classList.add('active');
+          if (i === idx + 1) el.classList.add('bright');
+        });
+      }
+      function hideActiveToPyramid(idx) {
+        activeStep.classList.remove('visible');
+        setTimeout(() => {
+          steps[idx].classList.remove('active');
+          steps[idx].classList.add('done');
+          if (steps[idx + 1]) steps[idx + 1].classList.add('bright');
+        }, 400);
+      }
+      function animatePyramid() {
+        let idx = 0;
+        showStep(idx);
+        function next() {
+          if (idx < steps.length - 1) {
+            setTimeout(() => {
+              hideActiveToPyramid(idx);
+              idx++;
+              setTimeout(() => {
+                showStep(idx);
+                next();
+              }, 400);
+            }, 1200);
+          } else {
+            setTimeout(() => {
+              activeStep.classList.remove('visible');
+              steps[idx].classList.remove('active');
+              steps[idx].classList.add('done');
+            }, 1200);
+          }
+        }
+        next();
+      }
+      steps.forEach(el => el.classList.remove('active', 'bright', 'done'));
+      animatePyramid();
+    }, 900); // задержка перед стартом анимации
+  }
+  document.addEventListener('DOMContentLoaded', function () {
+    const section = document.querySelector('.result-section');
+    if (!section) return;
+    const steps = Array.from(document.querySelectorAll('.result-pyramid .result-step'));
+    const activeStep = document.querySelector('.result-active-step');
+    if (steps.length && activeStep) setInitialState(steps, activeStep);
+    const observer = new window.IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        startPyramidAnimation();
+        observer.disconnect();
+      }
+    }, { threshold: 0.3 });
+    observer.observe(section);
+  });
+})();
+
+// Анимация "большой текст -> пирамида" для блока 'Какой итог?'
+(function () {
+  const pyramidSteps = [
+    'РОСТ <span>КОНВЕРСИИ</span>',
+    'РОСТ <span>СРЕДНЕГО ЧЕКА</span>',
+    'БОЛЕЕ <span>БЫСТРАЯ</span> ВОРОНКА',
+    '<span>ПРОЗРАЧНОСТЬ</span> ПРОЦЕССА ПРОДАЖ',
+    '<span>СИЛЬНЫЕ</span> МЕНЕДЖЕРЫ И УПРАВЛЕНЦЫ'
+  ];
+  let hasAnimated = false;
+  function showBigText(bigTextEl, text) {
+    bigTextEl.innerHTML = text;
+    bigTextEl.classList.add('visible');
+    bigTextEl.classList.remove('fadeout');
+  }
+  function hideBigText(bigTextEl) {
+    bigTextEl.classList.add('fadeout');
+    bigTextEl.classList.remove('visible');
+  }
+  function showPyramid(pyramidEl) {
+    pyramidEl.classList.add('visible');
+  }
+  function hidePyramid(pyramidEl) {
+    pyramidEl.classList.remove('visible');
+  }
+  function startPyramidAnimation() {
+    if (hasAnimated) return;
+    hasAnimated = true;
+    const bigTextEl = document.querySelector('.result-big-text');
+    const pyramidEl = document.querySelector('.result-pyramid');
+    const stepEls = Array.from(pyramidEl.querySelectorAll('.result-step'));
+    if (!bigTextEl || !pyramidEl || !stepEls.length) return;
+    // Скрыть пирамиду
+    hidePyramid(pyramidEl);
+    // Сначала показываем первый крупный текст
+    let idx = 0;
+    showBigText(bigTextEl, pyramidSteps[idx]);
+    // Анимация: поочередно схлопываем big-text в пирамиду и показываем следующий
+    function nextStep() {
+      if (idx < pyramidSteps.length - 1) {
+        setTimeout(() => {
+          // Схлопываем big-text
+          hideBigText(bigTextEl);
+          // Показываем уровень пирамиды
+          stepEls[idx].style.opacity = '1';
+          stepEls[idx].style.fontWeight = '700';
+          // Ждём fadeout
+          setTimeout(() => {
+            idx++;
+            // Показываем следующий big-text
+            showBigText(bigTextEl, pyramidSteps[idx]);
+            nextStep();
+          }, 600);
+        }, 1200);
+      } else {
+        // Последний шаг: схлопываем big-text и показываем всю пирамиду
+        setTimeout(() => {
+          hideBigText(bigTextEl);
+          setTimeout(() => {
+            showPyramid(pyramidEl);
+            // Все уровни пирамиды видимы
+            stepEls.forEach(el => { el.style.opacity = '1'; el.style.fontWeight = '700'; });
+          }, 600);
+        }, 1200);
+      }
+    }
+    // Скрываем все уровни пирамиды на старте
+    stepEls.forEach(el => { el.style.opacity = '0'; });
+    setTimeout(nextStep, 700);
+  }
+  document.addEventListener('DOMContentLoaded', function () {
+    const section = document.querySelector('.result-section');
+    if (!section) return;
+    const bigTextEl = document.querySelector('.result-big-text');
+    const pyramidEl = document.querySelector('.result-pyramid');
+    const stepEls = Array.from(pyramidEl.querySelectorAll('.result-step'));
+    // Скрываем пирамиду и уровни на старте
+    if (pyramidEl) pyramidEl.classList.remove('visible');
+    if (stepEls.length) stepEls.forEach(el => { el.style.opacity = '0'; });
+    if (bigTextEl) bigTextEl.innerHTML = '';
+    // Запуск по скроллу
+    const observer = new window.IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        startPyramidAnimation();
+        observer.disconnect();
+      }
+    }, { threshold: 0.3 });
+    observer.observe(section);
+  });
+})();
