@@ -3819,14 +3819,39 @@ html {
 }
 .result-pyramid {
   width: 100%;
-  max-width: 600px;
-  margin: 0 auto;
+  max-width: 700px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: flex-start;
   gap: 0.7em;
-  padding-right: 0;
+  margin: 0 auto 0 auto;
+  min-height: 0;
   position: relative;
+  z-index: 2;
+}
+.result-pyramid-step {
+  width: 100%;
+  text-align: center;
+  font-family: 'Montserrat', 'Manrope', Arial, sans-serif;
+  font-size: 2.1rem;
+  font-weight: 700;
+  color: #111;
+  letter-spacing: -0.03em;
+  line-height: 1.08;
+  white-space: nowrap;
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 0.7s, transform 0.7s, font-size 0.7s, color 0.7s;
+  margin: 0.2em 0 0.2em 0;
+}
+@media (max-width: 900px) {
+  .result-pyramid { max-width: 98vw; }
+  .result-pyramid-step { font-size: 1.1rem; }
+}
+@media (max-width: 600px) {
+  .result-pyramid { max-width: 100vw; }
+  .result-pyramid-step { font-size: 0.7rem; }
 }
 
 /* === Анимация "большой текст -> пирамида" === */
@@ -3933,4 +3958,489 @@ html {
   .result-big-text { font-size: 1.3rem; }
   .result-step { font-size: 0.7rem; }
   .result-line { width: 90%; }
+}
+
+/* === Заголовок "какой итог?" как на макете === */
+.result-title {
+  width: 100%;
+  text-align: right;
+  font-family: 'Montserrat', 'Manrope', Arial, sans-serif;
+  font-size: 2.6rem;
+  font-weight: 400;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+  margin-right: 5vw;
+}
+.result-title-muted {
+  color: #bfc3c6 !important;
+  font-weight: 400;
+  font-family: 'Montserrat', Arial, sans-serif;
+}
+.result-title-bold {
+  color: #111;
+  font-weight: 900;
+  font-family: 'Montserrat', Arial, sans-serif;
+  margin: 0 0.1em;
+}
+@media (max-width: 900px) {
+  .result-title { font-size: 1.5rem; margin-right: 2vw; }
+}
+@media (max-width: 600px) {
+  .result-title { font-size: 1.1rem; margin-right: 1vw; }
+}
+
+/* === .result-next-text (на очереди) === */
+.result-next-text {
+  width: 100%;
+  text-align: center;
+  font-family: 'Montserrat', 'Manrope', Arial, sans-serif;
+  font-size: 3.2rem;
+  font-weight: 700;
+  color: #e0e0e0;
+  letter-spacing: -0.03em;
+  line-height: 1.08;
+  white-space: nowrap;
+  opacity: 0;
+  transform: scale(0.98) translateY(10px);
+  transition: opacity 0.7s, transform 0.7s, font-size 0.7s, color 0.7s;
+  z-index: 1;
+  pointer-events: none;
+  margin-top: 0.2em;
+}
+.result-next-text.visible {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+@media (max-width: 900px) {
+  .result-next-text { font-size: 1.7rem; }
+}
+@media (max-width: 600px) {
+  .result-next-text { font-size: 0.9rem; }
+}
+
+/* === Пошаговая анимация пирамиды "Какой итог?" === */
+.result-anim-wrapper {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  min-height: 520px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+.result-pyramid {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2em;
+  padding: 0;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  pointer-events: none;
+}
+.result-pyramid.visible {
+  pointer-events: auto;
+}
+.result-step {
+  width: 100%;
+  text-align: center;
+  font-family: 'Montserrat', 'Manrope', Arial, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #111;
+  letter-spacing: -0.03em;
+  line-height: 1.08;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateY(0) scale(0.95);
+  transition: opacity 0.7s, transform 0.7s, font-size 0.7s, color 0.7s;
+  margin: 0.2em 0;
+}
+.result-step.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+.result-step.active {
+  font-size: 4.2rem;
+  font-weight: 900;
+  color: #111;
+  z-index: 2;
+  opacity: 1;
+  transform: translateY(0) scale(1.04);
+}
+.result-step.next {
+  font-size: 3.2rem;
+  font-weight: 700;
+  color: #e0e0e0;
+  opacity: 1;
+  z-index: 1;
+  transform: translateY(0) scale(1);
+}
+.result-step.pyramid {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #111;
+  opacity: 1;
+  z-index: 1;
+  transform: translateY(0) scale(1);
+}
+.result-line {
+  width: 60%;
+  height: 1px;
+  background: #bbb;
+  margin: 0.7em auto;
+  opacity: 0.7;
+}
+@media (max-width: 900px) {
+  .result-step.active { font-size: 2.5rem; }
+  .result-step.next { font-size: 1.7rem; }
+  .result-pyramid { max-width: 98vw; }
+  .result-line { width: 80%; }
+}
+@media (max-width: 600px) {
+  .result-step.active { font-size: 1.1rem; }
+  .result-step.next { font-size: 0.9rem; }
+  .result-step.pyramid { font-size: 0.7rem; }
+  .result-line { width: 90%; }
+}
+.result-big-text, .result-next-text { display: none !important; }
+
+/* === Огромный стартовый текст на всю ширину === */
+.result-intro-big {
+  width: 100vw;
+  max-width: 100vw;
+  text-align: center;
+  font-family: 'Montserrat', 'Manrope', Arial, sans-serif;
+  font-size: clamp(2.5rem, 8vw, 7.5rem);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  color: #111;
+  line-height: 1.08;
+  white-space: nowrap;
+  opacity: 0;
+  transform: scale(0.95) translateY(40px);
+  transition: opacity 0.7s, transform 0.7s;
+  z-index: 10;
+  margin: 2.5em 0 1.2em 0;
+  pointer-events: none;
+  position: relative;
+}
+.result-intro-big.visible {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+.result-intro-big.hide {
+  opacity: 0;
+  transform: scale(0.7) translateY(-60px);
+  pointer-events: none;
+}
+.result-anim-wrapper { opacity: 0; transition: opacity 0.7s; }
+.result-anim-wrapper.visible { opacity: 1; }
+
+/* === Минималистичная анимация: только три шага === */
+.result-top-small {
+  width: 100vw;
+  max-width: 100vw;
+  text-align: center;
+  font-family: 'Montserrat', 'Manrope', Arial, sans-serif;
+  font-size: 2.1rem;
+  font-weight: 700;
+  color: #111;
+  letter-spacing: -0.03em;
+  line-height: 1.08;
+  white-space: nowrap;
+  opacity: 0;
+  transform: scale(0.8) translateY(40px);
+  transition: opacity 0.7s, transform 0.7s, font-size 0.7s, color 0.7s;
+  margin: 0.2em 0 0.2em 0;
+  z-index: 2;
+  pointer-events: none;
+  position: relative;
+}
+.result-top-small.visible {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+.result-current-big {
+  width: 100vw;
+  max-width: 100vw;
+  text-align: center;
+  font-family: 'Montserrat', 'Manrope', Arial, sans-serif;
+  font-size: clamp(2.5rem, 8vw, 7.5rem);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  color: #111;
+  line-height: 1.08;
+  white-space: nowrap;
+  opacity: 0;
+  transform: scale(0.95) translateY(40px);
+  transition: opacity 0.7s, transform 0.7s;
+  z-index: 10;
+  margin: 0.5em 0 0.2em 0;
+  pointer-events: none;
+  position: relative;
+}
+.result-current-big.visible {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+.result-current-big.hide {
+  opacity: 0;
+  transform: scale(0.7) translateY(-60px);
+  pointer-events: none;
+}
+.result-next-fade {
+  width: 100vw;
+  max-width: 100vw;
+  text-align: center;
+  font-family: 'Montserrat', 'Manrope', Arial, sans-serif;
+  font-size: clamp(1.5rem, 5vw, 4.2rem);
+  font-weight: 700;
+  color: #e0e0e0;
+  letter-spacing: -0.03em;
+  line-height: 1.08;
+  white-space: nowrap;
+  opacity: 0;
+  transform: scale(0.98) translateY(10px);
+  transition: opacity 0.7s, transform 0.7s, font-size 0.7s, color 0.7s;
+  z-index: 1;
+  pointer-events: none;
+  margin-top: 0.2em;
+}
+.result-next-fade.visible {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+@media (max-width: 900px) {
+  .result-top-small { font-size: 1.1rem; }
+  .result-current-big { font-size: clamp(1.5rem, 5vw, 3.5rem); }
+  .result-next-fade { font-size: clamp(1rem, 3vw, 2.2rem); }
+}
+@media (max-width: 600px) {
+  .result-top-small { font-size: 0.7rem; }
+  .result-current-big { font-size: clamp(1rem, 3vw, 1.5rem); }
+  .result-next-fade { font-size: clamp(0.7rem, 2vw, 1.1rem); }
+}
+
+/* === Динамичная анимация: элементы двигаются и трансформируются === */
+.result-anim-stage {
+  position: relative;
+  width: 100vw;
+  max-width: 100vw;
+  height: 12em;
+  min-height: 320px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.result-anim-el {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%) scale(1);
+  opacity: 0;
+  font-family: 'Montserrat', 'Manrope', Arial, sans-serif;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  white-space: nowrap;
+  transition: transform 0.8s cubic-bezier(.4,0,.2,1), opacity 0.7s, font-size 0.8s, color 0.7s;
+  pointer-events: none;
+  z-index: 1;
+}
+.result-anim-el.big {
+  font-size: clamp(2.5rem, 8vw, 7.5rem);
+  color: #111;
+  opacity: 1;
+  z-index: 3;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(1);
+}
+.result-anim-el.to-top {
+  font-size: 2.1rem;
+  color: #111;
+  opacity: 1;
+  z-index: 2;
+  top: 0%;
+  transform: translate(-50%, 0%) scale(0.7);
+}
+.result-anim-el.to-center {
+  font-size: clamp(2.5rem, 8vw, 7.5rem);
+  color: #111;
+  opacity: 1;
+  z-index: 3;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(1);
+}
+.result-anim-el.to-bottom {
+  font-size: clamp(1.5rem, 5vw, 4.2rem);
+  color: #e0e0e0;
+  opacity: 1;
+  z-index: 1;
+  top: 80%;
+  transform: translate(-50%, 0%) scale(1);
+}
+.result-anim-el.hide {
+  opacity: 0;
+  pointer-events: none;
+}
+@media (max-width: 900px) {
+  .result-anim-stage { height: 7em; min-height: 180px; }
+  .result-anim-el.to-top { font-size: 1.1rem; }
+  .result-anim-el.to-bottom { font-size: clamp(1rem, 3vw, 2.2rem); }
+}
+@media (max-width: 600px) {
+  .result-anim-stage { height: 4em; min-height: 90px; }
+  .result-anim-el.to-top { font-size: 0.7rem; }
+  .result-anim-el.to-bottom { font-size: clamp(0.7rem, 2vw, 1.1rem); }
+}
+
+/* === Анимация: fade-in/out большого текста, по шагам строится пирамида === */
+.result-anim-big {
+  width: 100vw;
+  max-width: 100vw;
+  text-align: center;
+  font-family: 'Montserrat', 'Manrope', Arial, sans-serif;
+  font-size: clamp(2.5rem, 8vw, 7.5rem);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  color: #111;
+  line-height: 1.08;
+  white-space: nowrap;
+  opacity: 0;
+  transform: scale(0.95) translateY(40px);
+  transition: opacity 0.7s, transform 0.7s;
+  z-index: 10;
+  margin: 2.5em 0 1.2em 0;
+  pointer-events: none;
+  position: relative;
+}
+.result-anim-big.visible {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+.result-anim-big.hide {
+  opacity: 0;
+  transform: scale(0.7) translateY(-60px);
+  pointer-events: none;
+}
+.result-pyramid {
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.7em;
+  min-height: 0;
+  position: relative;
+  z-index: 2;
+}
+.result-pyramid-step {
+  width: 100%;
+  text-align: center;
+  font-family: 'Montserrat', 'Manrope', Arial, sans-serif;
+  font-size: 2.1rem;
+  font-weight: 700;
+  color: #111;
+  letter-spacing: -0.03em;
+  line-height: 1.08;
+  white-space: nowrap;
+  opacity: 0;
+  transform: scale(0.8) translateY(40px);
+  transition: opacity 0.7s, transform 0.7s, font-size 0.7s, color 0.7s;
+  margin: 0.2em 0 0.2em 0;
+}
+.result-pyramid-step.visible {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+.result-pyramid-line {
+  width: 60%;
+  height: 1px;
+  background: #bbb;
+  margin: 0.3em auto 0.3em auto;
+  opacity: 0.7;
+}
+@media (max-width: 900px) {
+  .result-anim-big { font-size: clamp(1.5rem, 5vw, 3.5rem); }
+  .result-pyramid { max-width: 98vw; }
+  .result-pyramid-step { font-size: 1.1rem; }
+  .result-pyramid-line { width: 80%; }
+}
+@media (max-width: 600px) {
+  .result-anim-big { font-size: clamp(1rem, 3vw, 1.5rem); }
+  .result-pyramid { max-width: 100vw; }
+  .result-pyramid-step { font-size: 0.7rem; }
+  .result-pyramid-line { width: 90%; }
+}
+
+/* === Адаптивность: всё помещается в ширину экрана === */
+.result-anim-big {
+  width: 100%;
+  max-width: 100vw;
+  overflow: hidden;
+  word-break: break-word;
+  text-align: center;
+  font-family: 'Montserrat', 'Manrope', Arial, sans-serif;
+  font-size: clamp(1.2rem, 8vw, 7.5rem);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  color: #111;
+  line-height: 1.08;
+  white-space: normal;
+  opacity: 0;
+  transform: scale(0.95) translateY(40px);
+  transition: opacity 0.7s, transform 0.7s;
+  z-index: 10;
+  margin: 2.5em 0 1.2em 0;
+  pointer-events: none;
+  position: relative;
+}
+.result-pyramid {
+  width: 100%;
+  max-width: 100vw;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.7em;
+  min-height: 0;
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+}
+.result-pyramid-step {
+  width: 100%;
+  max-width: 100vw;
+  text-align: center;
+  font-family: 'Montserrat', 'Manrope', Arial, sans-serif;
+  font-size: 2.1rem;
+  font-weight: 700;
+  color: #111;
+  letter-spacing: -0.03em;
+  line-height: 1.08;
+  white-space: normal;
+  word-break: break-word;
+  opacity: 0;
+  transform: scale(0.8) translateY(40px);
+  transition: opacity 0.7s, transform 0.7s, font-size 0.7s, color 0.7s;
+  margin: 0.2em 0 0.2em 0;
+}
+@media (max-width: 900px) {
+  .result-anim-big { font-size: clamp(1.1rem, 5vw, 3.5rem); }
+  .result-pyramid-step { font-size: 1.1rem; }
+}
+@media (max-width: 600px) {
+  .result-anim-big { font-size: clamp(0.8rem, 3vw, 1.5rem); }
+  .result-pyramid-step { font-size: 0.7rem; }
 }

@@ -863,7 +863,7 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 })();
 
-// Анимация "большой текст -> пирамида" для блока 'Какой итог?'
+// Анимация "большой текст -> пирамидка + на очереди" для блока 'Какой итог?'
 (function () {
   const pyramidSteps = [
     'РОСТ <span>КОНВЕРСИИ</span>',
@@ -882,6 +882,14 @@ document.addEventListener('DOMContentLoaded', function () {
     bigTextEl.classList.add('fadeout');
     bigTextEl.classList.remove('visible');
   }
+  function showNextText(nextTextEl, text) {
+    nextTextEl.innerHTML = text;
+    nextTextEl.classList.add('visible');
+  }
+  function hideNextText(nextTextEl) {
+    nextTextEl.classList.remove('visible');
+    nextTextEl.innerHTML = '';
+  }
   function showPyramid(pyramidEl) {
     pyramidEl.classList.add('visible');
   }
@@ -892,28 +900,36 @@ document.addEventListener('DOMContentLoaded', function () {
     if (hasAnimated) return;
     hasAnimated = true;
     const bigTextEl = document.querySelector('.result-big-text');
+    const nextTextEl = document.querySelector('.result-next-text');
     const pyramidEl = document.querySelector('.result-pyramid');
     const stepEls = Array.from(pyramidEl.querySelectorAll('.result-step'));
-    if (!bigTextEl || !pyramidEl || !stepEls.length) return;
+    if (!bigTextEl || !nextTextEl || !pyramidEl || !stepEls.length) return;
     // Скрыть пирамиду
     hidePyramid(pyramidEl);
-    // Сначала показываем первый крупный текст
+    // Скрыть все уровни пирамиды
+    stepEls.forEach(el => { el.style.opacity = '0'; });
+    // Сначала показываем первый крупный текст и второй как "на очереди"
     let idx = 0;
     showBigText(bigTextEl, pyramidSteps[idx]);
-    // Анимация: поочередно схлопываем big-text в пирамиду и показываем следующий
+    showNextText(nextTextEl, pyramidSteps[idx + 1]);
     function nextStep() {
       if (idx < pyramidSteps.length - 1) {
         setTimeout(() => {
           // Схлопываем big-text
           hideBigText(bigTextEl);
-          // Показываем уровень пирамиды
+          // Анимируем появление уровня пирамиды (уезжает вверх)
           stepEls[idx].style.opacity = '1';
           stepEls[idx].style.fontWeight = '700';
           // Ждём fadeout
           setTimeout(() => {
             idx++;
-            // Показываем следующий big-text
+            // Следующий big-text становится большим, под ним новый на очереди
             showBigText(bigTextEl, pyramidSteps[idx]);
+            if (pyramidSteps[idx + 1]) {
+              showNextText(nextTextEl, pyramidSteps[idx + 1]);
+            } else {
+              hideNextText(nextTextEl);
+            }
             nextStep();
           }, 600);
         }, 1200);
@@ -921,6 +937,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // Последний шаг: схлопываем big-text и показываем всю пирамиду
         setTimeout(() => {
           hideBigText(bigTextEl);
+          hideNextText(nextTextEl);
           setTimeout(() => {
             showPyramid(pyramidEl);
             // Все уровни пирамиды видимы
@@ -929,24 +946,422 @@ document.addEventListener('DOMContentLoaded', function () {
         }, 1200);
       }
     }
-    // Скрываем все уровни пирамиды на старте
-    stepEls.forEach(el => { el.style.opacity = '0'; });
     setTimeout(nextStep, 700);
   }
   document.addEventListener('DOMContentLoaded', function () {
     const section = document.querySelector('.result-section');
     if (!section) return;
     const bigTextEl = document.querySelector('.result-big-text');
+    const nextTextEl = document.querySelector('.result-next-text');
     const pyramidEl = document.querySelector('.result-pyramid');
     const stepEls = Array.from(pyramidEl.querySelectorAll('.result-step'));
     // Скрываем пирамиду и уровни на старте
     if (pyramidEl) pyramidEl.classList.remove('visible');
     if (stepEls.length) stepEls.forEach(el => { el.style.opacity = '0'; });
     if (bigTextEl) bigTextEl.innerHTML = '';
+    if (nextTextEl) nextTextEl.innerHTML = '';
     // Запуск по скроллу
     const observer = new window.IntersectionObserver((entries) => {
       if (entries[0].isIntersecting) {
         startPyramidAnimation();
+        observer.disconnect();
+      }
+    }, { threshold: 0.3 });
+    observer.observe(section);
+  });
+})();
+
+// Огромный стартовый текст -> анимация пирамиды
+(function () {
+  const pyramidSteps = [
+    'РОСТ <span>КОНВЕРСИИ</span>',
+    'РОСТ <span>СРЕДНЕГО ЧЕКА</span>',
+    'БОЛЕЕ <span>БЫСТРАЯ</span> ВОРОНКА',
+    '<span>ПРОЗРАЧНОСТЬ</span> ПРОЦЕССА ПРОДАЖ',
+    '<span>СИЛЬНЫЕ</span> МЕНЕДЖЕРЫ И УПРАВЛЕНЦЫ'
+  ];
+  let hasAnimated = false;
+  function setStepState(stepEls, idx) {
+    stepEls.forEach((el, i) => {
+      el.classList.remove('active', 'next', 'pyramid', 'visible');
+      if (i < idx) {
+        el.classList.add('pyramid', 'visible');
+      } else if (i === idx) {
+        el.classList.add('active', 'visible');
+      } else if (i === idx + 1) {
+        el.classList.add('next', 'visible');
+      }
+    });
+  }
+  function showAllPyramid(stepEls) {
+    stepEls.forEach((el) => {
+      el.classList.remove('active', 'next');
+      el.classList.add('pyramid', 'visible');
+    });
+  }
+  function startPyramidAnimation() {
+    if (hasAnimated) return;
+    hasAnimated = true;
+    const introBig = document.querySelector('.result-intro-big');
+    const animWrapper = document.querySelector('.result-anim-wrapper');
+    const pyramidEl = document.querySelector('.result-pyramid');
+    const stepEls = Array.from(pyramidEl.querySelectorAll('.result-step'));
+    if (!introBig || !animWrapper || !pyramidEl || !stepEls.length) return;
+    // 1. Показать огромный текст
+    introBig.innerHTML = pyramidSteps[0];
+    introBig.classList.add('visible');
+    animWrapper.classList.remove('visible');
+    // 2. Через паузу скрыть introBig и показать анимацию пирамиды
+    setTimeout(() => {
+      introBig.classList.add('hide');
+      introBig.classList.remove('visible');
+      setTimeout(() => {
+        animWrapper.classList.add('visible');
+        let idx = 0;
+        setStepState(stepEls, idx);
+        pyramidEl.classList.add('visible');
+        function nextStep() {
+          if (idx < pyramidSteps.length - 1) {
+            setTimeout(() => {
+              idx++;
+              setStepState(stepEls, idx);
+              nextStep();
+            }, 1400);
+          } else {
+            setTimeout(() => {
+              showAllPyramid(stepEls);
+            }, 1400);
+          }
+        }
+        nextStep();
+      }, 800);
+    }, 1400);
+  }
+  document.addEventListener('DOMContentLoaded', function () {
+    const section = document.querySelector('.result-section');
+    if (!section) return;
+    const introBig = document.querySelector('.result-intro-big');
+    const animWrapper = document.querySelector('.result-anim-wrapper');
+    const pyramidEl = document.querySelector('.result-pyramid');
+    const stepEls = Array.from(pyramidEl.querySelectorAll('.result-step'));
+    // Сбросить все классы
+    if (introBig) { introBig.innerHTML = ''; introBig.classList.remove('visible', 'hide'); }
+    if (animWrapper) animWrapper.classList.remove('visible');
+    stepEls.forEach(el => {
+      el.classList.remove('active', 'next', 'pyramid', 'visible');
+    });
+    // Запуск по скроллу
+    const observer = new window.IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        startPyramidAnimation();
+        observer.disconnect();
+      }
+    }, { threshold: 0.3 });
+    observer.observe(section);
+  });
+})();
+
+// Минималистичная анимация: только три шага
+(function () {
+  const pyramidSteps = [
+    'РОСТ <span>КОНВЕРСИИ</span>',
+    'РОСТ <span>СРЕДНЕГО ЧЕКА</span>',
+    'БОЛЕЕ <span>БЫСТРАЯ</span> ВОРОНКА'
+  ];
+  let hasAnimated = false;
+  function startMiniPyramid() {
+    if (hasAnimated) return;
+    hasAnimated = true;
+    const top = document.querySelector('.result-top-small');
+    const big = document.querySelector('.result-current-big');
+    const next = document.querySelector('.result-next-fade');
+    if (!top || !big || !next) return;
+    // Сброс
+    top.innerHTML = '';
+    big.innerHTML = '';
+    next.innerHTML = '';
+    top.classList.remove('visible');
+    big.classList.remove('visible', 'hide');
+    next.classList.remove('visible');
+    // 1. Показываем первый большой
+    big.innerHTML = pyramidSteps[0];
+    big.classList.add('visible');
+    // 2. Через паузу — big уезжает вверх, становится маленьким, второй становится большим, снизу появляется третий
+    setTimeout(() => {
+      // Первый уезжает вверх
+      big.classList.remove('visible');
+      setTimeout(() => {
+        top.innerHTML = pyramidSteps[0];
+        top.classList.add('visible');
+        // Второй становится большим
+        big.innerHTML = pyramidSteps[1];
+        big.classList.add('visible');
+        // Третий появляется снизу
+        next.innerHTML = pyramidSteps[2];
+        next.classList.add('visible');
+      }, 700);
+    }, 1400);
+  }
+  document.addEventListener('DOMContentLoaded', function () {
+    const section = document.querySelector('.result-section');
+    if (!section) return;
+    // Сброс
+    const top = document.querySelector('.result-top-small');
+    const big = document.querySelector('.result-current-big');
+    const next = document.querySelector('.result-next-fade');
+    if (top) { top.innerHTML = ''; top.classList.remove('visible'); }
+    if (big) { big.innerHTML = ''; big.classList.remove('visible', 'hide'); }
+    if (next) { next.innerHTML = ''; next.classList.remove('visible'); }
+    // Запуск по скроллу
+    const observer = new window.IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        startMiniPyramid();
+        observer.disconnect();
+      }
+    }, { threshold: 0.3 });
+    observer.observe(section);
+  });
+})();
+
+// Живая анимация построения пирамиды (как на картинках)
+(function () {
+  const pyramidSteps = [
+    'РОСТ <span>КОНВЕРСИИ</span>',
+    'РОСТ <span>СРЕДНЕГО ЧЕКА</span>',
+    'БОЛЕЕ <span>БЫСТРАЯ</span> ВОРОНКА',
+    '<span>ПРОЗРАЧНОСТЬ</span> ПРОЦЕССА ПРОДАЖ',
+    '<span>СИЛЬНЫЕ</span> МЕНЕДЖЕРЫ И УПРАВЛЕНЦЫ'
+  ];
+  let hasAnimated = false;
+  function createStep(text) {
+    const div = document.createElement('div');
+    div.className = 'result-pyramid-step';
+    div.innerHTML = text;
+    return div;
+  }
+  function createLine() {
+    const div = document.createElement('div');
+    div.className = 'result-pyramid-line';
+    return div;
+  }
+  function startPyramidAnimation() {
+    if (hasAnimated) return;
+    hasAnimated = true;
+    const pyramid = document.querySelector('.result-pyramid');
+    const big = document.querySelector('.result-current-big');
+    const next = document.querySelector('.result-next-fade');
+    if (!pyramid || !big || !next) return;
+    // Сброс
+    pyramid.innerHTML = '';
+    big.innerHTML = '';
+    next.innerHTML = '';
+    big.classList.remove('visible', 'hide');
+    next.classList.remove('visible');
+    // Начальный шаг
+    let idx = 0;
+    function step() {
+      // 1. Показываем текущий большой
+      big.innerHTML = pyramidSteps[idx];
+      big.classList.add('visible');
+      // 2. Показываем следующий fade, если есть
+      if (pyramidSteps[idx + 1]) {
+        next.innerHTML = pyramidSteps[idx + 1];
+        next.classList.add('visible');
+      } else {
+        next.classList.remove('visible');
+        next.innerHTML = '';
+      }
+    }
+    step();
+    function nextStep() {
+      // 1. Убираем big вниз, делаем маленьким и добавляем в пирамиду
+      big.classList.remove('visible');
+      setTimeout(() => {
+        // Добавляем в пирамиду
+        pyramid.appendChild(createStep(pyramidSteps[idx]));
+        if (idx < pyramidSteps.length - 1) pyramid.appendChild(createLine());
+        // Следующий big становится активным
+        idx++;
+        if (idx < pyramidSteps.length) {
+          step();
+          setTimeout(nextStep, 1400);
+        } else {
+          // Финал: убираем big и next, оставляем только пирамиду
+          big.innerHTML = '';
+          next.innerHTML = '';
+        }
+      }, 700);
+    }
+    setTimeout(nextStep, 1400);
+  }
+  document.addEventListener('DOMContentLoaded', function () {
+    const section = document.querySelector('.result-section');
+    if (!section) return;
+    // Сброс
+    const pyramid = document.querySelector('.result-pyramid');
+    const big = document.querySelector('.result-current-big');
+    const next = document.querySelector('.result-next-fade');
+    if (pyramid) pyramid.innerHTML = '';
+    if (big) { big.innerHTML = ''; big.classList.remove('visible', 'hide'); }
+    if (next) { next.innerHTML = ''; next.classList.remove('visible'); }
+    // Запуск по скроллу
+    const observer = new window.IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        startPyramidAnimation();
+        observer.disconnect();
+      }
+    }, { threshold: 0.3 });
+    observer.observe(section);
+  });
+})();
+
+// Динамичная анимация: движение и трансформация трёх элементов
+(function () {
+  const pyramidSteps = [
+    'РОСТ <span>КОНВЕРСИИ</span>',
+    'РОСТ <span>СРЕДНЕГО ЧЕКА</span>',
+    'БОЛЕЕ <span>БЫСТРАЯ</span> ВОРОНКА'
+  ];
+  let hasAnimated = false;
+  function startDynamicAnim() {
+    if (hasAnimated) return;
+    hasAnimated = true;
+    const el1 = document.getElementById('anim-el-1');
+    const el2 = document.getElementById('anim-el-2');
+    const el3 = document.getElementById('anim-el-3');
+    if (!el1 || !el2 || !el3) return;
+    // Сброс
+    el1.innerHTML = '';
+    el2.innerHTML = '';
+    el3.innerHTML = '';
+    el1.className = 'result-anim-el';
+    el2.className = 'result-anim-el';
+    el3.className = 'result-anim-el';
+    // 1. Первый появляется по центру
+    el1.innerHTML = pyramidSteps[0];
+    el1.classList.add('big');
+    // 2. Через паузу — первый уезжает вверх, второй появляется и увеличивается, третий fade-in
+    setTimeout(() => {
+      // Первый уезжает вверх
+      el1.classList.remove('big');
+      el1.classList.add('to-top');
+      // Второй появляется и увеличивается
+      el2.innerHTML = pyramidSteps[1];
+      el2.classList.add('to-center');
+      // Третий fade-in снизу
+      setTimeout(() => {
+        el3.innerHTML = pyramidSteps[2];
+        el3.classList.add('to-bottom');
+      }, 500);
+    }, 1400);
+  }
+  document.addEventListener('DOMContentLoaded', function () {
+    const section = document.querySelector('.result-section');
+    if (!section) return;
+    // Сброс
+    const el1 = document.getElementById('anim-el-1');
+    const el2 = document.getElementById('anim-el-2');
+    const el3 = document.getElementById('anim-el-3');
+    if (el1) { el1.innerHTML = ''; el1.className = 'result-anim-el'; }
+    if (el2) { el2.innerHTML = ''; el2.className = 'result-anim-el'; }
+    if (el3) { el3.innerHTML = ''; el3.className = 'result-anim-el'; }
+    // Запуск по скроллу
+    const observer = new window.IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        startDynamicAnim();
+        observer.disconnect();
+      }
+    }, { threshold: 0.3 });
+    observer.observe(section);
+  });
+})();
+
+// Fade-in/fade-out большого текста, по шагам строится пирамида
+(function () {
+  const pyramidSteps = [
+    'РОСТ <span>КОНВЕРСИИ</span>',
+    'РОСТ <span>СРЕДНЕГО ЧЕКА</span>',
+    'БОЛЕЕ <span>БЫСТРАЯ</span> ВОРОНКА',
+    '<span>ПРОЗРАЧНОСТЬ</span> ПРОЦЕССА ПРОДАЖ',
+    '<span>СИЛЬНЫЕ</span> МЕНЕДЖЕРЫ И УПРАВЛЕНЦЫ'
+  ];
+  let hasAnimated = false;
+  function createStep(text) {
+    const div = document.createElement('div');
+    div.className = 'result-pyramid-step';
+    div.innerHTML = text;
+    return div;
+  }
+  function createLine() {
+    const div = document.createElement('div');
+    div.className = 'result-pyramid-line';
+    return div;
+  }
+  function startFadePyramid() {
+    if (hasAnimated) return;
+    hasAnimated = true;
+    const big = document.querySelector('.result-anim-big');
+    const pyramid = document.querySelector('.result-pyramid');
+    if (!big || !pyramid) return;
+    // Сброс
+    big.innerHTML = '';
+    big.className = 'result-anim-big';
+    pyramid.innerHTML = '';
+    let idx = 0;
+    function showBig(text) {
+      big.innerHTML = text;
+      big.classList.remove('hide');
+      big.classList.add('visible');
+    }
+    function hideBig() {
+      big.classList.remove('visible');
+      big.classList.add('hide');
+    }
+    function showStepInPyramid(text, withLine) {
+      const step = createStep(text);
+      pyramid.appendChild(step);
+      setTimeout(() => step.classList.add('visible'), 50);
+      if (withLine) {
+        const line = createLine();
+        pyramid.appendChild(line);
+      }
+    }
+    function next() {
+      if (idx < pyramidSteps.length) {
+        showBig(pyramidSteps[idx]);
+        setTimeout(() => {
+          hideBig();
+          setTimeout(() => {
+            showStepInPyramid(pyramidSteps[idx], idx < pyramidSteps.length - 1);
+            idx++;
+            next();
+          }, 700);
+        }, 1200);
+      }
+    }
+    // Показываем пирамиду сразу после первого fade-out
+    showBig(pyramidSteps[0]);
+    setTimeout(() => {
+      hideBig();
+      setTimeout(() => {
+        showStepInPyramid(pyramidSteps[0], pyramidSteps.length > 1);
+        idx = 1;
+        next();
+      }, 700);
+    }, 1200);
+  }
+  document.addEventListener('DOMContentLoaded', function () {
+    const section = document.querySelector('.result-section');
+    if (!section) return;
+    // Сброс
+    const big = document.querySelector('.result-anim-big');
+    const pyramid = document.querySelector('.result-pyramid');
+    if (big) { big.innerHTML = ''; big.className = 'result-anim-big'; }
+    if (pyramid) pyramid.innerHTML = '';
+    // Запуск по скроллу
+    const observer = new window.IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        startFadePyramid();
         observer.disconnect();
       }
     }, { threshold: 0.3 });
