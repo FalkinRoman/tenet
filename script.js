@@ -554,6 +554,7 @@ document.addEventListener('DOMContentLoaded', function () {
   let interval = null;
   let userSelected = false;
   let progressDuration = 3000;
+  let reasonsLocked = false;
 
   function getRandomIndexes(count, total) {
     const arr = [];
@@ -572,6 +573,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function setActiveReasonsRandom() {
+    if (reasonsLocked) return; // если зафиксировано — не меняем!
     const allReasons = document.querySelectorAll('.problems-reasons-list span');
     let count;
     if (window.innerWidth < 900) {
