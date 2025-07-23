@@ -814,16 +814,17 @@ document.addEventListener('DOMContentLoaded', function () {
       big.innerHTML = text;
       big.classList.remove('hide');
       big.classList.add('visible');
-      // pyramid.classList.add('moving-up'); // убираем движение пирамиды
     }
-    function hideBig() {
+    function hideBig(callback) {
       big.classList.remove('visible');
       big.classList.add('hide');
-      // pyramid.classList.remove('moving-up'); // убираем движение пирамиды
+      setTimeout(() => {
+        big.classList.remove('hide');
+        if (callback) callback();
+      }, 600);
     }
     function showStepInPyramid(text, idx) {
       const step = createStep(text);
-      // Если не влезает — уменьшаем font-size
       setTimeout(() => {
         const containerWidth = pyramid.offsetWidth;
         if (step.scrollWidth > containerWidth) {
@@ -843,13 +844,14 @@ document.addEventListener('DOMContentLoaded', function () {
       if (idx < pyramidSteps.length) {
         showBig(pyramidSteps[idx]);
         setTimeout(() => {
-          hideBig();
-          setTimeout(() => {
-            showStepInPyramid(pyramidSteps[idx], idx);
-            idx++;
-            next();
-          }, 900);
-        }, 1200);
+          hideBig(() => {
+            setTimeout(() => {
+              showStepInPyramid(pyramidSteps[idx], idx);
+              idx++;
+              setTimeout(next, 600);
+            }, 400); // пауза между исчезновением большого текста и появлением элемента в пирамиде
+          });
+        }, 600);
       }
     }
     // Просто запускаем анимацию без верхней линии
