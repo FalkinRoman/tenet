@@ -869,8 +869,10 @@ document.addEventListener('DOMContentLoaded', function () {
   if (!section) return;
   const observer = new window.IntersectionObserver((entries) => {
     if (entries[0].isIntersecting) {
-      startFadePyramid();
-      observer.disconnect();
+      setTimeout(() => {
+        startFadePyramid();
+        observer.disconnect();
+      }, 400); // задержка в 400мс перед стартом всей анимации
     }
   }, { threshold: 0.3 });
   observer.observe(section);
