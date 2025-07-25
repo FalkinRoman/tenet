@@ -530,6 +530,132 @@
       </div>
     </section>
     
+    <!-- Модальное окно для заявки -->
+    <div class="modal-overlay" id="requestModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title">Объединяем силы для создания уникальных возможностей</h2>
+          <button class="modal-close" id="modalClose">
+            <img src="assets/images/close.svg" alt="Закрыть" class="close-icon">
+          </button>
+        </div>
+        
+        <form class="request-form" id="requestForm">
+          <div class="form-fields">
+            <div class="form-field">
+              <input type="text" id="name" name="name" placeholder=" " required>
+              <label for="name">Имя</label>
+            </div>
+            
+            <div class="form-field">
+              <input type="text" id="company" name="company" placeholder=" " required>
+              <label for="company">Компания</label>
+            </div>
+            
+            <div class="form-field">
+              <input type="tel" id="phone" name="phone" placeholder=" " required>
+              <label for="phone">Телефон</label>
+            </div>
+            
+            <div class="form-field">
+              <input type="date" id="date" name="date" placeholder=" " required>
+              <label for="date">Дата</label>
+            </div>
+            
+            <div class="form-field">
+              <select id="time" name="time" required>
+                <option value="">Выберите время</option>
+                <option value="09:00">09:00</option>
+                <option value="09:30">09:30</option>
+                <option value="10:00">10:00</option>
+                <option value="10:30">10:30</option>
+                <option value="11:00">11:00</option>
+                <option value="11:30">11:30</option>
+                <option value="12:00">12:00</option>
+                <option value="12:30">12:30</option>
+                <option value="13:00">13:00</option>
+                <option value="13:30">13:30</option>
+                <option value="14:00">14:00</option>
+                <option value="14:30">14:30</option>
+                <option value="15:00">15:00</option>
+                <option value="15:30">15:30</option>
+                <option value="16:00">16:00</option>
+                <option value="16:30">16:30</option>
+                <option value="17:00">17:00</option>
+                <option value="17:30">17:30</option>
+                <option value="18:00">18:00</option>
+                <option value="18:30">18:30</option>
+                <option value="19:00">19:00</option>
+                <option value="19:30">19:30</option>
+                <option value="20:00">20:00</option>
+              </select>
+              <label for="time">Время</label>
+            </div>
+          </div>
+          
+          <div class="service-categories">
+            <h3>Выберите категорию услуги</h3>
+            <div class="categories-grid">
+              <label class="category-checkbox">
+                <input type="checkbox" name="categories" value="all">
+                <span class="checkmark"></span>
+                <span class="category-text">Все</span>
+              </label>
+              
+              <label class="category-checkbox">
+                <input type="checkbox" name="categories" value="people">
+                <span class="checkmark"></span>
+                <span class="category-text">Люди</span>
+              </label>
+              
+              <label class="category-checkbox">
+                <input type="checkbox" name="categories" value="sales">
+                <span class="checkmark"></span>
+                <span class="category-text">Продажи</span>
+              </label>
+              
+              <label class="category-checkbox">
+                <input type="checkbox" name="categories" value="quality">
+                <span class="checkmark"></span>
+                <span class="category-text">Качество</span>
+              </label>
+              
+              <label class="category-checkbox">
+                <input type="checkbox" name="categories" value="service">
+                <span class="checkmark"></span>
+                <span class="category-text">Сервис</span>
+              </label>
+              
+              <label class="category-checkbox">
+                <input type="checkbox" name="categories" value="leaders">
+                <span class="checkmark"></span>
+                <span class="category-text">Руководители</span>
+              </label>
+              
+              <label class="category-checkbox">
+                <input type="checkbox" name="categories" value="unique">
+                <span class="checkmark"></span>
+                <span class="category-text">Уникальные</span>
+              </label>
+            </div>
+          </div>
+          
+          <div class="consent-section">
+            <label class="consent-checkbox">
+              <input type="checkbox" name="consent" required>
+              <span class="checkmark"></span>
+              <span class="consent-text">
+                Даю согласие на обработку персональных данных согласно 
+                <a href="#" class="privacy-link">Политике конфиденциальности</a>
+              </span>
+            </label>
+          </div>
+          
+          <button type="submit" class="submit-btn">Отправить заявку</button>
+        </form>
+      </div>
+    </div>
+    
     <section id="results" class="main-section"><h2>Результаты</h2><p>Кратко о достижениях, реализованных проектах и цифрах.</p></section>
     <section id="advantages" class="main-section"><h2>Преимущества</h2><p>Почему выбирают нас, наши сильные стороны.</p></section>
     <section id="team" class="main-section"><h2>Команда</h2><p>Кратко о ключевых сотрудниках и экспертах.</p></section>
@@ -572,6 +698,8 @@
     
     
     
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="script.js"></script>
     <script src="https://kit.fontawesome.com/44c3fc4ee4.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>

@@ -3,6 +3,104 @@ document.addEventListener('DOMContentLoaded', () => {
   const container = document.querySelector('.container');
   const sloganBlock2 = document.querySelector('.main-slogan-block2');
 
+  // === Модальное окно заявки ===
+  const modal = document.getElementById('requestModal');
+  const modalClose = document.getElementById('modalClose');
+  const requestForm = document.getElementById('requestForm');
+  const serviceCardContact = document.querySelector('.service-card-contact');
+  
+  // Находим все кнопки "Оставить заявку" (в шапке и в карточке)
+  const headerChooseButton = document.querySelector('.header-actions .choose');
+  const burgerChooseButton = document.querySelector('.burger-header-actions .choose');
+  
+  // Функция открытия модального окна
+  function openModal() {
+    if (modal) {
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+  }
+  
+  // Открытие модального окна при клике на карточку "Оставить заявку"
+  if (serviceCardContact) {
+    serviceCardContact.addEventListener('click', openModal);
+  }
+  
+  // Открытие модального окна при клике на кнопку в шапке
+  if (headerChooseButton) {
+    headerChooseButton.addEventListener('click', openModal);
+  }
+  
+  // Открытие модального окна при клике на кнопку в бургер-меню
+  if (burgerChooseButton) {
+    burgerChooseButton.addEventListener('click', openModal);
+  }
+  
+  // Тестовая функция для проверки модального окна
+  window.testModal = function() {
+    if (modal) {
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    } else {
+      console.error('Модальное окно не найдено в тесте!');
+    }
+  };
+  
+  // Закрытие модального окна при клике на крестик
+  if (modalClose) {
+    modalClose.addEventListener('click', () => {
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+    });
+  }
+  
+  // Закрытие модального окна при клике на фон
+  if (modal) {
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    });
+  }
+  
+  // Закрытие модального окна при нажатии Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.classList.contains('active')) {
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+  });
+  
+  // Обработка отправки формы
+  if (requestForm) {
+    requestForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const formData = new FormData(requestForm);
+      const data = {
+        name: formData.get('name'),
+        company: formData.get('company'),
+        phone: formData.get('phone'),
+        date: formData.get('date'),
+        time: formData.get('time'),
+        categories: formData.getAll('categories'),
+        consent: formData.get('consent')
+      };
+      
+      try {
+        await sendToTelegram(data);
+        showSuccessMessage();
+        requestForm.reset();
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+      } catch (error) {
+        console.error('Ошибка отправки:', error);
+        showErrorMessage();
+      }
+    });
+  }
+
   // Ждем завершения всех анимаций лоадера (2.4 секунды)
   setTimeout(() => {
     // Сначала начинаем исчезать элементы лоадера
@@ -880,17 +978,111 @@ document.addEventListener('DOMContentLoaded', function () {
   observer.observe(section);
 })();
 
-gsap.registerPlugin(ScrollTrigger);
+// GSAP ScrollTrigger (только если GSAP загружен)
+if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
 
-const fadeReveal = document.querySelector('.fade-reveal-section');
-if (fadeReveal) {
-  ScrollTrigger.create({
-    trigger: ".result-section",
-    start: "bottom center",
-    end: "+=400",
-    toggleClass: {targets: fadeReveal, className: 'active'},
-    scrub: true,
-    pin: false,
-    anticipatePin: 1,
+  const fadeReveal = document.querySelector('.fade-reveal-section');
+  if (fadeReveal) {
+    ScrollTrigger.create({
+      trigger: ".result-section",
+      start: "bottom center",
+      end: "+=400",
+      toggleClass: {targets: fadeReveal, className: 'active'},
+      scrub: true,
+      pin: false,
+      anticipatePin: 1,
+    });
+  }
+}
+
+// Функция отправки данных в Telegram
+async function sendToTelegram(data) {
+  // Замените на ваш токен бота и ID чата
+  const BOT_TOKEN = 'YOUR_BOT_TOKEN';
+  const CHAT_ID = 'YOUR_CHAT_ID';
+  
+  const message = `
+🆕 Новая заявка с сайта TENET
+
+👤 Имя: ${data.name}
+🏢 Компания: ${data.company}
+📞 Телефон: ${data.phone}
+📅 Дата: ${data.date}
+⏰ Время: ${data.time}
+📋 Категории: ${data.categories.join(', ') || 'Не выбрано'}
+✅ Согласие: ${data.consent ? 'Да' : 'Нет'}
+
+🕐 Время отправки: ${new Date().toLocaleString('ru-RU')}
+  `.trim();
+  
+  const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
+  
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      chat_id: CHAT_ID,
+      text: message,
+      parse_mode: 'HTML'
+    })
   });
+  
+  if (!response.ok) {
+    throw new Error('Ошибка отправки в Telegram');
+  }
+  
+  return response.json();
+}
+
+// Показ сообщения об успешной отправке
+function showSuccessMessage() {
+  const message = document.createElement('div');
+  message.className = 'success-message';
+  message.innerHTML = `
+    <div class="success-content">
+      <h3>✅ Заявка отправлена!</h3>
+      <p>Мы свяжемся с вами в ближайшее время.</p>
+    </div>
+  `;
+  
+  document.body.appendChild(message);
+  
+  setTimeout(() => {
+    message.classList.add('show');
+  }, 100);
+  
+  setTimeout(() => {
+    message.classList.remove('show');
+    setTimeout(() => {
+      document.body.removeChild(message);
+    }, 300);
+  }, 3000);
+}
+
+// Показ сообщения об ошибке
+function showErrorMessage() {
+  const message = document.createElement('div');
+  message.className = 'error-message';
+  message.innerHTML = `
+    <div class="error-content">
+      <h3>❌ Ошибка отправки</h3>
+      <p>Попробуйте еще раз или свяжитесь с нами по телефону.</p>
+    </div>
+  `;
+  
+  document.body.appendChild(message);
+  
+  setTimeout(() => {
+    message.classList.add('show');
+  }, 100);
+  
+  setTimeout(() => {
+    message.classList.remove('show');
+    setTimeout(() => {
+      document.body.removeChild(message);
+    }, 300);
+  }, 3000);
 }
