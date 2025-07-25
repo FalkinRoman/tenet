@@ -879,3 +879,18 @@ document.addEventListener('DOMContentLoaded', function () {
   }, { threshold: 0.3 });
   observer.observe(section);
 })();
+
+gsap.registerPlugin(ScrollTrigger);
+
+const fadeReveal = document.querySelector('.fade-reveal-section');
+if (fadeReveal) {
+  ScrollTrigger.create({
+    trigger: ".result-section",
+    start: "bottom center",
+    end: "+=400",
+    toggleClass: {targets: fadeReveal, className: 'active'},
+    scrub: true,
+    pin: false,
+    anticipatePin: 1,
+  });
+}
