@@ -4137,20 +4137,39 @@ html {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #f5f5f5;
-  border-radius: 12px;
-  padding: 40px 20px;
-  min-height: 180px;
+  background: transparent;
+  border-radius: 30px;
+  padding: 20px;
   width: 100%;
+  aspect-ratio: 1;
   transition: all 0.3s cubic-bezier(.4,0,.2,1);
   cursor: pointer;
   position: relative;
   overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
 
 .service-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+  transform: scale(1.02);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+  background: rgba(255,255,255,0.1);
+}
+
+.service-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.service-card:hover::before {
+  opacity: 1;
 }
 
 .service-card-icon {
@@ -4160,12 +4179,14 @@ html {
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  background: transparent;
 }
 
 .service-card-icon img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
+  display: block;
 }
 
 .service-card-text {
@@ -4182,13 +4203,14 @@ html {
 .service-card-contact {
   background: #fff !important;
   border: 2px solid #111;
-  border-radius: 12px;
+  border-radius: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 40px 20px;
+  padding: 20px;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(.4,0,.2,1);
+  aspect-ratio: 1;
 }
 
 .service-card-contact:hover {
@@ -4202,13 +4224,14 @@ html {
 
 .service-card-contact-text {
   font-family: 'Montserrat', Arial, sans-serif;
-  font-size: 1.1rem;
+  font-size: 1.8rem;
   font-weight: 700;
   color: #111;
   text-align: center;
   letter-spacing: 0.02em;
-  line-height: 1.2;
+  line-height: 1.1;
   transition: color 0.3s ease;
+  white-space: pre-line;
 }
 
 /* Адаптив для планшетов */
@@ -4221,16 +4244,17 @@ html {
     gap: 16px;
   }
   .service-card {
-    padding: 35px 15px;
-    min-height: 160px;
+    padding: 15px;
   }
   .service-card-icon {
     width: 90px;
     height: 90px;
   }
-  .service-card-text,
-  .service-card-contact-text {
+  .service-card-text {
     font-size: 1rem;
+  }
+  .service-card-contact-text {
+    font-size: 1.5rem;
   }
 }
 
@@ -4252,16 +4276,17 @@ html {
     gap: 14px;
   }
   .service-card {
-    padding: 30px 12px;
-    min-height: 140px;
+    padding: 12px;
   }
   .service-card-icon {
     width: 80px;
     height: 80px;
   }
-  .service-card-text,
-  .service-card-contact-text {
+  .service-card-text {
     font-size: 0.9rem;
+  }
+  .service-card-contact-text {
+    font-size: 1.3rem;
   }
 }
 
@@ -4286,16 +4311,17 @@ html {
     gap: 12px;
   }
   .service-card {
-    padding: 25px 8px;
-    min-height: 120px;
+    padding: 8px;
   }
   .service-card-icon {
     width: 70px;
     height: 70px;
   }
-  .service-card-text,
-  .service-card-contact-text {
+  .service-card-text {
     font-size: 0.8rem;
+  }
+  .service-card-contact-text {
+    font-size: 1.1rem;
   }
 }
 
@@ -4312,16 +4338,17 @@ html {
     gap: 10px;
   }
   .service-card {
-    padding: 20px 6px;
-    min-height: 100px;
+    padding: 6px;
   }
   .service-card-icon {
     width: 60px;
     height: 60px;
   }
-  .service-card-text,
-  .service-card-contact-text {
+  .service-card-text {
     font-size: 0.7rem;
+  }
+  .service-card-contact-text {
+    font-size: 0.95rem;
   }
 }
 
@@ -4331,12 +4358,12 @@ html {
     grid-template-rows: repeat(8, auto);
     gap: 20px;
   }
-  .service-card {
-    min-height: 90px;
-  }
   .service-card-icon {
     width: 50px;
     height: 50px;
+  }
+  .service-card-contact-text {
+    font-size: 0.85rem;
   }
 }
 
