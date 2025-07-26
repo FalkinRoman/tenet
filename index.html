@@ -460,66 +460,66 @@
       
       <div class="services-start-grid">
         <div class="service-card-wrapper">
-          <div class="service-card" style="background-image: url('assets/images/people.png'); background-size: cover; background-position: center; background-repeat: no-repeat;">
-            <div class="service-card-icon">
-              <!-- Картинка теперь фон карточки -->
+            <div class="service-card" data-category="people" style="background-image: url('assets/images/people.png'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+                <div class="service-card-icon">
+                    <!-- Картинка теперь фон карточки -->
+                </div>
             </div>
-          </div>
-          <div class="service-card-text">ЛЮДИ</div>
+            <div class="service-card-text">ЛЮДИ</div>
         </div>
         
         <div class="service-card-wrapper">
-          <div class="service-card" style="background-image: url('assets/images/quality.png'); background-size: cover; background-position: center; background-repeat: no-repeat;">
-            <div class="service-card-icon">
-              <!-- Добавить: assets/images/quality.png -->
+            <div class="service-card" data-category="quality" style="background-image: url('assets/images/quality.png'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+                <div class="service-card-icon">
+                    <!-- Добавить: assets/images/quality.png -->
+                </div>
             </div>
-          </div>
-          <div class="service-card-text">КАЧЕСТВО</div>
+            <div class="service-card-text">КАЧЕСТВО</div>
         </div>
         
         <div class="service-card-wrapper">
-          <div class="service-card" style="background-image: url('assets/images/bizness-prosses.png'); background-size: cover; background-position: center; background-repeat: no-repeat;">
-            <div class="service-card-icon">
-              <!-- Добавить: assets/images/business-processes.png -->
+            <div class="service-card" data-category="business" style="background-image: url('assets/images/bizness-prosses.png'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+                <div class="service-card-icon">
+                    <!-- Добавить: assets/images/business-processes.png -->
+                </div>
             </div>
-          </div>
-          <div class="service-card-text">БИЗНЕС ПРОЦЕССЫ</div>
+            <div class="service-card-text">БИЗНЕС ПРОЦЕССЫ</div>
         </div>
         
         <div class="service-card-wrapper">
-          <div class="service-card" style="background-image: url('assets/images/sales.png'); background-size: cover; background-position: center; background-repeat: no-repeat;">
-            <div class="service-card-icon">
-              <!-- Добавить: assets/images/sales.png -->
+            <div class="service-card" data-category="sales" style="background-image: url('assets/images/sales.png'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+                <div class="service-card-icon">
+                    <!-- Добавить: assets/images/sales.png -->
+                </div>
             </div>
-          </div>
-          <div class="service-card-text">ПРОДАЖИ</div>
+            <div class="service-card-text">ПРОДАЖИ</div>
         </div>
         
         <div class="service-card-wrapper">
-          <div class="service-card" style="background-image: url('assets/images/servisses.png'); background-size: cover; background-position: center; background-repeat: no-repeat;">
-            <div class="service-card-icon">
-              <!-- Добавить: assets/images/service.png -->
+            <div class="service-card" data-category="unique" style="background-image: url('assets/images/unick.png'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+                <div class="service-card-icon">
+                    <!-- Добавить: assets/images/unique-services.png -->
+                </div>
             </div>
-          </div>
-          <div class="service-card-text">СЕРВИС</div>
+            <div class="service-card-text">УНИКАЛЬНЫЕ УСЛУГИ</div>
         </div>
         
         <div class="service-card-wrapper">
-          <div class="service-card" style="background-image: url('assets/images/manadger.png'); background-size: cover; background-position: center; background-repeat: no-repeat;">
-            <div class="service-card-icon">
-              <!-- Добавить: assets/images/leaders.png -->
+            <div class="service-card" data-category="leaders" style="background-image: url('assets/images/manadger.png'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+                <div class="service-card-icon">
+                    <!-- Добавить: assets/images/leaders.png -->
+                </div>
             </div>
-          </div>
-          <div class="service-card-text">РУКОВОДИТЕЛИ</div>
+            <div class="service-card-text">РУКОВОДИТЕЛИ</div>
         </div>
         
         <div class="service-card-wrapper">
-          <div class="service-card" style="background-image: url('assets/images/unick.png'); background-size: cover; background-position: center; background-repeat: no-repeat;">
-            <div class="service-card-icon">
-              <!-- Добавить: assets/images/unique-services.png -->
+            <div class="service-card" data-category="service" style="background-image: url('assets/images/servisses.png'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+                <div class="service-card-icon">
+                    <!-- Добавить: assets/images/service.png -->
+                </div>
             </div>
-          </div>
-          <div class="service-card-text">УНИКАЛЬНЫЕ УСЛУГИ</div>
+            <div class="service-card-text">СЕРВИС</div>
         </div>
         
         <div class="service-card-wrapper">
@@ -532,6 +532,11 @@
     
     <!-- Модальное окно для заявки -->
     <div class="modal-overlay" id="requestModal">
+      <button class="modal-overlay-close" id="modalOverlayClose">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M18 6L6 18M6 6L18 18" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
       <div class="modal-content">
         <div class="modal-header">
           <h2 class="modal-title">Объединяем силы для создания уникальных возможностей</h2>
@@ -654,6 +659,40 @@
           <button type="submit" class="submit-btn">Отправить заявку</button>
         </form>
       </div>
+    </div>
+    
+    <!-- Универсальное модальное окно для категорий -->
+    <div class="category-modal-overlay" id="categoryModal">
+        <button class="modal-overlay-close" id="categoryModalOverlayClose">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M18 6L6 18M6 6L18 18" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </button>
+        <div class="category-modal-content">
+            <div class="category-modal-body">
+                <div class="category-quote-section">
+                    <div class="category-quote-text" id="categoryQuoteText"></div>
+                    <div class="category-quote-author" id="categoryQuoteAuthor"></div>
+                </div>
+                
+                <div class="category-modal-main-grid">
+                    <div class="category-modal-left">
+                        <div class="category-image-wrapper">
+                            <img class="category-image" id="categoryImage" src="" alt="Category Image">
+                        </div>
+                        <div class="category-name" id="categoryName"></div>
+                        <div class="category-tabs" id="categoryTabs"></div>
+                    </div>
+                    
+                    <div class="category-modal-right">
+                        <div class="category-accordions-container" id="categoryAccordions"></div>
+                        <div class="category-request-section">
+                            <button class="submit-btn" onclick="openRequestModalFromCategory()">Оставить заявку</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     
     <section id="results" class="main-section"><h2>Результаты</h2><p>Кратко о достижениях, реализованных проектах и цифрах.</p></section>

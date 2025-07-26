@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // === Модальное окно заявки ===
   const modal = document.getElementById('requestModal');
   const modalClose = document.getElementById('modalClose');
+  const modalOverlayClose = document.getElementById('modalOverlayClose');
   const requestForm = document.getElementById('requestForm');
   const serviceCardContact = document.querySelector('.service-card-contact');
   
@@ -18,6 +19,14 @@ document.addEventListener('DOMContentLoaded', () => {
     if (modal) {
       modal.classList.add('active');
       document.body.style.overflow = 'hidden';
+    }
+  }
+  
+  // Функция закрытия модального окна
+  function closeModal() {
+    if (modal) {
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
     }
   }
   
@@ -46,20 +55,21 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
   
-  // Закрытие модального окна при клике на крестик
+  // Закрытие модального окна при клике на крестик в модальном окне
   if (modalClose) {
-    modalClose.addEventListener('click', () => {
-      modal.classList.remove('active');
-      document.body.style.overflow = '';
-    });
+    modalClose.addEventListener('click', closeModal);
+  }
+  
+  // Закрытие модального окна при клике на крестик на подложке
+  if (modalOverlayClose) {
+    modalOverlayClose.addEventListener('click', closeModal);
   }
   
   // Закрытие модального окна при клике на фон
   if (modal) {
     modal.addEventListener('click', (e) => {
       if (e.target === modal) {
-        modal.classList.remove('active');
-        document.body.style.overflow = '';
+        closeModal();
       }
     });
   }
@@ -67,8 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Закрытие модального окна при нажатии Escape
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && modal.classList.contains('active')) {
-      modal.classList.remove('active');
-      document.body.style.overflow = '';
+      closeModal();
     }
   });
   
@@ -1085,4 +1094,464 @@ function showErrorMessage() {
       document.body.removeChild(message);
     }, 300);
   }, 3000);
+}
+
+// === Универсальное модальное окно для категорий ===
+let categoriesData = {
+  "people": {
+    "name": "Люди",
+    "image": "assets/images/people.png",
+    "quotes": [
+      { "text": "Качество работы людей — это основа успеха любой организации.", "author": "Питер Друкер" },
+      { "text": "Успех бизнеса зависит от качества людей, работающих в нем.", "author": "Джек Уэлч" },
+      { "text": "Уделяйте внимание своим сотрудникам, и они будут уделять внимание вашим Клиентам.", "author": "Ричард Брэнсон" },
+      { "text": "Собирая команду, вы должны помнить: самые большие активы Компании — это люди.", "author": "Генри Форд" },
+      { "text": "Качество вашей команды определяет качество вашего бизнеса.", "author": "Том Питерс" },
+      { "text": "Самые важные решения в бизнесе — это не те, что касаются стратегии или финансирования. Это те, что касаются людей.", "author": "Рэй Далио" },
+      { "text": "Ваши люди — это ваш самый ценный актив. Инвестируйте в них.", "author": "Майкл Делл" },
+      { "text": "Никто из нас не так умен, как все мы вместе.", "author": "Кен Бланшар" }
+    ],
+    "accordions": [
+      {
+        "title": "РАЗБОРЫ ПРОБЛЕМАТИК С КЛИЕНТАМИ НА РЕАЛЬНЫХ КЕЙСАХ",
+        "content": "Привлекаем к команде и к решению реального времени, помогаем разбирать сложные ситуации с клиентами. Показываем команде практические методики работы. Команды получают поддержку и мотивацию на результат."
+      },
+      {
+        "title": "ОБУЧЕНИЕ — ФОРМИРОВАНИЕ НАВЫКОВ ПРОДАЖ",
+        "content": "Разрабатываем для вас 51 навык, 41 авторское обучение и 39 авторских компетенций. Сотрудники проходят практическое обучение по собственным современным технологиям работы с клиентом, чтобы получать максимальный результат и увеличивать прибыль компании."
+      },
+      {
+        "title": "ОБУЧЕНИЕ ТЕХНОЛОГИЯМ СЕРВИСА",
+        "content": "Сотрудники проходят практическое обучение по собственным современным технологиям обслуживания, чтобы ваши сотрудники были уверены в достижении максимального результата и увеличении прибыли компании. Это способствует повышению их профессионализма и уверенности."
+      },
+      {
+        "title": "СОПРОВОЖДЕНИЕ ПОСЛЕ ОБУЧЕНИЯ",
+        "content": "Предоставляем поддержку сотрудникам после завершения обучения, помогаем внедрять новые знания на практике. Это гарантирует устойчивые результаты и закрепление полученных навыков."
+      },
+      {
+        "title": "ПОДБОР ПРОФЕССИОНАЛОВ",
+        "content": "Знаем 80% рынка недвижимости и на базе анализа ваших потребностей подбираем профессионалов, которые окажут наибольшее влияние в вашу команду. Доверьтесь нашему опыту — мы гарантируем результат, который превзойдет ваши ожидания."
+      },
+      {
+        "title": "ОПРОСЫ: ПЕРСОНАЛ, РУКОВОДСТВО",
+        "content": "Проводим опросы удовлетворенности, лояльности сотрудников, чтобы получить ценные инсайты и восприятие вашего бизнеса со всех сторон. Результаты позволяют принимать обоснованные решения для улучшения сервиса."
+      },
+      {
+        "title": "РАЗБОРЫ ПРОБЛЕМАТИК С МЕНЕДЖЕРАМИ НА РЕАЛЬНЫХ КЕЙСАХ",
+        "content": "Привлекаем к команде руководителей и к решению реального времени, помогаем разбирать сложные ситуации с менеджерами, инструктируем и работаем на результат. Команды руководителей получают поддержку и мотивацию на результат."
+      },
+      {
+        "title": "ОБУЧЕНИЕ — ФОРМИРОВАНИЕ УПРАВЛЕНЧЕСКИХ НАВЫКОВ",
+        "content": "Наши обучения по формированию управленческих навыков позволяют вашей команде развивать ключевые навыки менеджмента для эффективного управления проектами и коллективом. Мы применяем современные методики и практические инструменты, чтобы развивать навыки для успешной работы в будущем. Создаем успешные управленческие команды, способные достигать амбициозных целей."
+      },
+      {
+        "title": "АССЕССМЕНТ ПЕРСОНАЛА",
+        "content": "Комплексный и глубокий анализ компетенций сотрудников, который позволяет выявить их сильные стороны и зоны для развития. Мы используем современные методики и инструменты, обеспечивая точность и объективность оценки. Позволяет найти, чтобы оптимизировать кадровые ресурсы вашей компании и создать команду, способную достигать выдающихся результатов."
+      },
+      {
+        "title": "ИНДИВИДУАЛЬНЫЕ ПЛАНЫ РАЗВИТИЯ",
+        "content": "Создаем персонализированные планы развития для сотрудников, учитывая их сильные стороны и области для улучшения. Это способствует росту их компетенций и повышению эффективности команды."
+      },
+      {
+        "title": "МЕНТОРСТВО ПЕРСОНАЛА",
+        "content": "Услуга находится в разработке, если вам это интересно — свяжитесь с нами любым из телеграм. Мы предоставляем наставников для персонала, которые помогают развивать навыки и повышать эффективность работы команды. Наставники создают сильных специалистов внутри вашей команды."
+      },
+      {
+        "title": "МНОГОЕ ДРУГОЕ",
+        "content": "Мы предлагаем широкий спектр дополнительных услуг: тренинги, коучинг, оценка персонала, внедрение новых инструментов и многое другое. Свяжитесь с нами, чтобы узнать больше о том, как мы можем помочь вашему бизнесу!"
+      }
+    ]
+  },
+  "quality": {
+    "name": "Качество",
+    "image": "assets/images/quality_big.png",
+    "quotes": [
+      { "text": "Качество — это не акт, это привычка.", "author": "Аристотель" },
+      { "text": "Качество — это делать что-то правильно, даже когда никто не смотрит.", "author": "Генри Форд" },
+      { "text": "Качество — это не то, что вы делаете, а то, кем вы являетесь.", "author": "Джим Рон" }
+    ],
+    "accordions": [
+      {
+        "title": "СТАНДАРТЫ КАЧЕСТВА",
+        "content": "Разрабатываем и внедряем стандарты качества для всех процессов в вашей компании. Это обеспечивает единообразие и высокий уровень обслуживания клиентов."
+      },
+      {
+        "title": "КОНТРОЛЬ КАЧЕСТВА",
+        "content": "Внедряем системы контроля качества, которые позволяют отслеживать и улучшать все аспекты работы с клиентами."
+      },
+      {
+        "title": "ОБУЧЕНИЕ КАЧЕСТВУ",
+        "content": "Проводим обучение персонала принципам качества и стандартам обслуживания для обеспечения высокого уровня сервиса."
+      }
+    ]
+  },
+  "business": {
+    "name": "Бизнес-процессы",
+    "image": "assets/images/business_big.png",
+    "quotes": [
+      { "text": "Процессы — это то, что превращает хаос в порядок.", "author": "Питер Друкер" },
+      { "text": "Хорошие процессы создают хорошие результаты.", "author": "Том Питерс" },
+      { "text": "Оптимизация процессов — ключ к успеху бизнеса.", "author": "Майкл Портер" }
+    ],
+    "accordions": [
+      {
+        "title": "АНАЛИЗ ПРОЦЕССОВ",
+        "content": "Проводим детальный анализ существующих бизнес-процессов, выявляем узкие места и возможности для оптимизации."
+      },
+      {
+        "title": "ОПТИМИЗАЦИЯ ПРОЦЕССОВ",
+        "content": "Разрабатываем и внедряем оптимизированные бизнес-процессы, которые повышают эффективность и снижают затраты."
+      },
+      {
+        "title": "АВТОМАТИЗАЦИЯ",
+        "content": "Внедряем современные инструменты автоматизации для повышения эффективности бизнес-процессов."
+      }
+    ]
+  },
+  "sales": {
+    "name": "Продажи",
+    "image": "assets/images/sales_big.png",
+    "quotes": [
+      { "text": "Продажи — это не просто транзакция, это отношения.", "author": "Дейл Карнеги" },
+      { "text": "Лучшие продавцы — это лучшие слушатели.", "author": "Брайан Трейси" },
+      { "text": "Продажи — это решение проблем клиента.", "author": "Зиг Зиглар" }
+    ],
+    "accordions": [
+      {
+        "title": "ТЕХНИКИ ПРОДАЖ",
+        "content": "Обучаем современным техникам продаж, которые помогают закрывать больше сделок и увеличивать выручку."
+      },
+      {
+        "title": "СКРИПТЫ ПРОДАЖ",
+        "content": "Разрабатываем эффективные скрипты продаж, адаптированные под вашу отрасль и целевую аудиторию."
+      },
+      {
+        "title": "УПРАВЛЕНИЕ ПРОДАЖАМИ",
+        "content": "Внедряем системы управления продажами для отслеживания эффективности и планирования."
+      }
+    ]
+  },
+  "unique": {
+    "name": "Уникальные",
+    "image": "assets/images/unique_big.png",
+    "quotes": [
+      { "text": "Уникальность — это ваше конкурентное преимущество.", "author": "Майкл Портер" },
+      { "text": "Будьте уникальными, будьте незаменимыми.", "author": "Сет Годин" },
+      { "text": "Уникальность создает ценность.", "author": "Питер Тиль" }
+    ],
+    "accordions": [
+      {
+        "title": "УНИКАЛЬНЫЕ РЕШЕНИЯ",
+        "content": "Разрабатываем уникальные решения, адаптированные под специфику вашего бизнеса и рынка."
+      },
+      {
+        "title": "ИННОВАЦИИ",
+        "content": "Внедряем инновационные подходы и технологии для создания конкурентных преимуществ."
+      },
+      {
+        "title": "ИНДИВИДУАЛЬНЫЙ ПОДХОД",
+        "content": "Создаем индивидуальные стратегии развития, учитывающие особенности вашей компании."
+      }
+    ]
+  },
+  "leaders": {
+    "name": "Руководители",
+    "image": "assets/images/leaders_big.png",
+    "quotes": [
+      { "text": "Лидерство — это влияние, а не власть.", "author": "Джон Максвелл" },
+      { "text": "Хорошие лидеры создают последователей, великие лидеры создают лидеров.", "author": "Роберт Нойс" },
+      { "text": "Лидерство — это искусство заставить людей делать то, что нужно.", "author": "Дуайт Эйзенхауэр" }
+    ],
+    "accordions": [
+      {
+        "title": "РАЗВИТИЕ ЛИДЕРСТВА",
+        "content": "Развиваем лидерские качества у руководителей, помогаем стать эффективными лидерами команды."
+      },
+      {
+        "title": "УПРАВЛЕНЧЕСКИЕ НАВЫКИ",
+        "content": "Обучаем современным управленческим навыкам, необходимым для эффективного руководства."
+      },
+      {
+        "title": "СТРАТЕГИЧЕСКОЕ МЫШЛЕНИЕ",
+        "content": "Развиваем стратегическое мышление у руководителей для принятия правильных бизнес-решений."
+      }
+    ]
+  },
+  "service": {
+    "name": "Сервис",
+    "image": "assets/images/service_big.png",
+    "quotes": [
+      { "text": "Сервис — это не то, что вы делаете, а то, как вы это делаете.", "author": "Кен Бланшар" },
+      { "text": "Отличный сервис — лучшая реклама.", "author": "Ричард Брэнсон" },
+      { "text": "Клиент всегда прав, даже когда он неправ.", "author": "Гарри Гордон Селфридж" }
+    ],
+    "accordions": [
+      {
+        "title": "СТАНДАРТЫ СЕРВИСА",
+        "content": "Разрабатываем и внедряем высокие стандарты сервиса для обеспечения удовлетворенности клиентов."
+      },
+      {
+        "title": "ОБУЧЕНИЕ СЕРВИСУ",
+        "content": "Обучаем персонал принципам отличного сервиса и работе с клиентами."
+      },
+      {
+        "title": "ОБРАТНАЯ СВЯЗЬ",
+        "content": "Внедряем системы обратной связи для постоянного улучшения качества сервиса."
+      }
+    ]
+  }
+};
+
+let currentCategory = 'people'; // Default category
+
+// Инициализация модального окна категорий
+function initializeCategoryModal() {
+    const categoryModal = document.getElementById('categoryModal');
+    const categoryModalOverlayClose = document.getElementById('categoryModalOverlayClose');
+    
+    // Закрытие по клику на крестик на оверлее
+    categoryModalOverlayClose.addEventListener('click', closeCategoryModal);
+    
+    // Закрытие по клику на оверлей
+    categoryModal.addEventListener('click', function(e) {
+        if (e.target === categoryModal) {
+            closeCategoryModal();
+        }
+    });
+    
+    // Закрытие по Escape
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && categoryModal.classList.contains('active')) {
+            closeCategoryModal();
+        }
+    });
+    
+    // Обработчик для кнопки "Оставить заявку" в модалке категорий
+    document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('submit-btn') && e.target.closest('.category-request-section')) {
+            openRequestModalFromCategory();
+        }
+    });
+    
+    // Обработчики для карточек услуг
+    document.addEventListener('click', function(e) {
+        if (e.target.closest('.service-card') && !e.target.closest('.service-card-contact')) {
+            const card = e.target.closest('.service-card');
+            const category = card.getAttribute('data-category');
+            if (category) {
+                openCategoryModal(category);
+            }
+        }
+    });
+    
+    // Обработчики для табов категорий
+    document.addEventListener('click', function(e) {
+        if (e.target.closest('.category-tab')) {
+            const tab = e.target.closest('.category-tab');
+            const category = tab.getAttribute('data-category');
+            if (category) {
+                displayCategory(category);
+            }
+        }
+    });
+    
+    // Инициализация с первой категорией
+    displayCategory('people');
+}
+
+// Получаем случайную цитату для категории
+function getRandomQuote(category) {
+  if (categoriesData[category] && categoriesData[category].quotes && categoriesData[category].quotes.length > 0) {
+    const randomIndex = Math.floor(Math.random() * categoriesData[category].quotes.length);
+    return categoriesData[category].quotes[randomIndex];
+  }
+  return null;
+}
+
+// Отображаем цитату
+function displayQuote(category) {
+  const quoteText = document.querySelector('.category-quote-text');
+  const quoteAuthor = document.querySelector('.category-quote-author');
+  
+  if (quoteText && quoteAuthor) {
+    const quote = getRandomQuote(category);
+    if (quote) {
+      quoteText.textContent = quote.text;
+      quoteAuthor.textContent = quote.author;
+    } else {
+      quoteText.textContent = '';
+      quoteAuthor.textContent = '';
+    }
+  }
+}
+
+// Отображаем аккордеоны
+function displayAccordions(category) {
+  const accordionsContainer = document.querySelector('.category-accordions-container');
+  
+  if (accordionsContainer && categoriesData[category] && categoriesData[category].accordions) {
+    accordionsContainer.innerHTML = '';
+    
+    categoriesData[category].accordions.forEach((accordion, index) => {
+      const accordionElement = document.createElement('div');
+      accordionElement.className = 'category-accordion';
+      accordionElement.innerHTML = `
+        <div class="category-accordion-header">
+          <div class="category-accordion-title">${accordion.title}</div>
+          <div class="category-accordion-toggle"></div>
+        </div>
+        <div class="category-accordion-content">
+          <div class="category-accordion-text">${accordion.content}</div>
+        </div>
+      `;
+      
+      // Добавляем обработчик для аккордеона
+      const header = accordionElement.querySelector('.category-accordion-header');
+      const content = accordionElement.querySelector('.category-accordion-content');
+      
+      header.addEventListener('click', () => {
+        // Закрываем все остальные аккордеоны
+        document.querySelectorAll('.category-accordion').forEach(acc => {
+          if (acc !== accordionElement) {
+            acc.classList.remove('active');
+          }
+        });
+        
+        // Переключаем текущий аккордеон
+        accordionElement.classList.toggle('active');
+      });
+      
+      accordionsContainer.appendChild(accordionElement);
+    });
+  }
+}
+
+// Отображаем категорию (обновляем весь контент)
+function displayCategory(category) {
+  if (!categoriesData[category]) return;
+  
+  currentCategory = category;
+  
+  // Обновляем название категории
+  const categoryName = document.querySelector('.category-name');
+  if (categoryName) {
+    categoryName.textContent = categoriesData[category].name || '';
+  }
+  
+  // Обновляем изображение
+  const categoryImage = document.querySelector('.category-image');
+  if (categoryImage && categoriesData[category].image) {
+    categoryImage.src = categoriesData[category].image;
+    categoryImage.alt = categoriesData[category].name || '';
+  }
+  
+  // Отображаем цитату
+  displayQuote(category);
+  
+  // Отображаем аккордеоны
+  displayAccordions(category);
+  
+  // Обновляем активную вкладку
+  document.querySelectorAll('.category-tab').forEach(tab => {
+    tab.classList.remove('active');
+  });
+  
+  const activeTab = document.querySelector(`.category-tab[data-category="${category}"]`);
+  if (activeTab) {
+    activeTab.classList.add('active');
+  }
+  renderCategoryTabs();
+}
+
+// Открываем модальное окно категории
+function openCategoryModal(category = 'people') {
+  const categoryModal = document.getElementById('categoryModal');
+  
+  if (categoryModal) {
+    categoryModal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    
+    // Отображаем контент для выбранной категории
+    if (categoriesData[category]) {
+      displayCategory(category);
+    }
+  }
+}
+
+// Закрываем модальное окно категории
+function closeCategoryModal() {
+  const categoryModal = document.getElementById('categoryModal');
+  
+  if (categoryModal) {
+    categoryModal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+}
+
+// Рендер табов категорий
+function renderCategoryTabs() {
+  const tabsContainer = document.querySelector('.category-tabs');
+  if (!tabsContainer) return;
+  tabsContainer.innerHTML = '';
+  const tabList = [
+    { key: 'people', name: 'Люди', icon: 'assets/images/people.png' },
+    { key: 'quality', name: 'Качество', icon: 'assets/images/quality.png' },
+    { key: 'business', name: 'Бизнес-процессы', icon: 'assets/images/bizness-prosses.png' },
+    { key: 'sales', name: 'Продажи', icon: 'assets/images/sales.png' },
+    { key: 'unique', name: 'Уникальные', icon: 'assets/images/unick.png' },
+    { key: 'leaders', name: 'Руководители', icon: 'assets/images/manadger.png' },
+    { key: 'service', name: 'Сервис', icon: 'assets/images/servisses.png' }
+  ];
+  tabList.forEach(tab => {
+    const tabDiv = document.createElement('div');
+    tabDiv.className = 'category-tab';
+    tabDiv.dataset.category = tab.key;
+    if (tab.key === currentCategory) tabDiv.classList.add('active');
+    tabDiv.innerHTML = `
+      <div class="category-tab-icon"><img src="${tab.icon}" alt="${tab.name}"></div>
+      <div class="category-tab-name">${tab.name}</div>
+    `;
+    tabDiv.addEventListener('click', () => {
+      displayCategory(tab.key);
+    });
+    tabsContainer.appendChild(tabDiv);
+  });
+}
+
+// Инициализируем модалку сразу
+initializeCategoryModal();
+renderCategoryTabs();
+
+function openRequestModalFromCategory() {
+    closeCategoryModal();
+    setTimeout(() => {
+        openModal();
+        // Предварительно выбираем категорию в форме
+        setTimeout(() => {
+            const categoryCheckboxes = document.querySelectorAll('.category-checkbox input[type="checkbox"]');
+            categoryCheckboxes.forEach(checkbox => {
+                checkbox.checked = false;
+                checkbox.dispatchEvent(new Event('change'));
+            });
+            
+            const categoryMapping = {
+                'people': 'Люди',
+                'quality': 'Качество', 
+                'business': 'Бизнес-процессы',
+                'sales': 'Продажи',
+                'unique': 'Уникальные',
+                'leaders': 'Руководители',
+                'service': 'Сервис'
+            };
+            
+            const targetCategory = categoryMapping[currentCategory];
+            if (targetCategory) {
+                const targetCheckbox = document.querySelector(`input[value="${targetCategory}"]`);
+                if (targetCheckbox) {
+                    targetCheckbox.checked = true;
+                    targetCheckbox.dispatchEvent(new Event('change'));
+                }
+            }
+        }, 100);
+    }, 300);
 }
