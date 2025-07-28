@@ -5788,7 +5788,7 @@ html {
 }
 
 .category-accordion-header {
-  padding: 0 0 12px 0;
+  padding: 12px;
   background: none;
   border-bottom: 2px solid #e0e0e0;
   cursor: pointer;
@@ -5869,7 +5869,7 @@ html {
 }
 
 .category-accordion-text {
-  padding: 16px 0 0 0;
+  padding: 16px 12px;
   font-size: 14px;
   line-height: 1.6;
   color: #555;
@@ -6080,10 +6080,7 @@ html {
     width: 48px;
     height: 48px;
   }
-  .category-tab-icon img {
-    width: 28px;
-    height: 28px;
-  }
+ 
   .category-modal-close {
     top: 10px;
     right: 10px;
@@ -6153,6 +6150,122 @@ html {
   #categoryModalOverlayClose svg {
     width: 16px;
     height: 16px;
+  }
+}
+
+.modal-overlay-close {
+  display: none !important;
+}
+
+.category-modal-overlay-close {
+  display: none !important;
+}
+
+#categoryModalOverlayClose {
+  display: none !important;
+}
+
+/* Белые крестики в модальных окнах */
+.category-modal-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  background: #fff;
+  border: 2px solid #e0e0e0;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 10;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.category-modal-close:hover {
+  border-color: #1a1a1a;
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.category-modal-close svg {
+  width: 16px;
+  height: 16px;
+  fill: #1a1a1a;
+  transition: fill 0.3s ease;
+}
+
+.category-modal-close:hover svg {
+  fill: #000;
+}
+
+.modal-close-white {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  background: #fff;
+  border: 2px solid #e0e0e0;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 10;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.modal-close-white:hover {
+  border-color: #1a1a1a;
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.modal-close-white svg {
+  width: 16px;
+  height: 16px;
+  fill: #1a1a1a;
+  transition: fill 0.3s ease;
+}
+
+.modal-close-white:hover svg {
+  fill: #000;
+}
+
+/* Медиа-запросы для белых крестиков */
+@media (max-width: 900px) {
+  .category-modal-close,
+  .modal-close-white {
+    top: 15px;
+    right: 15px;
+    width: 35px;
+    height: 35px;
+  }
+  
+  .category-modal-close svg,
+  .modal-close-white svg {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+@media (max-width: 600px) {
+  .category-modal-close,
+  .modal-close-white {
+    top: 10px;
+    right: 10px;
+    width: 30px;
+    height: 30px;
+  }
+  
+  .category-modal-close svg,
+  .modal-close-white svg {
+    width: 12px;
+    height: 12px;
   }
 }
 
