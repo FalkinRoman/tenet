@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const burgerChooseButton = document.querySelector('.burger-header-actions .choose');
   
   // Функция открытия модального окна
-  function openModal() {
+  window.openModal = function() {
     if (modal) {
       modal.classList.add('active');
       document.body.style.overflow = 'hidden';
@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   
   // Функция закрытия модального окна
-  function closeModal() {
+  window.closeModal = function() {
     if (modal) {
       modal.classList.remove('active');
       document.body.style.overflow = '';
@@ -72,23 +72,23 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // Закрытие модального окна при клике на крестик в модальном окне
   if (modalClose) {
-    modalClose.addEventListener('click', closeModal);
+    modalClose.addEventListener('click', window.closeModal);
   }
   
   // Закрытие модального окна при клике на белый крестик
   if (modalCloseWhite) {
-    modalCloseWhite.addEventListener('click', closeModal);
+    modalCloseWhite.addEventListener('click', window.closeModal);
   }
   
   // Закрытие модального окна при клике на крестик на подложке
   if (modalOverlayClose) {
-    modalOverlayClose.addEventListener('click', closeModal);
+    modalOverlayClose.addEventListener('click', window.closeModal);
   }
   
   // Закрытие модального окна при нажатии Escape
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && modal.classList.contains('active')) {
-      closeModal();
+      window.closeModal();
     }
   });
   
@@ -1374,10 +1374,10 @@ function renderCategoryTabs() {
 initializeCategoryModal();
 renderCategoryTabs();
 
-function openRequestModalFromCategory() {
+window.openRequestModalFromCategory = function() {
     closeCategoryModal();
     setTimeout(() => {
-        openModal();
+        window.openModal();
         // Предварительно выбираем категорию в форме
         setTimeout(() => {
             const categoryCheckboxes = document.querySelectorAll('.category-checkbox input[type="checkbox"]');
