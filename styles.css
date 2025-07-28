@@ -4116,7 +4116,7 @@ html {
 
 .services-start-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(2, auto);
   gap: 60px 40px;
   width: 95%;
@@ -4269,7 +4269,7 @@ html {
   .services-start-grid {
     width: 98%;
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(4, auto);
+    grid-template-rows: repeat(3, auto);
     gap: 40px 24px;
   }
   .service-card-wrapper {
@@ -4303,7 +4303,7 @@ html {
   .services-start-grid {
     width: 100%;
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(4, auto);
+    grid-template-rows: repeat(3, auto);
     gap: 30px 16px;
     padding: 0 3vw;
   }
@@ -4355,7 +4355,7 @@ html {
 @media (max-width: 360px) {
   .services-start-grid {
     grid-template-columns: 1fr;
-    grid-template-rows: repeat(8, auto);
+    grid-template-rows: repeat(6, auto);
     gap: 20px;
   }
   .service-card-icon {
