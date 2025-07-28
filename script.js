@@ -25,6 +25,15 @@ document.addEventListener('DOMContentLoaded', () => {
     if (modal) {
       modal.classList.add('active');
       document.body.style.overflow = 'hidden';
+      
+      // Очищаем все чекбоксы при открытии модального окна
+      setTimeout(() => {
+        const categoryCheckboxes = document.querySelectorAll('.category-checkbox input[type="checkbox"]');
+        categoryCheckboxes.forEach(checkbox => {
+          checkbox.checked = false;
+          checkbox.dispatchEvent(new Event('change'));
+        });
+      }, 100);
     }
   }
   
@@ -1378,11 +1387,11 @@ function openRequestModalFromCategory() {
             });
             
             const categoryMapping = {
-                'people': 'Люди',
-                'quality': 'Качество', 
-                'sales': 'Продажи',
-                'leaders': 'Руководители',
-                'unique': 'Уникальные'
+                'people': 'people',
+                'quality': 'quality', 
+                'sales': 'sales',
+                'leaders': 'leaders',
+                'unique': 'unique'
             };
             
             const targetCategory = categoryMapping[currentCategory];
