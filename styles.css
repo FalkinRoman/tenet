@@ -4118,9 +4118,9 @@ html {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(2, auto);
-  gap: 60px 40px;
+  gap: 30px 60px;
   width: 95%;
-  max-width: 1600px;
+  max-width: 1200px;
   padding: 0 2.5vw;
   box-sizing: border-box;
   margin: 0 auto;
@@ -4130,7 +4130,7 @@ html {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: 12px;
 }
 
 .service-card {
@@ -4138,8 +4138,8 @@ html {
   align-items: center;
   justify-content: center;
   background: transparent;
-  border-radius: 30px;
-  padding: 20px;
+  border-radius: 20px;
+  padding: 12px;
   width: 100%;
   aspect-ratio: 1;
   transition: all 0.3s cubic-bezier(.4,0,.2,1);
@@ -4173,8 +4173,8 @@ html {
 }
 
 .service-card-icon {
-  width: 100px;
-  height: 100px;
+  width: 65px;
+  height: 65px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -4191,46 +4191,46 @@ html {
 
 .service-card-text {
   font-family: 'Montserrat', Arial, sans-serif;
-  font-size: 1.1rem;
+  font-size: 0.9rem;
   font-weight: 700;
   color: #111;
   text-align: center;
   letter-spacing: 0.02em;
   line-height: 1.2;
-  padding: 0 10px;
+  padding: 0 6px;
 }
 
 .service-card-contact {
   background: #fff !important;
   border: 2px solid #111;
-  border-radius: 30px;
+  border-radius: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px;
+  padding: 12px;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(.4,0,.2,1);
   aspect-ratio: 1;
 }
 
 .service-card-contact:hover {
-  background: #111 !important;
-  color: #fff;
+  transform: scale(1.02);
+  background: #f8f8f8 !important;
 }
 
 .service-card-contact:hover .service-card-contact-text {
-  color: #fff;
+  color: #000;
 }
 
 .service-card-contact-text {
   font-family: 'Montserrat', Arial, sans-serif;
-  font-size: 1.8rem;
+  font-size: 2.4rem;
   font-weight: 700;
   color: #111;
   text-align: center;
   letter-spacing: 0.02em;
   line-height: 1.1;
-  transition: color 0.3s ease;
+  padding: 0 6px;
   white-space: pre-line;
 }
 
@@ -4238,117 +4238,117 @@ html {
 @media (max-width: 1200px) {
   .services-start-grid {
     width: 96%;
-    gap: 50px 30px;
-  }
-  .service-card-wrapper {
-    gap: 16px;
-  }
-  .service-card {
-    padding: 15px;
-  }
-  .service-card-icon {
-    width: 90px;
-    height: 90px;
-  }
-  .service-card-text {
-    font-size: 1rem;
-  }
-  .service-card-contact-text {
-    font-size: 1.5rem;
-  }
-}
-
-@media (max-width: 900px) {
-  .services-start-section {
-    padding: 80px 0 80px 0;
-  }
-  .services-start-title {
-    font-size: 2.4rem;
-    margin-bottom: 60px;
-  }
-  .services-start-grid {
-    width: 98%;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(3, auto);
-    gap: 40px 24px;
-  }
-  .service-card-wrapper {
-    gap: 14px;
-  }
-  .service-card {
-    padding: 12px;
-  }
-  .service-card-icon {
-    width: 80px;
-    height: 80px;
-  }
-  .service-card-text {
-    font-size: 0.9rem;
-  }
-  .service-card-contact-text {
-    font-size: 1.3rem;
-  }
-}
-
-/* Адаптив для мобильных */
-@media (max-width: 600px) {
-  .services-start-section {
-    padding: 60px 0 60px 0;
-  }
-  .services-start-title {
-    font-size: 2rem;
-    margin-bottom: 40px;
-    padding: 0 4vw;
-  }
-  .services-start-grid {
-    width: 100%;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(3, auto);
-    gap: 30px 16px;
-    padding: 0 3vw;
-  }
-  .service-card-wrapper {
-    gap: 12px;
-  }
-  .service-card {
-    padding: 8px;
-  }
-  .service-card-icon {
-    width: 70px;
-    height: 70px;
-  }
-  .service-card-text {
-    font-size: 0.8rem;
-  }
-  .service-card-contact-text {
-    font-size: 1.1rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .services-start-title {
-    font-size: 1.8rem;
-    margin-bottom: 32px;
-  }
-  .services-start-grid {
-    gap: 24px 12px;
-    padding: 0 4vw;
+    gap: 25px 15px;
   }
   .service-card-wrapper {
     gap: 10px;
   }
   .service-card {
-    padding: 6px;
+    padding: 10px;
   }
   .service-card-icon {
     width: 60px;
     height: 60px;
   }
   .service-card-text {
+    font-size: 0.85rem;
+  }
+  .service-card-contact-text {
+    font-size: 2.2rem;
+  }
+}
+
+@media (max-width: 900px) {
+  .services-start-section {
+    padding: 60px 0 60px 0;
+  }
+  .services-start-title {
+    font-size: 2rem;
+    margin-bottom: 40px;
+  }
+  .services-start-grid {
+    width: 98%;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, auto);
+    gap: 25px 15px;
+  }
+  .service-card-wrapper {
+    gap: 10px;
+  }
+  .service-card {
+    padding: 10px;
+  }
+  .service-card-icon {
+    width: 55px;
+    height: 55px;
+  }
+  .service-card-text {
+    font-size: 0.8rem;
+  }
+  .service-card-contact-text {
+    font-size: 2rem;
+  }
+}
+
+/* Адаптив для мобильных */
+@media (max-width: 600px) {
+  .services-start-section {
+    padding: 40px 0 40px 0;
+  }
+  .services-start-title {
+    font-size: 1.6rem;
+    margin-bottom: 30px;
+    padding: 0 4vw;
+  }
+  .services-start-grid {
+    width: 100%;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, auto);
+    gap: 20px 12px;
+    padding: 0 3vw;
+  }
+  .service-card-wrapper {
+    gap: 8px;
+  }
+  .service-card {
+    padding: 8px;
+  }
+  .service-card-icon {
+    width: 50px;
+    height: 50px;
+  }
+  .service-card-text {
+    font-size: 0.75rem;
+  }
+  .service-card-contact-text {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .services-start-title {
+    font-size: 1.4rem;
+    margin-bottom: 25px;
+  }
+  .services-start-grid {
+    gap: 15px 10px;
+    padding: 0 4vw;
+  }
+  .service-card-wrapper {
+    gap: 6px;
+  }
+  .service-card {
+    padding: 6px;
+  }
+  .service-card-icon {
+    width: 45px;
+    height: 45px;
+  }
+  .service-card-text {
     font-size: 0.7rem;
   }
   .service-card-contact-text {
-    font-size: 0.95rem;
+    font-size: 1.6rem;
   }
 }
 
@@ -4356,14 +4356,14 @@ html {
   .services-start-grid {
     grid-template-columns: 1fr;
     grid-template-rows: repeat(6, auto);
-    gap: 20px;
+    gap: 15px;
   }
   .service-card-icon {
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
   }
   .service-card-contact-text {
-    font-size: 0.85rem;
+    font-size: 1.4rem;
   }
 }
 
