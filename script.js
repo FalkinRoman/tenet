@@ -1141,7 +1141,7 @@ let categoriesData = {
   },
   "quality": {
     "name": "Качество",
-    "image": "assets/images/quality.png",
+    "image": "assets/images/servisses.png",
     "quotes": [
       { "text": "**Качество** — это не акт, это **привычка**.", "author": "Аристотель" },
       { "text": "**Качество** — это делать **правильно** то, что никто не видит.", "author": "Рэй Крок" },
@@ -1165,6 +1165,35 @@ let categoriesData = {
       {
         "title": "Культура качества",
         "content": "Формирование **культуры качества** в организации, где каждый сотрудник понимает свою роль в обеспечении высоких стандартов."
+      }
+    ]
+  },
+  "service": {
+    "name": "Сервис",
+    "image": "assets/images/service.png",
+    "quotes": [
+      { "text": "**Сервис** — это **искусство** делать клиентов счастливыми.", "author": "Джон Шуп" },
+      { "text": "**Сервис** — это **отношения**, а не транзакции.", "author": "Кен Бланшар" },
+      { "text": "**Сервис** — это **внимание** к деталям.", "author": "Том Питерс" },
+      { "text": "**Сервис** — это **превышение** ожиданий клиента.", "author": "Джек Траут" },
+      { "text": "**Сервис** — это **ключ** к долгосрочному успеху.", "author": "Питер Друкер" }
+    ],
+    "accordions": [
+      {
+        "title": "Стандарты сервиса",
+        "content": "Разработка **корпоративных стандартов сервиса** для всех точек контакта с клиентом. **Детальные протоколы** и **процедуры обслуживания**."
+      },
+      {
+        "title": "Обучение персонала",
+        "content": "**Специализированное обучение** персонала навыкам клиентского сервиса. **Практические тренинги** с реальными ситуациями и **ролевыми играми**."
+      },
+      {
+        "title": "Обратная связь",
+        "content": "Система **сбора и анализа обратной связи** от клиентов. **Регулярные опросы** и **мониторинг удовлетворенности** для постоянного улучшения."
+      },
+      {
+        "title": "Культура сервиса",
+        "content": "Формирование **культуры превосходного сервиса** в организации, где каждый сотрудник понимает важность удовлетворенности клиентов."
       }
     ]
   },
@@ -1341,19 +1370,19 @@ function renderCategoryTabs() {
   const tabList = [
     { key: 'people', name: 'Люди', icon: 'assets/images/people.png' },
     { key: 'quality', name: 'Качество', icon: 'assets/images/quality.png' },
+    { key: 'service', name: 'Сервис', icon: 'assets/images/servisses.png' },
     { key: 'sales', name: 'Продажи', icon: 'assets/images/sales.png' },
     { key: 'leaders', name: 'Руководители', icon: 'assets/images/manadger.png' },
     { key: 'unique', name: 'Уникальные', icon: 'assets/images/unick.png' }
   ];
   
-  tabList.forEach(tab => {
+  // Исключаем активную категорию из нижних табов
+  const filteredTabs = tabList.filter(tab => tab.key !== currentCategory);
+  
+  filteredTabs.forEach(tab => {
     const tabDiv = document.createElement('div');
     tabDiv.className = 'category-tab';
     tabDiv.setAttribute('data-category', tab.key);
-    
-    if (tab.key === currentCategory) {
-      tabDiv.classList.add('active');
-    }
     
     tabDiv.innerHTML = `
       <div class="category-tab-icon">
@@ -1372,7 +1401,6 @@ function renderCategoryTabs() {
 
 // Инициализируем модалку сразу
 initializeCategoryModal();
-renderCategoryTabs();
 
 window.openRequestModalFromCategory = function() {
     closeCategoryModal();
@@ -1388,7 +1416,8 @@ window.openRequestModalFromCategory = function() {
             
             const categoryMapping = {
                 'people': 'people',
-                'quality': 'quality', 
+                'quality': 'quality',
+                'service': 'service',
                 'sales': 'sales',
                 'leaders': 'leaders',
                 'unique': 'unique'
@@ -1503,15 +1532,8 @@ function displayCategory(category) {
   // Отображаем аккордеоны
   displayAccordions(category);
   
-  // Обновляем активную вкладку
-  document.querySelectorAll('.category-tab').forEach(tab => {
-    tab.classList.remove('active');
-  });
-  
-  const activeTab = document.querySelector(`.category-tab[data-category="${category}"]`);
-  if (activeTab) {
-    activeTab.classList.add('active');
-  }
+  // Обновляем нижние табы (исключая текущую категорию)
+  renderCategoryTabs();
 }
 
 // Открываем модальное окно категории
@@ -1533,10 +1555,4 @@ function openCategoryModal(category = 'people') {
 document.addEventListener('DOMContentLoaded', function() {
   // Инициализация модального окна категорий
   initializeCategoryModal();
-  
-  // Рендер табов категорий
-  renderCategoryTabs();
-  
-  // Инициализация с первой категорией
-  displayCategory('people');
 });
