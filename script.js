@@ -16,13 +16,17 @@ document.addEventListener('DOMContentLoaded', () => {
   const categoryModalClose = document.getElementById('categoryModalClose');
   const categoryModalOverlayClose = document.getElementById('categoryModalOverlayClose');
   
+  // Переменная для отслеживания источника открытия модального окна заявки
+  let requestModalSource = null; // 'header', 'category', или null
+  
   // Находим все кнопки "Оставить заявку" (в шапке и в карточке)
   const headerChooseButton = document.querySelector('.header-actions .choose');
   const burgerChooseButton = document.querySelector('.burger-header-actions .choose');
   
   // Функция открытия модального окна
-  window.openModal = function() {
+  window.openModal = function(source = 'header') {
     if (modal) {
+      requestModalSource = source;
       modal.classList.add('active');
       document.body.style.overflow = 'hidden';
       
@@ -42,29 +46,38 @@ document.addEventListener('DOMContentLoaded', () => {
     if (modal) {
       modal.classList.remove('active');
       document.body.style.overflow = '';
+      
+      // Если модальное окно было открыто из категории, возвращаемся туда
+      if (requestModalSource === 'category') {
+        setTimeout(() => {
+          openCategoryModal(currentCategory);
+          requestModalSource = null; // Сбрасываем источник
+        }, 100);
+      } else {
+        requestModalSource = null; // Сбрасываем источник
+      }
     }
   }
   
   // Открытие модального окна при клике на карточку "Оставить заявку"
   if (serviceCardContact) {
-    serviceCardContact.addEventListener('click', openModal);
+    serviceCardContact.addEventListener('click', () => openModal('header'));
   }
   
   // Открытие модального окна при клике на кнопку в шапке
   if (headerChooseButton) {
-    headerChooseButton.addEventListener('click', openModal);
+    headerChooseButton.addEventListener('click', () => openModal('header'));
   }
   
   // Открытие модального окна при клике на кнопку в бургер-меню
   if (burgerChooseButton) {
-    burgerChooseButton.addEventListener('click', openModal);
+    burgerChooseButton.addEventListener('click', () => openModal('header'));
   }
   
   // Тестовая функция для проверки модального окна
   window.testModal = function() {
     if (modal) {
-      modal.classList.add('active');
-      document.body.style.overflow = 'hidden';
+      openModal('header');
     } else {
       console.error('Модальное окно не найдено в тесте!');
     }
@@ -83,6 +96,15 @@ document.addEventListener('DOMContentLoaded', () => {
   // Закрытие модального окна при клике на крестик на подложке
   if (modalOverlayClose) {
     modalOverlayClose.addEventListener('click', window.closeModal);
+  }
+  
+  // Закрытие модального окна при клике по подложке
+  if (modal) {
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        window.closeModal();
+      }
+    });
   }
   
   // Закрытие модального окна при нажатии Escape
@@ -112,8 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
         await sendToTelegram(data);
         showSuccessMessage();
         requestForm.reset();
-        modal.classList.remove('active');
-        document.body.style.overflow = '';
+        window.closeModal();
       } catch (error) {
         console.error('Ошибка отправки:', error);
         showErrorMessage();
@@ -1141,7 +1162,7 @@ let categoriesData = {
   },
   "quality": {
     "name": "Качество",
-    "image": "assets/images/servisses.png",
+    "image": "assets/images/quality.png",
     "quotes": [
       { "text": "**Качество** — это не акт, это **привычка**.", "author": "Аристотель" },
       { "text": "**Качество** — это делать **правильно** то, что никто не видит.", "author": "Рэй Крок" },
@@ -1170,7 +1191,7 @@ let categoriesData = {
   },
   "service": {
     "name": "Сервис",
-    "image": "assets/images/service.png",
+    "image": "assets/images/servisses.png",
     "quotes": [
       { "text": "**Сервис** — это **искусство** делать клиентов счастливыми.", "author": "Джон Шуп" },
       { "text": "**Сервис** — это **отношения**, а не транзакции.", "author": "Кен Бланшар" },
@@ -1405,7 +1426,7 @@ initializeCategoryModal();
 window.openRequestModalFromCategory = function() {
     closeCategoryModal();
     setTimeout(() => {
-        window.openModal();
+        window.openModal('category');
         // Предварительно выбираем категорию в форме
         setTimeout(() => {
             const categoryCheckboxes = document.querySelectorAll('.category-checkbox input[type="checkbox"]');
