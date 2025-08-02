@@ -4228,11 +4228,12 @@ html {
 
 .service-card-contact:hover {
   transform: scale(1.02);
-  background: #f8f8f8 !important;
+  background: #111 !important;
+  border-color: #111;
 }
 
 .service-card-contact:hover .service-card-contact-text {
-  color: #000;
+  color: #fff;
 }
 
 .service-card-contact-text {
@@ -4245,6 +4246,7 @@ html {
   line-height: 1.1;
   padding: 0 6px;
   white-space: pre-line;
+  transition: color 0.3s cubic-bezier(.4,0,.2,1);
 }
 
 /* Адаптив для планшетов */
