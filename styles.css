@@ -4963,23 +4963,7 @@ html {
   background: #a8a8a8;
 }
 
-.category-modal-close {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  width: 40px;
-  height: 40px;
-  background: #fff;
-  border: 2px solid #e0e0e0;
-  border-radius: 50%;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s ease;
-  z-index: 10;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
+
 
 .category-modal-close:hover {
   border-color: #1a1a1a;
@@ -5057,16 +5041,7 @@ html {
   display: block;
 }
 
-.category-name {
-  font-size: 26px;
-  font-weight: 700;
-  color: #333;
-  text-align: center;
-  text-transform: uppercase;
-  letter-spacing: 0.01em;
-  margin-bottom: 10px;
-  margin-top: 0;
-}
+
 
 
 
@@ -5113,15 +5088,7 @@ html {
   border-bottom-color: #e8e8e8;
 }
 
-.category-accordion-title {
-  font-size: 16px;
-  font-weight: 700;
-  color: #1a1a1a;
-  flex: 1;
-  letter-spacing: -0.01em;
-  text-transform: none;
-  line-height: 1.4;
-}
+
 
 .category-accordion-toggle {
   width: 18px;
@@ -5481,15 +5448,7 @@ html {
   object-fit: cover;
   display: block;
 }
-.category-name {
-  font-size: 24px;
-  font-weight: 700;
-  color: #111;
-  text-align: center;
 
-  margin-top: 0;
-  letter-spacing: 0.01em;
-}
 .category-tabs {
   display: flex;
   justify-content: space-between;
@@ -5571,14 +5530,7 @@ html {
   align-items: center;
   transition: none;
 }
-.category-accordion-title {
-  font-size: 15px;
-  font-weight: 700;
-  color: #111;
-  flex: 1;
-  letter-spacing: 0.01em;
-  text-transform: none;
-}
+
 .category-accordion-toggle {
   width: 18px;
   height: 18px;
@@ -5865,6 +5817,7 @@ html {
   text-align: center;
   margin-top: 0;
   letter-spacing: -0.01em;
+  text-transform: uppercase;
 }
 
 .category-tabs {
@@ -5992,12 +5945,13 @@ html {
 
 .category-accordion-title {
   font-size: 16px;
-  font-weight: 700;
+  font-weight: 300;
   color: #1a1a1a;
   flex: 1;
   letter-spacing: -0.01em;
   text-transform: none;
   line-height: 1.4;
+  text-transform: uppercase;
 }
 
 .category-accordion-toggle {
@@ -6120,7 +6074,7 @@ html {
   width: 40px;
   height: 40px;
   background: #fff;
-  border: 2px solid #e0e0e0;
+  border: 1px solid #e0e0e0;
   border-radius: 50%;
   cursor: pointer;
   display: flex;
@@ -6384,7 +6338,7 @@ html {
   width: 40px;
   height: 40px;
   background: #fff;
-  border: 2px solid #e0e0e0;
+  border: 1px solid #e0e0e0;
   border-radius: 50%;
   cursor: pointer;
   display: flex;
@@ -6649,7 +6603,7 @@ html {
   }
   
   .category-tab-name {
-    font-size: 14px;
+    font-size: 10px;
   }
 }
 
