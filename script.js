@@ -929,85 +929,54 @@ document.addEventListener('DOMContentLoaded', function () {
     div.innerHTML = text;
     return div;
   }
-  function createRow(stepEl) {
+  function createRow(stepEl, fromRight = false) {
     const row = document.createElement('div');
     row.className = 'result-pyramid-row';
+    if (fromRight) row.classList.add('from-right');
     row.appendChild(stepEl);
     return row;
   }
   function startFadePyramid() {
     if (hasAnimated) return;
     hasAnimated = true;
-    const big = document.querySelector('.result-anim-big');
     const pyramid = document.querySelector('.result-pyramid');
-    if (!big || !pyramid) return;
-    big.innerHTML = '';
-    big.className = 'result-anim-big';
+    if (!pyramid) return;
     pyramid.innerHTML = '';
     let idx = 0;
-    function showBig(text) {
-      big.innerHTML = text;
-      big.classList.remove('hide');
-      big.classList.add('visible');
-    }
-    function hideBig(callback) {
-      big.classList.remove('visible');
-      big.classList.add('hide');
-      setTimeout(() => {
-        big.classList.remove('hide');
-        if (callback) callback();
-      }, 600);
-    }
     function showStepInPyramid(text, idx) {
+      const fromRight = idx % 2 === 1; // Чередуем направление
       const step = createStep(text);
+      const row = createRow(step, fromRight);
+      pyramid.appendChild(row);
       setTimeout(() => {
-        const containerWidth = pyramid.offsetWidth;
-        if (step.scrollWidth > containerWidth) {
-          let fontSize = parseFloat(window.getComputedStyle(step).fontSize);
-          while (step.scrollWidth > containerWidth && fontSize > 0.7 * 16) {
-            fontSize -= 1;
-            step.style.fontSize = fontSize + 'px';
-          }
-        }
+        row.classList.add('visible');
         step.classList.add('visible');
         setTimeout(() => step.classList.add('pulse'), 250);
       }, 100);
-      const row = createRow(step);
-      pyramid.appendChild(row);
     }
     function next() {
       if (idx < pyramidSteps.length) {
-        showBig(pyramidSteps[idx]);
-        setTimeout(() => {
-          hideBig(() => {
-            setTimeout(() => {
-              showStepInPyramid(pyramidSteps[idx], idx);
-              idx++;
-              setTimeout(next, 600);
-            }, 400); // пауза между исчезновением большого текста и появлением элемента в пирамиде
-          });
-        }, 600);
+        showStepInPyramid(pyramidSteps[idx], idx);
+        idx++;
+        setTimeout(next, 600);
       }
     }
-    // Просто запускаем анимацию без верхней линии
     next();
   }
-
   // Сброс при загрузке
-  const big = document.querySelector('.result-anim-big');
   const pyramid = document.querySelector('.result-pyramid');
-  if (big) { big.innerHTML = ''; big.className = 'result-anim-big'; }
   if (pyramid) pyramid.innerHTML = '';
-
   // Запуск по скроллу
   const section = document.querySelector('.result-section');
   if (!section) return;
+  let pageLoaded = false;
+  setTimeout(() => { pageLoaded = true; }, 800);
   const observer = new window.IntersectionObserver((entries) => {
-    if (entries[0].isIntersecting) {
+    if (entries[0].isIntersecting && pageLoaded) {
       setTimeout(() => {
         startFadePyramid();
         observer.disconnect();
-      }, 400); // задержка в 400мс перед стартом всей анимации
+      }, 400);
     }
   }, { threshold: 0.3 });
   observer.observe(section);
