@@ -5751,6 +5751,12 @@ html {
   margin-bottom: 8px;
   font-style: normal;
   letter-spacing: -0.01em;
+  text-align: left;
+}
+
+.category-quote-text strong {
+  font-weight: 700;
+  color: #1a1a1a;
 }
 
 .category-quote-text::before {
@@ -5776,6 +5782,18 @@ html {
 @media (max-width: 600px) {
   .category-quote-text {
     font-size: 18px;
+  }
+}
+
+@media (max-width: 500px) {
+  .category-quote-text {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 400px) {
+  .category-quote-text {
+    font-size: 14px;
   }
 }
 
@@ -6041,7 +6059,7 @@ html {
   width: 100%;
   display: flex;
   justify-content: flex-end;
-  margin-top: 20px;
+  margin-top: 40px;
 }
 
 .category-request-btn {
@@ -6803,6 +6821,154 @@ html {
   .category-modal-close svg {
     width: 16px;
     height: 16px;
+  }
+}
+
+
+
+
+
+
+/* Специальные стили для блока "УНИКАЛЬНЫЕ" */
+.category-modal-content[data-category="unique"] .category-accordion.active .category-accordion-title {
+  color: #ff0000 !important;
+}
+
+.category-modal-content[data-category="unique"] .category-accordion.active .category-accordion-toggle::before {
+  background-color: #1a1a1a !important;
+}
+
+.category-modal-content[data-category="unique"] .category-accordion.active .category-accordion-toggle::after {
+  background-color: #1a1a1a !important;
+}
+
+/* Адаптивный текст под аккордеонами для блока "УНИКАЛЬНЫЕ" */
+.category-unique-description {
+ 
+  padding: 20px;
+  background: transparent;
+  border-radius: 0;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #333;
+  text-align: center;
+  font-weight: 400;
+  max-width: 100%;
+  width: 100%;
+  margin-left: 0;
+  margin-right: 0;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.category-unique-description .text-block {
+  margin-bottom: 20px;
+}
+
+.category-unique-description .text-block:last-child {
+  margin-bottom: 0;
+}
+
+.category-unique-description strong {
+  font-weight: 700;
+  color: #333;
+}
+
+@media (max-width: 900px) {
+  .category-unique-description {
+    font-size: 14px;
+    padding: 0;
+    margin-top: 30px;
+  }
+  
+  .category-unique-description .text-block {
+    margin-bottom: 15px;
+  }
+}
+
+@media (max-width: 600px) {
+  .category-unique-description {
+    font-size: 13px;
+    padding: 0;
+    margin-top: 25px;
+  }
+  
+  .category-unique-description .text-block {
+    margin-bottom: 12px;
+  }
+}
+
+/* Отдельный текстовый блок в модальном окне */
+.category-modal-text-block {
+  width: 100%;
+  text-align: center;
+  margin-top: 40px;
+  padding: 0 20px;
+}
+
+.category-modal-text-block p {
+  font-size: 18px;
+  line-height: 1.5;
+  color: #1a1a1a;
+  font-weight: 400;
+  margin-bottom: 20px;
+}
+
+.category-modal-text-block p:last-child {
+  margin-bottom: 0;
+}
+
+.category-modal-text-block strong {
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+@media (max-width: 1200px) {
+  .category-modal-text-block {
+    margin-top: 30px;
+  }
+  
+  .category-modal-text-block p {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 900px) {
+  .category-modal-text-block {
+    margin-top: 25px;
+    padding: 0 15px;
+  }
+  
+  .category-modal-text-block p {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 600px) {
+  .category-modal-text-block {
+    margin-top: 20px;
+    padding: 0 10px;
+  }
+  
+  .category-modal-text-block p {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 500px) {
+  .category-modal-text-block {
+    margin-top: 15px;
+  }
+  
+  .category-modal-text-block p {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 400px) {
+  .category-modal-text-block p {
+    font-size: 12px;
   }
 }
 

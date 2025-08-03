@@ -1445,31 +1445,35 @@ let categoriesData = {
     ]
   },
   "unique": {
-    "name": "Уникальные услуги",
+    "name": "УНИКАЛЬНЫЕ",
     "image": "assets/images/unick.png",
     "quotes": [
-      { "text": "**Уникальность** — это **конкурентное преимущество**.", "author": "Майкл Портер" },
-      { "text": "**Инновации** — это **будущее** бизнеса.", "author": "Питер Друкер" },
-      { "text": "**Уникальность** — это **ценность** для клиента.", "author": "Сет Годин" },
-      { "text": "**Дифференциация** — это **путь** к успеху.", "author": "Джек Траут" },
-      { "text": "**Уникальность** — это **ответ** на потребности рынка.", "author": "Клейтон Кристенсен" }
+      { "text": "Индивидуальный подход к каждому Партнеру — это не просто **стратегия**, это **философия**.", "author": "Команда \"TENET\"" }
     ],
     "accordions": [
       {
-        "title": "Авторские методики",
-        "content": "**Уникальные методики** и подходы, разработанные специально для рынка недвижимости. **Патентованные решения** и **эксклюзивные технологии**."
+        "title": "**ВОЗВРАТ КЛИЕНТОВ** В ВОРОНКУ",
+        "content": "Собственная технология работы с Клиентом. **41% Клиентов** — мы вернули в воронку из порученных нам."
       },
       {
-        "title": "Индивидуальные решения",
-        "content": "**Персонализированные решения** под конкретные потребности каждого клиента. **Глубокий анализ** бизнеса и **точечные рекомендации**."
+        "title": "**ОЧИЩЕНИЕ ТРАФИКА**",
+        "content": "Определяем **реальное количество** потенциальных Клиентов, обратившихся к вам в компанию."
       },
       {
-        "title": "Экспертиза рынка",
-        "content": "**Глубокая экспертиза** рынка недвижимости и **понимание специфики** отрасли. **Отраслевые знания** и **лучшие практики**."
+        "title": "**УСКОРЕНИЕ СДЕЛОК**",
+        "content": "Мы знаем, какие действия нужны, чтобы **ускорить конвертацию лидов в сделку**: от персонала до процессов. И делимся своей практикой с вами. **Ускорение ср.срока цикла сделки на 19%**"
       },
       {
-        "title": "Инновационные технологии",
-        "content": "Внедрение **современных технологий** и **инновационных решений** для повышения эффективности бизнеса."
+        "title": "**УВЕЛИЧЕНИЕ РЕКОМЕНДАЦИЙ**",
+        "content": "Сделки без вложений в маркетинг — это реальность. И мы можем передать вам технологии увеличения трафика по рекомендациям."
+      },
+      {
+        "title": "**СОМНЕВАЮЩИЕСЯ КЛИЕНТЫ**",
+        "content": "Это **самый большой процент Клиентов** в каждой компании. Клиенты ждут, когда им предоставят больше аргументов, помогут решить их переживания и т.д. Но сначала **нужно понять кто это** — объективно и независимо."
+      },
+      {
+        "title": "**ТЕМПЕРАТУРА КЛИЕНТА**",
+        "content": "**Горячий** — **Теплый** — **Холодный**. Передаем **точные данные** для прогнозов, планирования и стратегий. А также, расшифровываем что такое температура Клиента на самом деле и как с этим работать. Мы передадим свой опыт и практики по каждому типу Клиента."
       }
     ]
   }
@@ -1655,46 +1659,80 @@ function displayQuote(category) {
 // Отображаем аккордеоны
 function displayAccordions(category) {
   const accordionsContainer = document.querySelector('.category-accordions-container');
+  if (!accordionsContainer) return;
   
-  if (accordionsContainer && categoriesData[category] && categoriesData[category].accordions) {
-    accordionsContainer.innerHTML = '';
+  // Очищаем контейнер
+  accordionsContainer.innerHTML = '';
+  
+  // Удаляем старый текстовый блок для уникальных услуг, если он есть
+  const oldUniqueDescription = document.querySelector('.category-unique-description');
+  if (oldUniqueDescription) {
+    oldUniqueDescription.remove();
+  }
+  
+  if (!categoriesData[category] || !categoriesData[category].accordions) return;
+  
+  categoriesData[category].accordions.forEach(accordion => {
+    const processedTitle = accordion.title.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+    const processedContent = accordion.content.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
     
-    categoriesData[category].accordions.forEach((accordion, index) => {
-      // Обрабатываем жирный текст в названии
-      const processedTitle = accordion.title.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-      // Обрабатываем жирный текст в контенте
-      const processedContent = accordion.content.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-      
-      const accordionElement = document.createElement('div');
-      accordionElement.className = 'category-accordion';
-      accordionElement.innerHTML = `
-        <div class="category-accordion-header">
-          <div class="category-accordion-title">${processedTitle}</div>
-          <div class="category-accordion-toggle"></div>
-        </div>
-        <div class="category-accordion-content">
-          <div class="category-accordion-text">${processedContent}</div>
-        </div>
-      `;
-      
-      // Добавляем обработчик для аккордеона
-      const header = accordionElement.querySelector('.category-accordion-header');
-      const content = accordionElement.querySelector('.category-accordion-content');
-      
-      header.addEventListener('click', () => {
-        // Закрываем все остальные аккордеоны
-        document.querySelectorAll('.category-accordion').forEach(acc => {
-          if (acc !== accordionElement) {
-            acc.classList.remove('active');
-          }
-        });
-        
-        // Переключаем текущий аккордеон
-        accordionElement.classList.toggle('active');
+    const accordionElement = document.createElement('div');
+    accordionElement.className = 'category-accordion';
+    accordionElement.innerHTML = `
+      <div class="category-accordion-header">
+        <div class="category-accordion-title">${processedTitle}</div>
+        <div class="category-accordion-toggle"></div>
+      </div>
+      <div class="category-accordion-content">
+        <div class="category-accordion-text">${processedContent}</div>
+      </div>
+    `;
+    
+    // Добавляем обработчик для аккордеона
+    const header = accordionElement.querySelector('.category-accordion-header');
+    const content = accordionElement.querySelector('.category-accordion-content');
+    
+    header.addEventListener('click', () => {
+      // Закрываем все остальные аккордеоны
+      document.querySelectorAll('.category-accordion').forEach(acc => {
+        if (acc !== accordionElement) {
+          acc.classList.remove('active');
+        }
       });
       
-      accordionsContainer.appendChild(accordionElement);
+      // Переключаем текущий аккордеон
+      accordionElement.classList.toggle('active');
     });
+    
+    accordionsContainer.appendChild(accordionElement);
+  });
+  
+  // Добавляем специальный текст для блока "УНИКАЛЬНЫЕ"
+  if (category === 'unique') {
+    console.log('Добавляем текстовый блок для уникальных услуг');
+    const uniqueDescription = document.createElement('div');
+    uniqueDescription.className = 'category-unique-description';
+    uniqueDescription.innerHTML = `
+      <div class="text-block">МЫ ВСЕГДА <strong>ОТКРЫТЫ НОВОМУ</strong> И ВСЕГДА МОЖЕМ СОЗДАТЬ <strong>ЧТО ТО НОВОЕ</strong>.</div>
+      <div class="text-block">ПОСТОЯННО ГОТОВЫ РАССМАТРИВАТЬ <strong>РАЗЛИЧНЫЕ ВАРИАНТЫ ВЗАИМОДЕЙСТВИЯ</strong>. <strong>САМОЕ ГЛАВНОЕ - ВМЕСТЕ ДВИГАТЬСЯ К РЕЗУЛЬТАТУ</strong>.</div>
+    `;
+    
+    // Добавляем текстовый блок в правую колонку между аккордеонами и кнопкой
+    const categoryModalRight = document.querySelector('.category-modal-right');
+    console.log('categoryModalRight:', categoryModalRight);
+    if (categoryModalRight) {
+      // Вставляем текстовый блок перед кнопкой
+      const requestSection = categoryModalRight.querySelector('.category-request-section');
+      if (requestSection) {
+        categoryModalRight.insertBefore(uniqueDescription, requestSection);
+        console.log('Текстовый блок добавлен между аккордеонами и кнопкой');
+      } else {
+        categoryModalRight.appendChild(uniqueDescription);
+        console.log('Текстовый блок добавлен в конец правой колонки');
+      }
+    } else {
+      console.log('categoryModalRight не найден');
+    }
   }
 }
 
@@ -1715,6 +1753,12 @@ function displayCategory(category) {
   if (categoryImage && categoriesData[category].image) {
     categoryImage.src = categoriesData[category].image;
     categoryImage.alt = categoriesData[category].name || '';
+  }
+  
+  // Устанавливаем атрибут data-category для стилизации
+  const categoryModalContent = document.querySelector('.category-modal-content');
+  if (categoryModalContent) {
+    categoryModalContent.setAttribute('data-category', category);
   }
   
   // Отображаем цитату
