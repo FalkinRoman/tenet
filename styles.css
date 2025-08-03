@@ -5254,24 +5254,22 @@ html {
 }
 
 .category-request-btn {
-  background: #fff;
-  border: 2px solid #333;
+  background: transparent;
+  border: none;
   color: #333;
-  padding: 15px 30px;
-  border-radius: 10px;
+  padding: 0;
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
 }
 
 .category-request-btn:hover {
-  background: #333;
-  color: #fff;
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  color: #000;
+  text-decoration-thickness: 3px;
 }
 
 @media (max-width: 1200px) {
@@ -5975,6 +5973,10 @@ html {
   text-transform: uppercase;
 }
 
+.category-accordion-title strong {
+  font-weight: 600;
+}
+
 .category-accordion-toggle {
   width: 20px;
   height: 20px;
@@ -6031,7 +6033,7 @@ html {
   padding: 16px 12px;
   font-size: 14px;
   line-height: 1.6;
-  color: #555;
+  color: #1a1a1a;
   font-weight: 400;
 }
 
