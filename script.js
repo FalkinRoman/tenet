@@ -6,7 +6,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // === Модальное окно заявки ===
   const modal = document.getElementById('requestModal');
   const modalClose = document.getElementById('modalClose');
-  const modalCloseWhite = document.getElementById('modalCloseWhite');
   const modalOverlayClose = document.getElementById('modalOverlayClose');
   const requestForm = document.getElementById('requestForm');
   const serviceCardContact = document.querySelector('.service-card-contact');
@@ -86,11 +85,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // Закрытие модального окна при клике на крестик в модальном окне
   if (modalClose) {
     modalClose.addEventListener('click', window.closeModal);
-  }
-  
-  // Закрытие модального окна при клике на белый крестик
-  if (modalCloseWhite) {
-    modalCloseWhite.addEventListener('click', window.closeModal);
   }
   
   // Закрытие модального окна при клике на крестик на подложке

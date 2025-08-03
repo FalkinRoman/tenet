@@ -4452,26 +4452,36 @@ html {
 }
 
 .modal-close {
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 8px;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 32px;
+  height: 32px;
+  background: #fff;
+  border: 1px solid #e0e0e0;
   border-radius: 50%;
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background-color 0.2s;
-  flex-shrink: 0;
+  transition: all 0.3s ease;
+  z-index: 10;
 }
 
 .modal-close:hover {
-  background-color: #f5f5f5;
+  border-color: #1a1a1a;
+  transform: scale(1.1);
 }
 
 .close-icon {
-  width: 20px;
-  height: 20px;
-  opacity: 0.7;
+  width: 12px;
+  height: 12px;
+  fill: #1a1a1a;
+  transition: fill 0.3s ease;
+}
+
+.modal-close:hover .close-icon {
+  fill: #000;
 }
 
 .request-form {
@@ -4701,8 +4711,18 @@ html {
   }
   
   .categories-grid {
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
     gap: 12px;
+  }
+  
+  .modal-close {
+    width: 28px;
+    height: 28px;
+  }
+  
+  .close-icon {
+    width: 10px;
+    height: 10px;
   }
 }
 
@@ -4726,7 +4746,7 @@ html {
   
   .categories-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
+    gap: 12px;
   }
   
   .category-text {
@@ -6072,8 +6092,8 @@ html {
   position: absolute;
   top: 20px;
   right: 20px;
-  width: 40px;
-  height: 40px;
+  width: 32px;
+  height: 32px;
   background: #fff;
   border: 1px solid #e0e0e0;
   border-radius: 50%;
@@ -6091,8 +6111,8 @@ html {
 }
 
 .category-modal-close svg {
-  width: 16px;
-  height: 16px;
+  width: 12px;
+  height: 12px;
   fill: #1a1a1a;
   transition: fill 0.3s ease;
 }
@@ -6398,34 +6418,30 @@ html {
 
 /* Медиа-запросы для белых крестиков */
 @media (max-width: 900px) {
-  .category-modal-close,
-  .modal-close-white {
+  .category-modal-close {
     top: 15px;
     right: 15px;
-    width: 35px;
-    height: 35px;
+    width: 28px;
+    height: 28px;
   }
   
-  .category-modal-close svg,
-  .modal-close-white svg {
-    width: 14px;
-    height: 14px;
+  .category-modal-close svg {
+    width: 10px;
+    height: 10px;
   }
 }
 
 @media (max-width: 600px) {
-  .category-modal-close,
-  .modal-close-white {
+  .category-modal-close {
     top: 10px;
     right: 10px;
-    width: 30px;
-    height: 30px;
+    width: 24px;
+    height: 24px;
   }
   
-  .category-modal-close svg,
-  .modal-close-white svg {
-    width: 12px;
-    height: 12px;
+  .category-modal-close svg {
+    width: 8px;
+    height: 8px;
   }
 }
 
@@ -6731,8 +6747,8 @@ html {
   }
   
   .category-modal-close {
-    width: 35px;
-    height: 35px;
+    width: 30px;
+    height: 30px;
   }
   
   .category-modal-close svg {
