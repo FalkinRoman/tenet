@@ -4024,6 +4024,25 @@ html {
   .horizontal-panel { font-size: 1rem; padding: 0 2vw; }
 }
 
+
+@media (max-width: 950px) {
+  .services-start-title {
+    font-size: 2rem !important;
+    margin-bottom: 40px !important;
+  }
+}
+
+
+@media (max-width: 900px) {
+  .how-solve-section {
+    padding: 0 0 135px 0;
+  }
+  .result-pyramid {
+    min-height: 380px;
+    height: 380px;
+  }
+} 
+
 /* Split Reveal Effect */
 .split-reveal {
   position: relative;
@@ -4313,10 +4332,10 @@ html {
 
 @media (max-width: 900px) {
   .services-start-section {
-    padding: 60px 0 60px 0;
+    padding: 60px 0 170px 0;
   }
   .services-start-title {
-    font-size: 2rem !importantgjc;
+    font-size: 2rem !important;
     margin-bottom: 40px;
   }
   .services-start-grid {
