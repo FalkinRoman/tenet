@@ -4370,9 +4370,16 @@ html {
 
 /* Адаптив для мобильных */
 @media (max-width: 600px) {
-  .services-start-section {
-    padding: 40px 0 40px 0;
+  .services-start-title {
+    font-size: 1.8rem !important;
   }
+  .services-start-section {
+    padding: 0px 0 140px 0;
+  }
+   .result-pyramid {
+    min-height: 360px;
+    height: 360px;
+}
   .services-start-title {
     font-size: 1.6rem;
     margin-bottom: 30px;
@@ -4401,11 +4408,30 @@ html {
   .service-card-contact-text {
     font-size: 1.6rem;
   }
+  .result-title {
+    margin-top: 0
+  }
+  .how-solve-section {
+    padding: 0 0 120px 0 !important;
+}
+}
+
+@media (max-width: 500px) {
+  .how-solve-section {
+      padding: 0 0 96px 0 !important;
+  }
+  .result-section {
+    padding: 0 0 0 0 !important;
+}
+.services-start-section {
+  padding: 0px 0 135px 0;
+}
 }
 
 @media (max-width: 480px) {
+  
   .services-start-title {
-    font-size: 1.4rem;
+    font-size: 1.6rem !important;
     margin-bottom: 25px;
   }
   .services-start-grid {
