@@ -2382,7 +2382,7 @@ html {
     top: 80px !important;
 }
 .problems-section {
-  padding: 102px 0 102px 0 !important;
+  padding: 102px 0 130px 0 !important;
 }
 }
 
@@ -4377,8 +4377,8 @@ html {
     padding: 0px 0 140px 0;
   }
    .result-pyramid {
-    min-height: 360px;
-    height: 360px;
+    min-height: 420px;
+    height: 420px;
 }
   .services-start-title {
     font-size: 1.6rem;
@@ -4418,7 +4418,7 @@ html {
 
 @media (max-width: 500px) {
   .how-solve-section {
-      padding: 0 0 96px 0 !important;
+      padding: 0 0 133px 0 !important;
   }
   .result-section {
     padding: 0 0 0 0 !important;
