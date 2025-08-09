@@ -7060,3 +7060,51 @@ html {
 
 
 
+
+/* Новая секция с картинкой picbig2.png */
+.new-image-section {
+  width: 100vw !important;
+  max-width: 100vw !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  position: relative;
+  overflow: hidden;
+  left: 50% !important;
+  right: 50% !important;
+  margin-left: -50vw !important;
+  margin-right: -50vw !important;
+}
+
+.new-image-section .main-image {
+  width: 100vw !important;
+  max-width: 100vw !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  left: 0 !important;
+  right: 0 !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+.new-image-section .main-image img {
+  width: 100vw !important;
+  height: auto !important;
+  max-width: 100vw !important;
+  min-width: 100vw !important;
+  object-fit: cover;
+  display: block;
+  margin: 0 !important;
+  padding: 0 !important;
+  position: relative;
+  min-height: auto !important;
+  max-height: none !important;
+}
+
+
+
+
+
