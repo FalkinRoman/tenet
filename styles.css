@@ -7104,6 +7104,218 @@ html {
   max-height: none !important;
 }
 
+/* Блок результатов */
+.results-section {
+  width: 100vw;
+  max-width: 100vw;
+  margin: 0;
+  padding: 80px 0;
+  background: #fff;
+  overflow-x: hidden;
+}
+
+.results-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.results-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 80px;
+}
+
+.results-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.results-item img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  cursor: pointer;
+  transition: filter 0.3s ease;
+}
+
+.results-item img:hover {
+  filter: brightness(0.3);
+}
+
+/* Верхний ряд: Forma + Pik (по 80% ширины) */
+.results-top-row .results-forma,
+.results-top-row .results-pik {
+  width: 40%;
+  max-width: 40%;
+}
+
+/* Центральный ряд: Pioneer (90% ширины) */
+.results-center-row .results-pioneer {
+  width: 90%;
+  max-width: 90%;
+}
+
+/* Средний ряд: GALS слева (50%), Мангазея справа (70%) */
+.results-middle-row {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.results-middle-row .results-gals {
+  width: 50%;
+  max-width: 50%;
+  margin-right: auto;
+}
+
+.results-middle-row .results-mangazeya {
+  width: 70%;
+  max-width: 70%;
+  margin-left: auto;
+}
+
+/* Нижний ряд: Etalon + INGRAD (по 90% ширины) */
+.results-bottom-row .results-etalon,
+.results-bottom-row .results-ingrad {
+  width: 45%;
+  max-width: 45%;
+}
+
+/* Адаптивность */
+@media (max-width: 900px) {
+  .results-container {
+    padding: 0 15px;
+    gap: 30px;
+  }
+  
+  .results-row {
+    gap: 60px; /* Уменьшаю отступ для планшетов */
+  }
+  
+  .results-top-row .results-forma,
+  .results-top-row .results-pik {
+    width: 45%;
+    max-width: 45%;
+  }
+  
+  .results-center-row .results-pioneer {
+    width: 95%;
+    max-width: 95%;
+  }
+  
+  .results-middle-row .results-gals {
+    width: 55%;
+    max-width: 55%;
+  }
+  
+  .results-middle-row .results-mangazeya {
+    width: 75%;
+    max-width: 75%;
+  }
+  
+  .results-bottom-row .results-etalon,
+  .results-bottom-row .results-ingrad {
+    width: 47%;
+    max-width: 47%;
+  }
+}
+
+@media (max-width: 600px) {
+  .results-section {
+    padding: 60px 0;
+  }
+  
+  .results-container {
+    padding: 0 10px;
+    gap: 25px;
+  }
+  
+  .results-row {
+    flex-direction: column;
+    gap: 30px; /* Увеличиваю отступ между картинками в колонке */
+  }
+  
+  .results-top-row .results-forma,
+  .results-top-row .results-pik,
+  .results-center-row .results-pioneer,
+  .results-middle-row .results-gals,
+  .results-middle-row .results-mangazeya,
+  .results-bottom-row .results-etalon,
+  .results-bottom-row .results-ingrad {
+    width: 90%;
+    max-width: 90%;
+    margin: 0 auto;
+  }
+  
+  .results-middle-row {
+    justify-content: center;
+  }
+}
+
+
+
+
+
+
+/* Стили для модального окна результатов */
+.results-modal-content {
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.results-modal-content h3 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0;
+  text-align: center;
+}
+
+.results-modal-content p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #666;
+  margin: 0;
+  text-align: center;
+}
+
+@media (max-width: 900px) {
+  .results-modal-content {
+    padding: 30px 15px;
+  }
+  
+  .results-modal-content h3 {
+    font-size: 1.5rem;
+  }
+  
+  .results-modal-content p {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .results-modal-content {
+    padding: 20px 10px;
+  }
+  
+  .results-modal-content h3 {
+    font-size: 1.3rem;
+  }
+  
+  .results-modal-content p {
+    font-size: 0.95rem;
+  }
+}
+
 
 
 

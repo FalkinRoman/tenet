@@ -528,6 +528,48 @@
       </div>
     </section>
     
+    <!-- Блок результатов с картинками -->
+    <section id="results" class="results-section">
+      <div class="results-container">
+        <!-- Вверху: форма и пик на одной строке -->
+        <div class="results-row results-top-row">
+          <div class="results-item results-forma">
+            <img src="assets/images/results/forma.png" alt="Forma">
+          </div>
+          <div class="results-item results-pik">
+            <img src="assets/images/results/pik.png" alt="Pik">
+          </div>
+        </div>
+        
+        <!-- Пионер по центру -->
+        <div class="results-row results-center-row">
+          <div class="results-item results-pioneer">
+            <img src="assets/images/results/pioneer.png" alt="Pioneer">
+          </div>
+        </div>
+        
+        <!-- GALS слева, Мангазея справа -->
+        <div class="results-row results-middle-row">
+          <div class="results-item results-gals">
+            <img src="assets/images/results/gals.png" alt="GALS">
+          </div>
+          <div class="results-item results-mangazeya">
+            <img src="assets/images/results/magnezia.png" alt="Мангазея">
+          </div>
+        </div>
+        
+        <!-- Внизу: эталон и ингрэд на одной строке -->
+        <div class="results-row results-bottom-row">
+          <div class="results-item results-etalon">
+            <img src="assets/images/results/italon.png" alt="Эталон">
+          </div>
+          <div class="results-item results-ingrad">
+            <img src="assets/images/results/ingrad.png" alt="INGRAD">
+          </div>
+        </div>
+      </div>
+    </section>
+    
     <!-- Модальное окно для заявки -->
     <div class="modal-overlay" id="requestModal">
       <button class="modal-overlay-close" id="modalOverlayClose">
@@ -700,7 +742,39 @@
         </div>
     </div>
     
-    <section id="results" class="main-section"><h2>Результаты</h2><p>Кратко о достижениях, реализованных проектах и цифрах.</p></section>
+    <!-- Модальное окно для результатов -->
+    <div class="category-modal-overlay" id="resultsModal">
+        <button class="modal-overlay-close" id="resultsModalOverlayClose">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M18 6L6 18M6 6L18 18" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </button>
+        <div class="category-modal-content">
+            <button class="category-modal-close" id="resultsModalClose">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M18 6L6 18M6 6L18 18" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+            <div class="category-modal-body">
+                <div class="category-modal-main-grid">
+                    <div class="category-modal-left">
+                        <div class="category-image-wrapper">
+                            <img class="category-image" id="resultsImage" src="" alt="Results Image">
+                        </div>
+                    </div>
+                    
+                    <div class="category-modal-right">
+                        <!-- Пока пустое содержимое -->
+                        <div class="results-modal-content">
+                            <h3>Информация о проекте</h3>
+                            <p>Здесь будет располагаться информация о выбранном проекте.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
     <section id="advantages" class="main-section"><h2>Преимущества</h2><p>Почему выбирают нас, наши сильные стороны.</p></section>
     <section id="team" class="main-section"><h2>Команда</h2><p>Кратко о ключевых сотрудниках и экспертах.</p></section>
     

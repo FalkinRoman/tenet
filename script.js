@@ -1759,4 +1759,67 @@ function openCategoryModal(category = 'people') {
 document.addEventListener('DOMContentLoaded', function() {
   // Инициализация модального окна категорий
   initializeCategoryModal();
+  
+  // Инициализация модального окна результатов
+  initializeResultsModal();
 });
+
+// Функция инициализации модального окна результатов
+function initializeResultsModal() {
+  const resultsModal = document.getElementById('resultsModal');
+  const resultsModalClose = document.getElementById('resultsModalClose');
+  const resultsModalOverlayClose = document.getElementById('resultsModalOverlayClose');
+  const resultsImage = document.getElementById('resultsImage');
+  
+  // Добавляем обработчики кликов на все картинки результатов
+  const resultImages = document.querySelectorAll('.results-item img');
+  
+  resultImages.forEach(img => {
+    img.addEventListener('click', function() {
+      openResultsModal(this.src, this.alt);
+    });
+  });
+  
+  // Функция открытия модального окна результатов
+  function openResultsModal(imageSrc, imageAlt) {
+    if (resultsModal && resultsImage) {
+      resultsImage.src = imageSrc;
+      resultsImage.alt = imageAlt;
+      resultsModal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+  }
+  
+  // Функция закрытия модального окна результатов
+  function closeResultsModal() {
+    if (resultsModal) {
+      resultsModal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+  }
+  
+  // Обработчики закрытия модального окна
+  if (resultsModalClose) {
+    resultsModalClose.addEventListener('click', closeResultsModal);
+  }
+  
+  if (resultsModalOverlayClose) {
+    resultsModalOverlayClose.addEventListener('click', closeResultsModal);
+  }
+  
+  // Закрытие при клике на overlay
+  if (resultsModal) {
+    resultsModal.addEventListener('click', function(e) {
+      if (e.target === resultsModal) {
+        closeResultsModal();
+      }
+    });
+  }
+  
+  // Закрытие при нажатии Escape
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && resultsModal.classList.contains('active')) {
+      closeResultsModal();
+    }
+  });
+}
